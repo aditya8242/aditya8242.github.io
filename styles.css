@@ -2,8 +2,11 @@
 
 body {
   text-align: center;
-  background-image: url('');
   font-family: 'Bungee Shade', cursive;
-  background-color: purple;
-  color: gold;
+  background-image: url("https://media.giphy.com/media/smzfl3E7a4iHK/giphy.gif");
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
 }
