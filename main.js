@@ -5,6 +5,7 @@ var quotes = [
   'If you’re afraid to fail, then you’re probably going to fail. -Kobe Bryant',
   'I don\'t stop when I\'m tired. I stop when I\'m done. - David Goggins.',
   'From the time you take your first breath, you become eligible to die. You also become eligible to find your greatness and become the one warrior. -David Goggins',
+  'Its better to be a warrior in a garden than to be a gardener in war. -Old Expression',
 ]
 
 function newQuote() {
