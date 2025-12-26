@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Learned Open Source the Hard Way</title>
+  <meta name="description" content="A firsthand account of failing publicly in open source and learning the real value of ownership, correctness, and trust.">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #0f0f0f;
+      color: #e0e0e0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 1rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 1.2rem;
+      font-weight: normal;
+      color: #aaa;
+      margin-bottom: 2rem;
+    }
+    p {
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+    ul {
+      margin-left: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    .quote {
+      font-style: italic;
+      color: #888;
+      border-left: 3px solid #444;
+      padding-left: 1rem;
+      margin: 2rem 0;
+    }
+    a {
+      color: #6cf;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      margin-top: 4rem;
+      font-size: 0.8rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>I Learned Open Source the Hard Way</h1>
+      <h2>By failing publicly</h2>
+    </header>
+
+    <p>
+      A few days ago, I made a mistake — the kind that hurts your ego but upgrades your brain.
+    </p>
+
+    <p>
+      I wanted to make a quick open-source contribution. The motivation was familiar:
+      a merged pull request, a green square, something easy to point at.
+    </p>
+
+    <h3>The Shortcut Mindset</h3>
+
+    <p>
+      I searched GitHub for “good first issues” and found one quickly.
+      The task sounded trivial: add JavaDoc-style comments to a C header file.
+    </p>
+
+    <p>Instead of asking:</p>
+    <ul>
+      <li>What does this project do?</li>
+      <li>Why does it need documentation?</li>
+      <li>How does documentation work in C?</li>
+    </ul>
+
+    <p>I asked a different question:</p>
+
+    <p><strong>How fast can I finish this?</strong></p>
+
+    <p>
+      I copied the header file into an AI chatbot and asked it to generate comments.
+      I didn’t review the output. I didn’t understand it.
+      I didn’t even read the project README.
+    </p>
+
+    <p>I opened a pull request.</p>
+
+    <h3>The Reality Check</h3>
+
+    <p>
+      A few hours later, the maintainer replied.
+    </p>
+
+    <p>
+      Not only were the comments wrong — critical code had been removed.
+      Out of roughly 700 lines.
+    </p>
+
+    <p>
+      That’s not a small mistake.
+      That’s a trust-breaking one.
+    </p>
+
+    <p>I apologized and said I would fix it.</p>
+
+    <h3>Making the Same Mistake Twice</h3>
+
+    <p>
+      Instead of slowing down, I doubled down.
+    </p>
+
+    <p>
+      I went back to AI. Wrote “better prompts.” Trusted the output again.
+      Still didn’t review it. Still didn’t understand it.
+    </p>
+
+    <p>I opened another pull request.</p>
+
+    <p>
+      This time, the maintainer was furious — and rightfully so.
+      He accused me of using AI. I admitted it.
+    </p>
+
+    <p>
+      He told me not to touch his code anymore.
+    </p>
+
+    <h3>The Turning Point</h3>
+
+    <p>
+      After cooling down, I reread his comments.
+    </p>
+
+    <p>
+      This wasn’t arrogance or gatekeeping.
+      This was someone protecting their project, their time, and their standards.
+    </p>
+
+    <p>
+      I asked for one last chance — not to look good, but to do it right.
+      He gave it.
+    </p>
+
+    <h3>Doing the Actual Work</h3>
+
+    <p>This time, I slowed down.</p>
+
+    <ul>
+      <li>Read the project documentation</li>
+      <li>Learned what INI files are (it was an INI parser)</li>
+      <li>Understood JavaDoc vs Doxygen</li>
+      <li>Learned how documentation fits into C projects</li>
+      <li>Made changes incrementally</li>
+      <li>Reviewed every line</li>
+    </ul>
+
+    <p>
+      Within a few hours, I fixed the issue properly.
+      I learned more than I would have from ten “easy” pull requests.
+    </p>
+
+    <h3>What This Taught Me</h3>
+
+    <ul>
+      <li>AI accelerates work only when you already care about correctness</li>
+      <li>Open source is collaboration, not a résumé farm</li>
+      <li>Maintainers aren’t enemies — they’re guardians</li>
+      <li>Owning mistakes earns more respect than pretending competence</li>
+      <li>Public failure is brutal — and incredibly educational</li>
+    </ul>
+
+    <p>
+      I failed. I failed again. Then I learned.
+    </p>
+
+    <p>
+      That was my real first contribution.
+    </p>
+
+    <footer>
+      <p><a href="/">← Back to home</a></p>
+    </footer>
+  </main>
+</body>
+</html>
