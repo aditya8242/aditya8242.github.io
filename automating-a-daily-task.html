@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automating a Daily Task Instead of Repeating It</title>
+  <meta name="description" content="A small automation project that replaces repetitive daily work with a reliable, failure-aware system.">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #0f0f0f;
+      color: #e0e0e0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 1rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 1.2rem;
+      font-weight: normal;
+      color: #aaa;
+      margin-bottom: 2rem;
+    }
+    h3 {
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+    ul {
+      margin-left: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    a {
+      color: #6cf;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      margin-top: 4rem;
+      font-size: 0.8rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Automating a Daily Task Instead of Repeating It</h1>
+      <h2>Replacing fragile manual work with a simple system</h2>
+    </header>
+
+    <p>
+      This project started with a small but annoying observation.
+      A daily business workflow depended on someone manually opening a website every morning just to check updated prices.
+    </p>
+
+    <p>
+      It was repetitive. Easy to forget. And clearly automatable.
+    </p>
+
+    <p>
+      So I automated it.
+    </p>
+
+    <h3>The Problem</h3>
+
+    <p>Every day, the same steps:</p>
+    <ul>
+      <li>Open a website</li>
+      <li>Find today’s price</li>
+      <li>Read the numbers</li>
+      <li>Share them with others</li>
+    </ul>
+
+    <p>
+      Nothing complex. Just fragile human effort.
+    </p>
+
+    <p>
+      I didn’t want dashboards. I didn’t want alerts, logins, or subscriptions.
+    </p>
+
+    <p>I wanted the system to:</p>
+    <ul>
+      <li>Run every day</li>
+      <li>Fail safely</li>
+      <li>Never need babysitting</li>
+    </ul>
+
+    <h3>The Solution</h3>
+
+    <p>
+      I built a small Python automation that runs on its own.
+    </p>
+
+    <p>The script:</p>
+    <ul>
+      <li>Sends an HTTP request to a public website</li>
+      <li>Parses the returned HTML</li>
+      <li>Locates the table containing the Pune egg rates</li>
+      <li>Extracts only today’s row</li>
+      <li>Reads values for piece, tray, 100 eggs, and peti</li>
+    </ul>
+
+    <p>
+      Because websites change, the script is defensive by design.
+    </p>
+
+    <p>If:</p>
+    <ul>
+      <li>Today’s data isn’t present, or</li>
+      <li>The page structure changes</li>
+    </ul>
+
+    <p>
+      It does not guess.
+      It fails cleanly and sends a clear “data unavailable” message instead of incorrect numbers.
+    </p>
+
+    <p>
+      Wrong data is worse than no data.
+    </p>
+
+    <h3>Delivery, Not Just Extraction</h3>
+
+    <p>
+      Once the data is extracted, it’s formatted into a simple, readable message.
+    </p>
+
+    <p>
+      That message is sent automatically using the Telegram Bot API.
+    </p>
+
+    <p>The same message is broadcast to multiple recipients:</p>
+    <ul>
+      <li>No duplicated logic</li>
+      <li>No separate flows</li>
+      <li>No per-user handling</li>
+    </ul>
+
+    <p>
+      Simple input. Simple output.
+    </p>
+
+    <h3>Full Automation with GitHub Actions</h3>
+
+    <p>
+      I didn’t want this tied to my laptop.
+    </p>
+
+    <p>
+      The entire workflow runs via GitHub Actions on a scheduled cron job.
+    </p>
+
+    <p>Every day, the workflow:</p>
+    <ul>
+      <li>Spins up</li>
+      <li>Installs dependencies</li>
+      <li>Runs the script</li>
+      <li>Exits</li>
+    </ul>
+
+    <p>
+      All sensitive values — bot token and recipient IDs — are handled through environment variables and GitHub Secrets.
+      No secrets in code. No shortcuts.
+    </p>
+
+    <h3>Intentional Simplicity</h3>
+
+    <p>This project was deliberately minimal.</p>
+
+    <p>No:</p>
+    <ul>
+      <li>Database</li>
+      <li>Backend server</li>
+      <li>Frameworks</li>
+      <li>Paid services</li>
+    </ul>
+
+    <p>Just:</p>
+    <ul>
+      <li>Python</li>
+      <li>HTTP</li>
+      <li>HTML parsing</li>
+      <li>A scheduler</li>
+      <li>A messaging API</li>
+    </ul>
+
+    <p>
+      The focus wasn’t showing off complexity.
+      It was building something reliable, understandable, and cheap to run.
+    </p>
+
+    <p>
+      Once deployed, the system requires zero manual intervention, zero maintenance, and zero daily thought.
+    </p>
+
+    <p>
+      It just works.
+    </p>
+
+    <h3>What I Learned</h3>
+
+    <p>
+      This project reinforced a simple but important idea:
+      small systems that solve real problems teach you more than large systems built for demos.
+    </p>
+
+    <p>I improved my understanding of:</p>
+    <ul>
+      <li>Web scraping</li>
+      <li>Defensive programming</li>
+      <li>Automation</li>
+      <li>Designing systems that expect failure instead of ignoring it</li>
+    </ul>
+
+    <p>
+      No buzzwords. No overengineering.
+      Just removing friction from real life.
+    </p>
+
+    <p>
+      And that’s usually the best place to start.
+    </p>
+
+    <footer>
+      <p><a href="/">← Back to home</a></p>
+    </footer>
+  </main>
+</body>
+</html>
