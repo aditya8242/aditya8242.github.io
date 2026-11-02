@@ -5,9 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aditya Chavan — Systems & Backend Architecture</title>
   
+  <!-- Security Directives -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; base-uri 'self'; form-action 'self';">
+
   <!-- Primary Meta Tags -->
   <meta name="title" content="Aditya Chavan — Systems & Backend Architecture">
-  <meta name="description" content="Software Engineer specializing in Linux internals, C/C++, and scalable Java/Spring Boot backends—paired with frontline B2B software architecture. Engineered from the metal up.">
+  <meta name="description" content="Software Engineer focused on Linux internals, C/C++, and scalable Java backends—with practical experience building custom web software for businesses at Iron & Logic.">
   <meta name="keywords" content="Aditya Chavan, Systems Engineer, Backend Engineer, Linux Internals, C++, Spring Boot, Pune, Software Architect, GitHub Pages">
   <meta name="author" content="Aditya Chavan">
   <meta name="theme-color" content="#0A0A0A">
@@ -17,7 +22,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aditya8242.github.io/">
   <meta property="og:title" content="Aditya Chavan — Systems & Backend Architecture">
-  <meta property="og:description" content="Software Engineer specializing in Linux internals, C/C++, and scalable Java/Spring Boot backends—paired with frontline B2B software architecture.">
+  <meta property="og:description" content="Software Engineer focused on Linux internals, C/C++, and scalable Java backends—with practical experience building custom web software for businesses at Iron & Logic.">
   <meta property="og:site_name" content="Aditya Chavan Portfolio">
 
   <!-- Twitter -->
@@ -25,7 +30,7 @@
   <meta name="twitter:site" content="@ad1tya24">
   <meta name="twitter:creator" content="@ad1tya24">
   <meta name="twitter:title" content="Aditya Chavan — Systems & Backend Architecture">
-  <meta name="twitter:description" content="Software Engineer specializing in Linux internals, C/C++, and scalable Java/Spring Boot backends—paired with frontline B2B software architecture.">
+  <meta name="twitter:description" content="Software Engineer focused on Linux internals, C/C++, and scalable Java backends—with practical experience building custom web software for businesses at Iron & Logic.">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -46,10 +51,6 @@
     "url": "https://aditya8242.github.io/",
     "jobTitle": "Systems & Backend Software Engineer",
     "worksFor": [
-      {
-        "@type": "Organization",
-        "name": "Brilliant Info Systems Pvt. Ltd."
-      },
       {
         "@type": "Organization",
         "name": "Iron & Logic"
@@ -138,14 +139,14 @@
           <span>Pune, IN · Systems &amp; Backend Engineering</span>
         </div>
 
-        <div class="hero-name fade-in-entry delay-2">00 // ARCHITECTURE REPORT</div>
+        <div class="hero-name fade-in-entry delay-2">00 // SYSTEMS &amp; BACKEND</div>
         <h1 class="hero-headline fade-in-entry delay-2">
           Aditya Chavan.<br>
-          <span class="gradient-highlight">Engineered from the metal up.</span>
+          <span class="gradient-highlight">Building simple, reliable systems.</span>
         </h1>
 
         <p class="hero-subheadline fade-in-entry delay-3">
-          Software Engineer specializing in Linux internals, C/C++, and scalable Java/Spring Boot backends—paired with frontline B2B software architecture.
+          Software Engineer focused on Linux internals, C/C++, and scalable Java backends—with practical experience building custom web software for businesses at Iron &amp; Logic.
         </p>
 
         <!-- Monospace Philosophy Callout -->
@@ -388,41 +389,163 @@
             </div>
           </article>
 
+          <!-- Project 05: EggRateBot -->
+          <article class="spec-card">
+            <div>
+              <div class="card-header-bar">
+                <span class="card-num">SPEC 05 // DEFENSIVE AUTOMATION</span>
+                <span class="card-date">JAN 2025</span>
+              </div>
+              <h3 class="card-title">EggRateBot — Daily Cloud Scraper &amp; Notifier</h3>
+              <div class="card-tech-stack">Python · Telegram Bot API · BeautifulSoup4 · GitHub Actions</div>
+
+              <!-- Architecture Schematic -->
+              <div class="card-schematic">
+                <div class="schematic-tag">// DEFENSIVE SCRAPING &amp; BROADCAST PIPELINE</div>
+                <div class="schematic-diagram">Cron (Daily 06:00) ──► HTTP Fetch &amp; HTML Parse
+                                │
+                                ├──► [Valid Rates] ──► <span class="accent">Telegram Bot Broadcast</span>
+                                └──► [DOM Changed]  ──► <span class="highlight">Fail Clean (No False Data)</span></div>
+              </div>
+
+              <div class="card-spec-block">
+                <div class="spec-row">
+                  <div class="spec-label">Specification:</div>
+                  <div class="spec-body">
+                    Defensive automated scraper replacing fragile daily manual checks with an autonomous, failure-aware notifier broadcasting wholesale rates via Telegram.
+                  </div>
+                </div>
+                <div class="spec-row">
+                  <div class="spec-label">Execution:</div>
+                  <div class="spec-body">
+                    Engineered to fail cleanly rather than transmit invalid data if upstream HTML tables change. Runs serverless via scheduled GitHub Actions cron jobs with zero operational cost.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <span class="mono text-muted" style="font-size:0.75rem;">Python / Actions Cron</span>
+              <div class="card-links">
+                <a href="blog/automating-a-daily-task.html" class="link-btn" title="Read Essay">
+                  <span>Read Essay</span>
+                  <span>→</span>
+                </a>
+                <a href="https://github.com/aditya8242/EggRateBot" target="_blank" rel="noopener noreferrer" class="link-btn">
+                  <span>Repository</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 06: FaceRecogESP -->
+          <article class="spec-card">
+            <div>
+              <div class="card-header-bar">
+                <span class="card-num">SPEC 06 // EMBEDDED COMPUTER VISION</span>
+                <span class="card-date">MAR 2025</span>
+              </div>
+              <h3 class="card-title">FaceRecogESP — Edge Facial Biometrics</h3>
+              <div class="card-tech-stack">C++ · ESP32-CAM · Embedded Systems · FreeRTOS · Wi-Fi</div>
+
+              <!-- Architecture Schematic -->
+              <div class="card-schematic">
+                <div class="schematic-tag">// MICROCONTROLLER VISION PIPELINE</div>
+                <div class="schematic-diagram">OV2640 Sensor ──► Framebuffer (PSRAM) ──► <span class="highlight">Face Detection / Recognition</span>
+                                                    │
+                                                    ├──► <span class="cyan">MJPEG Wi-Fi Stream (:80)</span>
+                                                    └──► GPIO Hardware Trigger</div>
+              </div>
+
+              <div class="card-spec-block">
+                <div class="spec-row">
+                  <div class="spec-label">Specification:</div>
+                  <div class="spec-body">
+                    Real-time biometric facial detection and recognition pipeline running directly on a resource-constrained ESP32-CAM microcontroller.
+                  </div>
+                </div>
+                <div class="spec-row">
+                  <div class="spec-label">Execution:</div>
+                  <div class="spec-body">
+                    Optimized internal SRAM allocation using external PSRAM buffers, concurrent FreeRTOS tasks, and real-time MJPEG video streaming over local Wi-Fi.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <span class="mono text-muted" style="font-size:0.75rem;">C++ / ESP32 Hardware</span>
+              <div class="card-links">
+                <a href="https://github.com/aditya8242/FaceRecogESP" target="_blank" rel="noopener noreferrer" class="link-btn">
+                  <span>github.com/aditya8242/FaceRecogESP</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 07: maKneeTrack -->
+          <article class="spec-card">
+            <div>
+              <div class="card-header-bar">
+                <span class="card-num">SPEC 07 // DATA ACCESS &amp; CLI</span>
+                <span class="card-date">DEC 2024</span>
+              </div>
+              <h3 class="card-title">maKneeTrack — CLI Expense Engine</h3>
+              <div class="card-tech-stack">Java · JDBC · SQLite · 3-Layer Architecture</div>
+
+              <!-- Architecture Schematic -->
+              <div class="card-schematic">
+                <div class="schematic-tag">// LAYERED DATA ACCESS ARCHITECTURE</div>
+                <div class="schematic-diagram">Console UI ──► <span class="highlight">[Service Layer]</span> ──► [DAO Layer]
+                                                    │
+                                                    └──► <span class="accent">SQLite (PreparedStatements)</span></div>
+              </div>
+
+              <div class="card-spec-block">
+                <div class="spec-row">
+                  <div class="spec-label">Specification:</div>
+                  <div class="spec-body">
+                    Console-based expense tracker built on strict 3-layer architecture separating presentation, business logic, and database persistence.
+                  </div>
+                </div>
+                <div class="spec-row">
+                  <div class="spec-label">Execution:</div>
+                  <div class="spec-body">
+                    Engineered secure CRUD persistence with JDBC and SQLite using parameterized queries to eliminate SQL injection and ensure transaction integrity.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <span class="mono text-muted" style="font-size:0.75rem;">Java / SQLite</span>
+              <div class="card-links">
+                <a href="https://github.com/aditya8242/maKneeTrack" target="_blank" rel="noopener noreferrer" class="link-btn">
+                  <span>github.com/aditya8242/maKneeTrack</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
 
-    <!-- Section 03: Experience & B2B Execution (Clean Timeline) -->
+    <!-- Section 03: Experience (Clean Timeline) -->
     <section id="timeline" class="section-wrapper">
       <div class="container">
-        <div class="section-tag">02 // CHRONOLOGY &amp; EXECUTION</div>
-        <h2 class="section-heading">Experience &amp; B2B Systems.</h2>
+        <div class="section-tag">02 // WORK &amp; EXPERIENCE</div>
+        <h2 class="section-heading">Work Experience.</h2>
         <p class="section-lead">
-          Engineering that understands the business engine. Bridging low-level systems logic with frontline B2B SaaS sales cycles, client discovery, and production delivery.
+          Building and shipping practical software directly for real business clients.
         </p>
 
         <div class="timeline-container">
           
-          <!-- Experience 01 -->
-          <div class="timeline-card">
-            <div class="timeline-top">
-              <div class="timeline-title-group">
-                <h3 class="timeline-company">Brilliant Info Systems Pvt. Ltd.</h3>
-                <span class="timeline-role">Technical Sales Intern</span>
-              </div>
-              <span class="timeline-period">Nov 2026 – Present · Pune, India</span>
-            </div>
-            <p class="timeline-body">
-              Operating at the intersection of engineering and revenue: structuring CRM data models across the B2B software sales cycle, running technical product demonstrations, and translating client workflows into engineering specifications.
-            </p>
-            <ul class="timeline-highlights">
-              <li>Architecting CRM data schemas and lead-qualification workflows to compress enterprise sales discovery cycles.</li>
-              <li>Delivering high-conviction technical product demonstrations to corporate technical leads and procurement executives.</li>
-              <li>Translating nuanced customer infrastructure constraints into structured engineering backlog specifications.</li>
-            </ul>
-          </div>
-
-          <!-- Experience 02 -->
+          <!-- Experience: Iron & Logic -->
           <div class="timeline-card">
             <div class="timeline-top">
               <div class="timeline-title-group">
@@ -432,12 +555,13 @@
               <span class="timeline-period">Aug 2026 – Present · Pune, India</span>
             </div>
             <p class="timeline-body">
-              Auditing legacy local business infrastructure, building custom B2B outreach tooling, and deploying high-speed web architecture and direct booking systems using React, Tailwind CSS, and Vercel.
+              Building custom web applications, direct booking flows, and internal automation tools for businesses and local venues in Pune.
             </p>
             <ul class="timeline-highlights">
-              <li>Complete project ownership: direct client discovery, UI/UX architecture, performance optimization, and production deployment.</li>
-              <li>Engineered custom AI-assisted internal tooling and web scraping scripts for B2B outreach and commercial lead generation.</li>
-              <li>Eliminated third-party booking commissions for local venues by deploying bespoke, high-converting digital storefronts.</li>
+              <li>Built and deployed fast, responsive websites for local businesses using React, Tailwind CSS, and Vercel.</li>
+              <li>Handled end-to-end project ownership: client discovery, UI/UX design, development, domain/DNS setup, and ongoing maintenance.</li>
+              <li>Developed automated Python scrapers and outreach tooling to streamline business lead generation.</li>
+              <li>Replaced third-party commission-heavy booking platforms with custom, zero-fee direct reservation systems.</li>
             </ul>
           </div>
 

@@ -71,10 +71,13 @@ STATUS:   Available for backend engineering roles, systems architecture, and tec
         const target = args[0] ? args[0].toLowerCase().replace(/\/$/, '') : '';
         if (target === 'projects' || target === 'projects/') {
           return `
-drwxr-xr-x  4 aditya staff   128 Feb 2025  01_CVFS_VirtualFileSystem (C++ / Linux Internals)
-drwxr-xr-x  4 aditya staff   128 Feb 2026  02_ConcurrentFTPServer    (C / POSIX Sockets)
-drwxr-xr-x  4 aditya staff   128 Jan 2025  03_EduTrack_Backend       (Java / Spring Boot / MongoDB)
-drwxr-xr-x  4 aditya staff   128 Jul 2026  04_IronVault_Archiver     (Java / Binary Packing / XOR)
+drwxr-xr-x  4 aditya staff   128 Feb 2025  01_CVFS_VirtualFileSystem   (C++ / Linux Internals)
+drwxr-xr-x  4 aditya staff   128 Feb 2026  02_ConcurrentFTPServer      (C / POSIX Sockets)
+drwxr-xr-x  4 aditya staff   128 Jan 2025  03_EggRateBot_Automation    (Python / GitHub Actions)
+drwxr-xr-x  4 aditya staff   128 Mar 2025  04_FaceRecogESP_Embedded    (C++ / ESP32-CAM / CV)
+drwxr-xr-x  4 aditya staff   128 Jan 2025  05_EduTrack_Backend         (Java / Spring Boot / MongoDB)
+drwxr-xr-x  4 aditya staff   128 Jul 2026  06_IronVault_Archiver       (Java / Binary Packing / XOR)
+drwxr-xr-x  4 aditya staff   128 Dec 2024  07_maKneeTrack_CLI          (Java / JDBC / SQLite)
 `;
         }
         if (target === 'blog' || target === 'blog/') {
@@ -165,37 +168,40 @@ Type 'open blog' to launch the essays portal in your browser.
 
 SUMMARY:
 Systems & Backend Engineer specializing in Linux internals, C/C++, and scalable
-Java/Spring Boot backends—paired with frontline B2B software architecture.
-Bridging low-level UNIX programming with high-velocity revenue engineering.
+Java/Spring Boot backends—with practical experience building custom software at Iron & Logic.
 
 EDUCATION:
 Bachelor of Science, Computer Science — 7.8 CGPA (2023 – 2026)
 Savitribai Phule Pune University, Pune, India
 
 WORK EXPERIENCE:
-1. Brilliant Info Systems Pvt. Ltd. | Technical Sales Intern (Nov 2026 – Present · Pune)
-   • Operating at the intersection of engineering and revenue.
-   • Structuring CRM data models across the B2B sales cycle.
-   • Conducting technical product demos & translating client workflows to engineering specs.
-
-2. Iron & Logic | Founder & Web Architect (Aug 2026 – Present · Pune)
-   • Built high-performance web architecture and direct booking integrations.
+1. Iron & Logic | Founder & Web Architect (Aug 2026 – Present · Pune)
+   • Built and deployed fast, responsive websites for local businesses using React, Tailwind CSS, and Vercel.
    • Handled end-to-end client research, UI/UX, B2B outreach tooling, and deployment.
+   • Developed automated Python scrapers and internal lead qualification tools.
 
 SELECTED SYSTEMS PROJECTS:
 • Customized Virtual File System (CVFS) — C++ / Linux Internals (Feb 2025)
   In-memory UNIX UFS-modeled file system from scratch with custom inode tables,
-  User File Descriptor Table (UFDT), and 7 core system calls (creat, open, read,
-  write, unlink, stat, ls).
+  User File Descriptor Table (UFDT), and 7 core system calls.
 • Concurrent FTP Server — C / Sockets / Linux (Feb 2026)
   High-concurrency TCP file server using fork-per-connection architecture with
   custom line-based wire protocol over raw sockets.
+• EggRateBot — Python / Telegram / GitHub Actions (Jan 2025)
+  Defensive automated scraper broadcasting wholesale rates via Telegram Bot API
+  on scheduled GitHub Actions cron jobs. Designed to fail safely without emitting corrupt data.
+• FaceRecogESP — C++ / ESP32-CAM / Embedded (Mar 2025)
+  Biometric facial recognition pipeline running on ESP32-CAM microcontroller hardware
+  with external PSRAM optimization and Wi-Fi MJPEG streaming.
 • EduTrack — Java / Spring Boot / MongoDB / Docker (Jan 2025)
   Production RESTful backend with layered architecture (Controller-Service-Repo),
   Dockerized on Render with MongoDB Atlas.
 • IronVault — Java / Swing / Cryptography (Jul 2026)
   Zero-dependency binary file archiver packing 18+ formats using custom headers
   and repeating XOR encryption.
+• maKneeTrack — Java / SQLite / JDBC (Dec 2024)
+  Console expense engine engineered on strict 3-layer architecture with parameterized
+  SQL persistence.
 
 OPEN SOURCE & HONORS:
 • Merged contributor to ccgargantua/ini (PR #24) — Doxygen C documentation.
@@ -377,24 +383,18 @@ ACADEMICS & OPEN SOURCE:
     },
 
     experience: {
-      desc: 'Display professional engineering & B2B timeline',
+      desc: 'Display professional engineering timeline',
       exec: () => `
 ================================================================================
-CHRONOLOGY & B2B EXECUTION
+EXPERIENCE & WORK
 ================================================================================
 
-[01] Brilliant Info Systems Pvt. Ltd. — Technical Sales Intern
-     Period:   Nov 2026 – Present · Pune, India
-     Scope:    Operating at the intersection of engineering and revenue.
-               Structuring CRM data models across enterprise sales cycles,
-               running technical demos, and turning customer workflows into
-               concrete engineering specifications.
-
-[02] Iron & Logic — Founder & Web Architect
+[01] Iron & Logic — Founder & Web Architect
      Period:   Aug 2026 – Present · Pune, India
-     Scope:    Audited local business digital infrastructure, built automated
-               B2B lead generation tooling, and engineered high-speed booking
-               engines deployed on modern React/Vercel architecture.
+     Scope:    Building custom web software, booking flows, and digital tools
+               for local businesses in Pune. Full project lifecycle from client
+               scoping, UI/UX, and development to React/Tailwind frontend,
+               backend integrations, and Vercel deployments.
 `
     },
 
@@ -515,12 +515,12 @@ DIRECT DISPATCH ENDPOINTS:
         return;
       }
 
-      if (COMMANDS[commandName]) {
+      if (Object.prototype.hasOwnProperty.call(COMMANDS, commandName)) {
         try {
           const result = COMMANDS[commandName].exec(args);
           if (result) this.print(result);
         } catch (err) {
-          this.print(`Execution error: ${err.message}`, true);
+          this.print(`Execution error: ${escapeHtml(err.message)}`, true);
         }
       } else {
         this.print(`bash: ${commandName}: command not found. Type 'help' to inspect available commands.`, true);
@@ -582,7 +582,13 @@ DIRECT DISPATCH ENDPOINTS:
   }
 
   function escapeHtml(text) {
-    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    if (typeof text !== 'string') return '';
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
 
   // Export to window
