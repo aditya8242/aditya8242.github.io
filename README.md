@@ -16,8 +16,11 @@ Focused on Linux internals, C/C++, POSIX socket protocols, and scalable Java/Spr
 
 - **[CVFS](https://github.com/aditya8242/CustomizedVirtualFileSystem)** — In-memory UNIX UFS-modeled virtual file system built in C++ featuring custom inode tables, User File Descriptor Tables (UFDT), and 7 core system calls.
 - **[Concurrent FTP Server](https://github.com/aditya8242/ConcurrentFTPServer)** — High-concurrency TCP file-transfer server in C utilizing a fork-per-connection architecture with a custom line-based wire protocol over raw sockets.
+- **[EggRateBot](https://github.com/aditya8242/EggRateBot)** — Defensive daily scraper and Telegram notifier running serverless via scheduled GitHub Actions cron.
+- **[FaceRecogESP](https://github.com/aditya8242/FaceRecogESP)** — Real-time biometric facial recognition running on an ESP32-CAM microcontroller in C++.
 - **[EduTrack](https://github.com/aditya8242/EduTrack)** — Production RESTful API backend built with Java, Spring Boot, MongoDB Atlas, and Docker on strict Controller–Service–Repository architecture.
 - **[IronVault](https://github.com/aditya8242/IronVault)** — Zero-dependency directory packer serializing 18+ file formats into a single binary archive using custom header formats and repeating XOR encryption.
+- **[maKneeTrack](https://github.com/aditya8242/maKneeTrack)** — Console expense engine built with Java, clean 3-layer architecture, and parameterized SQLite persistence.
 
 ### Engineering Dispatches
 
