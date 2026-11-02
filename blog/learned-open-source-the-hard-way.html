@@ -63,8 +63,23 @@
             <span>[~]$</span>
             <span class="kbd-shortcut">/</span>
           </button>
+
+          <!-- Mobile Navigation Toggle -->
+          <button id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+            <span class="menu-icon">☰</span>
+          </button>
         </div>
       </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html" class="mobile-nav-link"><span>← All Engineering Dispatches</span><span>↖</span></a></li>
+        <li><a href="../index.html" class="mobile-nav-link"><span>01 // Portfolio Home</span><span>↗</span></a></li>
+        <li><a href="../index.html#systems" class="mobile-nav-link"><span>02 // Systems &amp; Architecture</span><span>↓</span></a></li>
+        <li><a href="../index.html#dispatch" class="mobile-nav-link accent"><span>06 // Contact / Dispatch</span><span>↓</span></a></li>
+      </ul>
     </div>
   </header>
 
@@ -318,6 +333,25 @@
         }
       });
     })();
+  </script>
+
+  <script>
+    const mBtn = document.getElementById('mobile-menu-btn');
+    const mDrawer = document.getElementById('mobile-nav-drawer');
+    if (mBtn && mDrawer) {
+      mBtn.addEventListener('click', () => {
+        const isOpen = mDrawer.classList.toggle('open');
+        const iconSpan = mBtn.querySelector('.menu-icon');
+        if (iconSpan) iconSpan.textContent = isOpen ? '✕' : '☰';
+      });
+      mDrawer.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mDrawer.classList.remove('open');
+          const iconSpan = mBtn.querySelector('.menu-icon');
+          if (iconSpan) iconSpan.textContent = '☰';
+        });
+      });
+    }
   </script>
 </body>
 </html>

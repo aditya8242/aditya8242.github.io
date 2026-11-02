@@ -120,8 +120,26 @@
             <span>[~]$</span>
             <span class="kbd-shortcut">/</span>
           </button>
+
+          <!-- Mobile Navigation Toggle -->
+          <button id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+            <span class="menu-icon">☰</span>
+          </button>
         </div>
       </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+      <ul class="mobile-nav-list">
+        <li><a href="#hero" class="mobile-nav-link"><span>01 // Hero</span><span>↓</span></a></li>
+        <li><a href="#systems" class="mobile-nav-link"><span>02 // Systems &amp; Architecture</span><span>↓</span></a></li>
+        <li><a href="#timeline" class="mobile-nav-link"><span>03 // Engineering Timeline</span><span>↓</span></a></li>
+        <li><a href="#specs" class="mobile-nav-link"><span>04 // Hardware &amp; System Specs</span><span>↓</span></a></li>
+        <li><a href="#writing" class="mobile-nav-link"><span>05 // Engineering Dispatches</span><span>↓</span></a></li>
+        <li><a href="#dispatch" class="mobile-nav-link"><span>06 // Direct Dispatch / Contact</span><span>↓</span></a></li>
+        <li><a href="blog/" class="mobile-nav-link accent"><span>→ Engineering Blog Archive</span><span>↗</span></a></li>
+      </ul>
     </div>
   </header>
 
@@ -1037,6 +1055,24 @@
           card.style.setProperty('--mouse-y', `${y}px`);
         });
       });
+
+      // Mobile Drawer Toggle
+      const mobileBtn = document.getElementById('mobile-menu-btn');
+      const mobileDrawer = document.getElementById('mobile-nav-drawer');
+      if (mobileBtn && mobileDrawer) {
+        mobileBtn.addEventListener('click', () => {
+          const isOpen = mobileDrawer.classList.toggle('open');
+          const iconSpan = mobileBtn.querySelector('.menu-icon');
+          if (iconSpan) iconSpan.textContent = isOpen ? '✕' : '☰';
+        });
+        mobileDrawer.querySelectorAll('.mobile-nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileDrawer.classList.remove('open');
+            const iconSpan = mobileBtn.querySelector('.menu-icon');
+            if (iconSpan) iconSpan.textContent = '☰';
+          });
+        });
+      }
 
     })();
   </script>
