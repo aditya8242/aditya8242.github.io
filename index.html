@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aditya Chavan — Systems & Backend Architecture</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Aditya Chavan — Systems & Backend Architecture">
+  <meta name="description" content="Software Engineer specializing in Linux internals, C/C++, and scalable Java/Spring Boot backends—paired with frontline B2B software architecture. Engineered from the metal up.">
+  <meta name="keywords" content="Aditya Chavan, Systems Engineer, Backend Engineer, Linux Internals, C++, Spring Boot, Pune, Software Architect, GitHub Pages">
+  <meta name="author" content="Aditya Chavan">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aditya8242.github.io/">
+  <meta property="og:title" content="Aditya Chavan — Systems & Backend Architecture">
+  <meta property="og:description" content="Software Engineer specializing in Linux internals, C/C++, and scalable Java/Spring Boot backends—paired with frontline B2B software architecture.">
+  <meta property="og:site_name" content="Aditya Chavan Portfolio">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ad1tya24">
+  <meta name="twitter:creator" content="@ad1tya24">
+  <meta name="twitter:title" content="Aditya Chavan — Systems & Backend Architecture">
+  <meta name="twitter:description" content="Software Engineer specializing in Linux internals, C/C++, and scalable Java/Spring Boot backends—paired with frontline B2B software architecture.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Typography: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Aditya Chavan",
+    "url": "https://aditya8242.github.io/",
+    "jobTitle": "Systems & Backend Software Engineer",
+    "worksFor": [
+      {
+        "@type": "Organization",
+        "name": "Brilliant Info Systems Pvt. Ltd."
+      },
+      {
+        "@type": "Organization",
+        "name": "Iron & Logic"
+      }
+    ],
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Savitribai Phule Pune University"
+    },
+    "sameAs": [
+      "https://github.com/aditya8242",
+      "https://linkedin.com/in/adityachavan24",
+      "https://x.com/ad1tya24"
+    ],
+    "knowsAbout": [
+      "Linux Internals",
+      "C++",
+      "C",
+      "Java",
+      "Spring Boot",
+      "POSIX Sockets",
+      "Virtual File Systems",
+      "Docker",
+      "REST APIs"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-brand" aria-label="Aditya Chavan Home">
+          <span class="brand-monogram">AC</span>
+          <div class="brand-meta">
+            <span class="brand-name">Aditya Chavan</span>
+            <span class="brand-role">SYS // BACKEND ARCH</span>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#hero">01 // Hero</a></li>
+            <li><a href="#systems">02 // Systems</a></li>
+            <li><a href="#timeline">03 // Timeline</a></li>
+            <li><a href="#specs">04 // Specs</a></li>
+            <li><a href="#writing">05 // Blog</a></li>
+            <li><a href="#dispatch">06 // Dispatch</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-controls">
+          <!-- GUI vs Raw Terminal Switcher -->
+          <div class="view-switcher" role="tablist" aria-label="Interface Mode">
+            <button id="gui-toggle-btn" class="view-btn active" role="tab" aria-selected="true" title="Switch to Editorial View">
+              <span>GUI</span>
+            </button>
+            <button id="term-toggle-btn" class="view-btn" role="tab" aria-selected="false" title="Switch to Fullscreen Shell">
+              <span>RAW CLI</span>
+            </button>
+          </div>
+
+          <!-- Quick Terminal Trigger Pill -->
+          <button id="open-terminal-btn" class="terminal-trigger-btn" title="Open Interactive Terminal (Press /)">
+            <span>[~]$</span>
+            <span class="kbd-shortcut">/</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN GUI VIEWPORT
+       ======================================================================== -->
+  <main id="gui-fullview">
+    
+    <!-- Section 01: Hero (Above the Fold) -->
+    <section id="hero" class="hero-section">
+      <div class="container">
+        <!-- Live Status Pill -->
+        <div class="hero-status-pill fade-in-entry delay-1">
+          <span class="live-indicator-dot"></span>
+          <span>Pune, IN · Systems &amp; Backend Engineering</span>
+        </div>
+
+        <div class="hero-name fade-in-entry delay-2">00 // ARCHITECTURE REPORT</div>
+        <h1 class="hero-headline fade-in-entry delay-2">
+          Aditya Chavan.<br>
+          <span class="gradient-highlight">Engineered from the metal up.</span>
+        </h1>
+
+        <p class="hero-subheadline fade-in-entry delay-3">
+          Software Engineer specializing in Linux internals, C/C++, and scalable Java/Spring Boot backends—paired with frontline B2B software architecture.
+        </p>
+
+        <!-- Monospace Philosophy Callout -->
+        <div class="philosophy-callout fade-in-entry delay-4">
+          <span class="philosophy-prefix">CORE TENET //</span>
+          <span class="philosophy-quote">"Brute force the logic first. Optimize it later."</span>
+        </div>
+
+        <!-- Latest Dispatch Callout Pill -->
+        <div class="fade-in-entry delay-4" style="margin-bottom: 2.5rem;">
+          <a href="blog/learned-open-source-the-hard-way.html" style="display:inline-flex;align-items:center;gap:0.75rem;padding:0.45rem 0.85rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:4px;text-decoration:none;font-family:var(--font-mono);font-size:0.75rem;color:var(--text-secondary);transition:border-color var(--transition-fast);">
+            <span style="color:var(--accent-green);font-weight:600;">LATEST DISPATCH →</span>
+            <span style="color:var(--text-primary);">"I Learned Open Source the Hard Way"</span>
+          </a>
+        </div>
+
+        <!-- Primary Actions -->
+        <div class="hero-actions fade-in-entry delay-5">
+          <a href="#systems" class="btn btn-primary">
+            <span>View Systems Architecture</span>
+            <span class="mono">↓</span>
+          </a>
+          <a href="blog/" class="btn btn-secondary" title="Visit Engineering Blog">
+            <span>Read Blog (/blog)</span>
+            <span class="mono">↗</span>
+          </a>
+          <a href="https://github.com/aditya8242" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <span>GitHub</span>
+            <span class="mono">↗</span>
+          </a>
+          <a href="https://linkedin.com/in/adityachavan24" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <span>LinkedIn</span>
+            <span class="mono">↗</span>
+          </a>
+          <a href="Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+            <span>Resume.pdf</span>
+            <span class="mono">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 02: Selected Engineering (Bento / Technical Spec Grid) -->
+    <section id="systems" class="section-wrapper">
+      <div class="container">
+        <div class="section-tag">01 // SELECTED ENGINEERING</div>
+        <h2 class="section-heading">Systems & Protocol Architecture.</h2>
+        <p class="section-lead">
+          Low-level primitives, custom protocol implementations, and production backends. Engineered for deterministic memory safety, concurrency, and high throughput.
+        </p>
+
+        <div class="bento-grid">
+          
+          <!-- Project 01: CVFS -->
+          <article class="spec-card">
+            <div>
+              <div class="card-header-bar">
+                <span class="card-num">SPEC 01 // KERNEL ARCHITECTURE</span>
+                <span class="card-date">FEB 2025</span>
+              </div>
+              <h3 class="card-title">Customized Virtual File System (CVFS)</h3>
+              <div class="card-tech-stack">C++ · Linux Internals · Inode Management · Custom Shell</div>
+
+              <!-- Architecture Schematic -->
+              <div class="card-schematic">
+                <div class="schematic-tag">// MEMORY LAYOUT &amp; UFDT DEREFERENCE SCHEMATIC</div>
+                <div class="schematic-diagram">[UFDT Index] ──► [File Table (Offset Ptr)] ──► <span class="highlight">[Inode Table]</span>
+                                                    │
+                                                    ├── Size &amp; Type
+                                                    ├── Perms (R/W/RW)
+                                                    └── <span class="accent">[1024B Block Buffer]</span></div>
+              </div>
+
+              <div class="card-spec-block">
+                <div class="spec-row">
+                  <div class="spec-label">Specification:</div>
+                  <div class="spec-body">
+                    In-memory UNIX UFS-modeled file system built from scratch featuring custom inode tables, User File Descriptor Tables (UFDT), and precise byte-offset tracking.
+                  </div>
+                </div>
+                <div class="spec-row">
+                  <div class="spec-label">Execution:</div>
+                  <div class="spec-body">
+                    Engineered 7 core system calls (<code class="mono text-accent-blue">creat</code>, <code class="mono text-accent-blue">open</code>, <code class="mono text-accent-blue">read</code>, <code class="mono text-accent-blue">write</code>, <code class="mono text-accent-blue">unlink</code>, <code class="mono text-accent-blue">stat</code>, <code class="mono text-accent-blue">ls</code>) with strict permission handling, structured error codes, and a custom CLI shell.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <span class="mono text-muted" style="font-size:0.75rem;">C++17 / POSIX</span>
+              <div class="card-links">
+                <a href="https://github.com/aditya8242/CustomizedVirtualFileSystem" target="_blank" rel="noopener noreferrer" class="link-btn">
+                  <span>github.com/aditya8242/CVFS</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 02: Concurrent FTP Server -->
+          <article class="spec-card">
+            <div>
+              <div class="card-header-bar">
+                <span class="card-num">SPEC 02 // NETWORKING PROTOCOL</span>
+                <span class="card-date">FEB 2026</span>
+              </div>
+              <h3 class="card-title">Concurrent FTP Server</h3>
+              <div class="card-tech-stack">C · POSIX Sockets · Fork-per-Connection · Wire Protocol</div>
+
+              <!-- Architecture Schematic -->
+              <div class="card-schematic">
+                <div class="schematic-tag">// CONCURRENCY &amp; WIRE PROTOCOL SEQUENCE</div>
+                <div class="schematic-diagram">Client [RETR binary] ──► <span class="highlight">Master [Listen :2121]</span>
+                               │
+                               └──► <span class="cyan">fork() Child [Isolated PID]</span>
+                                      ├── Send: "SIZE &lt;bytes&gt;\n"
+                                      └── Raw Byte Stream @ 4KB Buffer</div>
+              </div>
+
+              <div class="card-spec-block">
+                <div class="spec-row">
+                  <div class="spec-label">Specification:</div>
+                  <div class="spec-body">
+                    High-concurrency TCP file-transfer server utilizing a fork-per-connection architecture to serve parallel client downloads across isolated child processes.
+                  </div>
+                </div>
+                <div class="spec-row">
+                  <div class="spec-label">Execution:</div>
+                  <div class="spec-body">
+                    Designed a custom line-based wire protocol (<code class="mono">filename request</code> → <code class="mono">size header</code> → <code class="mono">raw byte stream</code>) over raw sockets with deterministic process isolation and graceful socket cleanup.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <span class="mono text-muted" style="font-size:0.75rem;">POSIX C / Sockets</span>
+              <div class="card-links">
+                <a href="https://github.com/aditya8242/ConcurrentFTPServer" target="_blank" rel="noopener noreferrer" class="link-btn">
+                  <span>github.com/aditya8242/FTP</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 03: EduTrack -->
+          <article class="spec-card">
+            <div>
+              <div class="card-header-bar">
+                <span class="card-num">SPEC 03 // ENTERPRISE BACKEND</span>
+                <span class="card-date">JAN 2025</span>
+              </div>
+              <h3 class="card-title">EduTrack — Enterprise Management Backend</h3>
+              <div class="card-tech-stack">Java · Spring Boot · MongoDB · Docker · Render PaaS</div>
+
+              <!-- Architecture Schematic -->
+              <div class="card-schematic">
+                <div class="schematic-tag">// LAYERED PIPELINE &amp; CLOUD CONTAINERIZATION</div>
+                <div class="schematic-diagram">REST API Request ──► <span class="highlight">[Controller Layer]</span>
+                            │
+                            └──► [Service (Business Logic)]
+                                   └──► <span class="accent">[Mongo Repository]</span> ──► Cloud Atlas</div>
+              </div>
+
+              <div class="card-spec-block">
+                <div class="spec-row">
+                  <div class="spec-label">Specification:</div>
+                  <div class="spec-body">
+                    Production RESTful API backend for academic course and student fee operations built on strict Controller–Service–Repository layered architecture.
+                  </div>
+                </div>
+                <div class="spec-row">
+                  <div class="spec-label">Execution:</div>
+                  <div class="spec-body">
+                    Containerized with Docker and deployed on Render with MongoDB Atlas (<code class="mono">edutrack-3426.onrender.com</code>), validating end-to-end CRUD integrity under concurrent client loads.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <span class="mono text-muted" style="font-size:0.75rem;">Java 17 / Spring Boot</span>
+              <div class="card-links">
+                <a href="https://edutrack-3426.onrender.com" target="_blank" rel="noopener noreferrer" class="link-btn" title="Live Deployment">
+                  <span>Live API</span>
+                  <span>↗</span>
+                </a>
+                <a href="https://github.com/aditya8242/EduTrack" target="_blank" rel="noopener noreferrer" class="link-btn">
+                  <span>Repository</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 04: IronVault -->
+          <article class="spec-card">
+            <div>
+              <div class="card-header-bar">
+                <span class="card-num">SPEC 04 // BINARY ARCHIVER &amp; CIPHER</span>
+                <span class="card-date">JUL 2026</span>
+              </div>
+              <h3 class="card-title">IronVault — Binary File Archiver &amp; Encryptor</h3>
+              <div class="card-tech-stack">Java · Swing GUI · Cryptography · Custom Headers</div>
+
+              <!-- Architecture Schematic -->
+              <div class="card-schematic">
+                <div class="schematic-tag">// BINARY ARCHIVE PACKING SPECIFICATION</div>
+                <div class="schematic-diagram"><span class="highlight">[MAGIC: 0x495641]</span> ──► [4B Meta Len] ──► [Header Records x N]
+                                              │
+                                              └──► <span class="cyan">[Repeating XOR Stream]</span></div>
+              </div>
+
+              <div class="card-spec-block">
+                <div class="spec-row">
+                  <div class="spec-label">Specification:</div>
+                  <div class="spec-body">
+                    Zero-dependency directory packer serializing 18+ file formats into a single binary archive using a custom header format and repeating XOR encryption.
+                  </div>
+                </div>
+                <div class="spec-row">
+                  <div class="spec-label">Execution:</div>
+                  <div class="spec-body">
+                    Supports 18 file formats including documents, images, source code, and media. Ships with a self-contained Swing GUI with zero external dependencies.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <span class="mono text-muted" style="font-size:0.75rem;">Java / Cryptography</span>
+              <div class="card-links">
+                <a href="https://github.com/aditya8242/IronVault" target="_blank" rel="noopener noreferrer" class="link-btn">
+                  <span>github.com/aditya8242/IronVault</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 03: Experience & B2B Execution (Clean Timeline) -->
+    <section id="timeline" class="section-wrapper">
+      <div class="container">
+        <div class="section-tag">02 // CHRONOLOGY &amp; EXECUTION</div>
+        <h2 class="section-heading">Experience &amp; B2B Systems.</h2>
+        <p class="section-lead">
+          Engineering that understands the business engine. Bridging low-level systems logic with frontline B2B SaaS sales cycles, client discovery, and production delivery.
+        </p>
+
+        <div class="timeline-container">
+          
+          <!-- Experience 01 -->
+          <div class="timeline-card">
+            <div class="timeline-top">
+              <div class="timeline-title-group">
+                <h3 class="timeline-company">Brilliant Info Systems Pvt. Ltd.</h3>
+                <span class="timeline-role">Technical Sales Intern</span>
+              </div>
+              <span class="timeline-period">Nov 2026 – Present · Pune, India</span>
+            </div>
+            <p class="timeline-body">
+              Operating at the intersection of engineering and revenue: structuring CRM data models across the B2B software sales cycle, running technical product demonstrations, and translating client workflows into engineering specifications.
+            </p>
+            <ul class="timeline-highlights">
+              <li>Architecting CRM data schemas and lead-qualification workflows to compress enterprise sales discovery cycles.</li>
+              <li>Delivering high-conviction technical product demonstrations to corporate technical leads and procurement executives.</li>
+              <li>Translating nuanced customer infrastructure constraints into structured engineering backlog specifications.</li>
+            </ul>
+          </div>
+
+          <!-- Experience 02 -->
+          <div class="timeline-card">
+            <div class="timeline-top">
+              <div class="timeline-title-group">
+                <h3 class="timeline-company">Iron &amp; Logic</h3>
+                <span class="timeline-role">Founder &amp; Web Architect</span>
+              </div>
+              <span class="timeline-period">Aug 2026 – Present · Pune, India</span>
+            </div>
+            <p class="timeline-body">
+              Auditing legacy local business infrastructure, building custom B2B outreach tooling, and deploying high-speed web architecture and direct booking systems using React, Tailwind CSS, and Vercel.
+            </p>
+            <ul class="timeline-highlights">
+              <li>Complete project ownership: direct client discovery, UI/UX architecture, performance optimization, and production deployment.</li>
+              <li>Engineered custom AI-assisted internal tooling and web scraping scripts for B2B outreach and commercial lead generation.</li>
+              <li>Eliminated third-party booking commissions for local venues by deploying bespoke, high-converting digital storefronts.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 04: Technical Specification Sheet (Apple-Style Hardware Spec Table) -->
+    <section id="specs" class="section-wrapper">
+      <div class="container">
+        <div class="section-tag">03 // HARDWARE &amp; SOFTWARE MATRIX</div>
+        <h2 class="section-heading">Technical Specification Sheet.</h2>
+        <p class="section-lead">
+          Comprehensive breakdown of systems engineering competencies, runtime tooling, and academic credentials.
+        </p>
+
+        <div class="spec-table-container">
+          <div class="spec-table-header">
+            <span>SPECIFICATION FIELD</span>
+            <span>SYSTEM ARCHITECTURE &amp; ATTRIBUTES</span>
+          </div>
+
+          <!-- Row 1: Systems & Languages -->
+          <div class="spec-table-row">
+            <div class="spec-category-label">
+              <span class="spec-index">01.0</span>
+              <span>Systems &amp; Languages</span>
+            </div>
+            <div class="spec-category-content">
+              <div class="spec-tokens-list">
+                <span class="spec-token highlight">C</span>
+                <span class="spec-token highlight">C++17</span>
+                <span class="spec-token highlight">Java</span>
+                <span class="spec-token">Python</span>
+                <span class="spec-token">JavaScript</span>
+                <span class="spec-token">Bash / Shell</span>
+                <span class="spec-token highlight">Linux / UNIX Internals</span>
+                <span class="spec-token">Process Memory</span>
+                <span class="spec-token">In-Memory Filesystems</span>
+                <span class="spec-token">POSIX Sockets</span>
+              </div>
+              <p class="spec-note">
+                Deep low-level focus on process isolation, system calls, pointer arithmetic, offset calculation, and deterministic operating system internals.
+              </p>
+            </div>
+          </div>
+
+          <!-- Row 2: Backend & Data -->
+          <div class="spec-table-row">
+            <div class="spec-category-label">
+              <span class="spec-index">02.0</span>
+              <span>Backend &amp; Data</span>
+            </div>
+            <div class="spec-category-content">
+              <div class="spec-tokens-list">
+                <span class="spec-token highlight">Spring Boot</span>
+                <span class="spec-token highlight">REST APIs</span>
+                <span class="spec-token">Layered Architecture</span>
+                <span class="spec-token highlight">PostgreSQL</span>
+                <span class="spec-token highlight">MongoDB</span>
+                <span class="spec-token">MySQL</span>
+                <span class="spec-token">SQLite</span>
+                <span class="spec-token">JDBC</span>
+                <span class="spec-token">Controller-Service-Repo</span>
+              </div>
+              <p class="spec-note">
+                Modular service-oriented backend architecture, transactional persistence, strict boundary separation, and scalable cloud database integration.
+              </p>
+            </div>
+          </div>
+
+          <!-- Row 3: Infrastructure & Tooling -->
+          <div class="spec-table-row">
+            <div class="spec-category-label">
+              <span class="spec-index">03.0</span>
+              <span>Infrastructure &amp; Tooling</span>
+            </div>
+            <div class="spec-category-content">
+              <div class="spec-tokens-list">
+                <span class="spec-token highlight">Docker</span>
+                <span class="spec-token">Git</span>
+                <span class="spec-token">GitHub Actions CI/CD</span>
+                <span class="spec-token">Vercel</span>
+                <span class="spec-token">Cloudflare</span>
+                <span class="spec-token">Vim</span>
+                <span class="spec-token">Linux CLI</span>
+                <span class="spec-token">Render PaaS</span>
+                <span class="spec-token">IntelliJ IDEA</span>
+              </div>
+              <p class="spec-note">
+                Containerized microservices, immutable deployments, terminal-first developer ergonomics, and automated delivery pipelines.
+              </p>
+            </div>
+          </div>
+
+          <!-- Row 4: Open Source & Education -->
+          <div class="spec-table-row">
+            <div class="spec-category-label">
+              <span class="spec-index">04.0</span>
+              <span>Open Source &amp; Education</span>
+            </div>
+            <div class="spec-category-content">
+              <div class="spec-tokens-list">
+                <span class="spec-token highlight">ccgargantua/ini (PR #24 Merged)</span>
+                <span class="spec-token">Doxygen C Docs</span>
+                <span class="spec-token highlight">B.Sc. Computer Science (7.8 CGPA)</span>
+                <span class="spec-token">Savitribai Phule Pune University</span>
+                <span class="spec-token">Infosys PostgreSQL Dev</span>
+                <span class="spec-token">Infosys Python Certified</span>
+              </div>
+              <p class="spec-note">
+                Active open-source contributor to C library codebases. Savitribai Phule Pune University (2023–2026). Rigorous foundation in data structures, algorithms, and computing fundamentals.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 05: Engineering Dispatches & Writings (/blog) -->
+    <section id="writing" class="section-wrapper">
+      <div class="container">
+        <div class="section-tag">04 // FIELD NOTES &amp; ESSAYS</div>
+        <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 2rem;">
+          <h2 class="section-heading" style="margin-bottom: 0;">Engineering Dispatches.</h2>
+          <a href="blog/" class="btn btn-secondary" title="Visit Complete Blog">
+            <span>Explore All Articles (/blog)</span>
+            <span class="mono">→</span>
+          </a>
+        </div>
+        <p class="section-lead">
+          Writing about software simplicity, open-source ownership, and defensive automation. Candid field notes from building and breaking systems.
+        </p>
+
+        <div class="bento-grid">
+          <!-- Article Card 1 -->
+          <a href="blog/learned-open-source-the-hard-way.html" class="spec-card" style="text-decoration: none; cursor: pointer;">
+            <div>
+              <div class="card-header-bar">
+                <span class="card-num">ESSAY 01 // OPEN SOURCE</span>
+                <span class="card-date">OCT 2025 · 4 MIN READ</span>
+              </div>
+              <h3 class="card-title">I Learned Open Source the Hard Way</h3>
+              <div class="card-tech-stack">By failing publicly · C / Doxygen · Maintainer Reality</div>
+              <p class="spec-body" style="margin-top: 1rem; margin-bottom: 1.5rem;">
+                A firsthand account of failing publicly in open source and learning the real value of ownership, correctness, and trust. What happens when an eager PR with unverified AI comments meets an uncompromising C maintainer.
+              </p>
+            </div>
+            <div class="card-footer">
+              <span class="mono text-accent-green" style="font-size:0.75rem;">Read Essay →</span>
+              <span class="mono text-muted" style="font-size:0.75rem;">/blog/learned-open-source-the-hard-way.html</span>
+            </div>
+          </a>
+
+          <!-- Article Card 2 -->
+          <a href="blog/automating-a-daily-task.html" class="spec-card" style="text-decoration: none; cursor: pointer;">
+            <div>
+              <div class="card-header-bar">
+                <span class="card-num">ESSAY 02 // DEFENSIVE AUTOMATION</span>
+                <span class="card-date">2025 · 4 MIN READ</span>
+              </div>
+              <h3 class="card-title">Automating a Daily Task Instead of Repeating It</h3>
+              <div class="card-tech-stack">Replacing fragile manual work · Python · GitHub Actions</div>
+              <p class="spec-body" style="margin-top: 1rem; margin-bottom: 1.5rem;">
+                A small automation project that replaces repetitive daily work with a reliable, failure-aware system using Python and GitHub Actions cron jobs. Zero databases, zero babysitting.
+              </p>
+            </div>
+            <div class="card-footer">
+              <span class="mono text-accent-green" style="font-size:0.75rem;">Read Essay →</span>
+              <span class="mono text-muted" style="font-size:0.75rem;">/blog/automating-a-daily-task.html</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 06: Footer / Direct Dispatch -->
+    <footer id="dispatch" class="footer-dispatch">
+      <div class="container">
+        
+        <!-- CTA Box -->
+        <div class="dispatch-cta-box">
+          <div class="section-tag">04 // DIRECT DISPATCH</div>
+          <div class="dispatch-statement">
+            Available for backend engineering roles, systems architecture, and technical consulting.
+          </div>
+          <p class="text-secondary" style="max-width:620px;margin-bottom:2rem;font-size:0.9375rem;">
+            Whether you are building high-concurrency network servers, refactoring legacy data pipelines, or designing scalable B2B systems from scratch—let's build it right.
+          </p>
+
+          <!-- Direct Links Grid -->
+          <div class="dispatch-grid">
+            
+            <!-- Email (with copy toast) -->
+            <div id="copy-email-card" class="dispatch-link-card" title="Click to copy email address">
+              <span class="dispatch-label">Direct Transmission</span>
+              <div class="dispatch-value">
+                <span>aditya.h.chavan@gmail.com</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </div>
+            </div>
+
+            <!-- GitHub -->
+            <a href="https://github.com/aditya8242" target="_blank" rel="noopener noreferrer" class="dispatch-link-card">
+              <span class="dispatch-label">Code Repositories</span>
+              <div class="dispatch-value">
+                <span>github.com/aditya8242</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </div>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/in/adityachavan24" target="_blank" rel="noopener noreferrer" class="dispatch-link-card">
+              <span class="dispatch-label">Executive Network</span>
+              <div class="dispatch-value">
+                <span>in/adityachavan24</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </div>
+            </a>
+
+            <!-- X / Twitter -->
+            <a href="https://x.com/ad1tya24" target="_blank" rel="noopener noreferrer" class="dispatch-link-card">
+              <span class="dispatch-label">Technical Discourse</span>
+              <div class="dispatch-value">
+                <span>x.com/ad1tya24</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </div>
+            </a>
+
+          </div>
+
+          <!-- Phone line info -->
+          <div style="margin-top:1.5rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;">
+            <span>VOICE:</span>
+            <a href="tel:+918669906901" style="color:var(--text-secondary);text-decoration:none;">+91 86699 06901</a>
+            <span>·</span>
+            <span>LOCATION: Pune, Maharashtra, India</span>
+          </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="footer-bottom-bar">
+          <div>
+            <span>© 2026 Aditya Chavan. Engineered with Dieter Rams precision.</span>
+          </div>
+          <div style="display:flex;gap:1rem;">
+            <span>Zero-Config Static Engine</span>
+            <span>·</span>
+            <span>GitHub Pages: aditya8242.github.io</span>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+  </main>
+
+  <!-- ========================================================================
+       FULL-SCREEN RAW CLI WORKSTATION VIEWPORT
+       ======================================================================== -->
+  <section id="terminal-fullview" aria-label="UNIX Terminal Workstation">
+    <div class="container">
+      <div class="terminal-window">
+        <div class="terminal-titlebar">
+          <div class="terminal-dots">
+            <span class="terminal-dot close" id="term-close-dot" title="Return to GUI"></span>
+            <span class="terminal-dot min"></span>
+            <span class="terminal-dot max"></span>
+          </div>
+          <div class="terminal-title">aditya@arch-pune: ~ (tty1) — 80x24</div>
+          <button id="term-switch-back-btn" class="modal-close-btn" title="Return to GUI">GUI Mode [Esc]</button>
+        </div>
+        <div class="terminal-body" id="full-term-body">
+          <div class="term-output" id="full-term-output"></div>
+          <div class="term-prompt-line">
+            <span class="term-prompt">aditya@arch-pune:~$</span>
+            <input type="text" id="full-term-input" class="term-input" spellcheck="false" autocomplete="off" autofocus aria-label="Terminal Input">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       EASTER EGG MODAL TERMINAL (PRESS / OR CLICK [~]$)
+       ======================================================================== -->
+  <div id="terminal-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Interactive Terminal Shell">
+    <div class="modal-terminal-card">
+      <div class="terminal-titlebar">
+        <div class="terminal-dots">
+          <span class="terminal-dot close" id="modal-close-dot"></span>
+          <span class="terminal-dot min"></span>
+          <span class="terminal-dot max"></span>
+        </div>
+        <div class="terminal-title">aditya@arch-pune: ~ (sh) — Press Esc to exit</div>
+        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close terminal">✕ Close</button>
+      </div>
+      <div class="terminal-body" id="modal-term-body" style="overflow-y:auto;flex:1;">
+        <div class="term-output" id="modal-term-output"></div>
+        <div class="term-prompt-line">
+          <span class="term-prompt">aditya@arch-pune:~$</span>
+          <input type="text" id="modal-term-input" class="term-input" spellcheck="false" autocomplete="off" aria-label="Interactive Command Input">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="terminal.js"></script>
+  <script>
+    (function() {
+      'use strict';
+
+      // Elements
+      const body = document.body;
+      const guiToggleBtn = document.getElementById('gui-toggle-btn');
+      const termToggleBtn = document.getElementById('term-toggle-btn');
+      const openTerminalBtn = document.getElementById('open-terminal-btn');
+      
+      const modal = document.getElementById('terminal-modal');
+      const modalCloseBtn = document.getElementById('modal-close-btn');
+      const modalCloseDot = document.getElementById('modal-close-dot');
+      const modalInput = document.getElementById('modal-term-input');
+      const modalOutput = document.getElementById('modal-term-output');
+      const modalBody = document.getElementById('modal-term-body');
+
+      const fullInput = document.getElementById('full-term-input');
+      const fullOutput = document.getElementById('full-term-output');
+      const fullBody = document.getElementById('full-term-body');
+      const termSwitchBackBtn = document.getElementById('term-switch-back-btn');
+      const termCloseDot = document.getElementById('term-close-dot');
+
+      const copyEmailCard = document.getElementById('copy-email-card');
+
+      // Toast Notification System
+      function showToast(message) {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `
+          <span class="toast-dot"></span>
+          <span>${message}</span>
+        `;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.classList.add('toast-exit');
+          setTimeout(() => toast.remove(), 300);
+        }, 3200);
+      }
+
+      // Copy email to clipboard
+      if (copyEmailCard) {
+        copyEmailCard.addEventListener('click', () => {
+          const email = 'aditya.h.chavan@gmail.com';
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(() => {
+              showToast(`COPIED // ${email}`);
+            }).catch(() => {
+              showToast(`TRANSMIT // ${email}`);
+            });
+          } else {
+            showToast(`TRANSMIT // ${email}`);
+          }
+        });
+      }
+
+      // Initialize Terminals
+      let modalTerminal = null;
+      let fullTerminal = null;
+
+      function openModalTerminal() {
+        modal.classList.add('open');
+        if (!modalTerminal) {
+          modalTerminal = new window.TerminalEngine(
+            modalBody,
+            modalInput,
+            modalOutput,
+            () => closeModalTerminal(),
+            () => closeModalTerminal()
+          );
+        }
+        setTimeout(() => modalInput.focus(), 50);
+      }
+
+      function closeModalTerminal() {
+        modal.classList.remove('open');
+      }
+
+      function switchToTerminalMode() {
+        body.classList.add('mode-terminal');
+        termToggleBtn.classList.add('active');
+        termToggleBtn.setAttribute('aria-selected', 'true');
+        guiToggleBtn.classList.remove('active');
+        guiToggleBtn.setAttribute('aria-selected', 'false');
+
+        if (!fullTerminal) {
+          fullTerminal = new window.TerminalEngine(
+            fullBody,
+            fullInput,
+            fullOutput,
+            () => switchToGuiMode(),
+            () => switchToGuiMode()
+          );
+        }
+        setTimeout(() => fullInput.focus(), 50);
+      }
+
+      function switchToGuiMode() {
+        body.classList.remove('mode-terminal');
+        guiToggleBtn.classList.add('active');
+        guiToggleBtn.setAttribute('aria-selected', 'true');
+        termToggleBtn.classList.remove('active');
+        termToggleBtn.setAttribute('aria-selected', 'false');
+      }
+
+      // Event listeners for toggle controls
+      guiToggleBtn.addEventListener('click', switchToGuiMode);
+      termToggleBtn.addEventListener('click', switchToTerminalMode);
+      if (termSwitchBackBtn) termSwitchBackBtn.addEventListener('click', switchToGuiMode);
+      if (termCloseDot) termCloseDot.addEventListener('click', switchToGuiMode);
+
+      openTerminalBtn.addEventListener('click', openModalTerminal);
+      modalCloseBtn.addEventListener('click', closeModalTerminal);
+      modalCloseDot.addEventListener('click', closeModalTerminal);
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModalTerminal();
+        }
+      });
+
+      // Global Keyboard Shortcuts: '/' opens terminal modal, 'Esc' closes it or returns to GUI
+      document.addEventListener('keydown', (e) => {
+        // If typing in an active input, ignore '/'
+        if (e.key === '/' && document.activeElement !== modalInput && document.activeElement !== fullInput && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          openModalTerminal();
+        } else if (e.key === 'Escape') {
+          if (modal.classList.contains('open')) {
+            closeModalTerminal();
+          } else if (body.classList.contains('mode-terminal')) {
+            switchToGuiMode();
+          }
+        }
+      });
+
+      // Mouse Spotlight Hover effect on Spec Cards (Linear / Apple style)
+      document.querySelectorAll('.spec-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Learned Open Source the Hard Way — Aditya Chavan</title>
+  <meta name="description" content="A firsthand account of failing publicly in open source and learning the real value of ownership, correctness, and trust.">
+  <meta name="author" content="Aditya Chavan">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://aditya8242.github.io/blog/learned-open-source-the-hard-way.html">
+  <meta property="og:title" content="I Learned Open Source the Hard Way — Aditya Chavan">
+  <meta property="og:description" content="A firsthand account of failing publicly in open source and learning the real value of ownership, correctness, and trust.">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ad1tya24">
+  <meta name="twitter:creator" content="@ad1tya24">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" type="image/png" href="../favicon.png">
+
+  <!-- Typography: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="../" class="nav-brand" aria-label="Aditya Chavan Portfolio">
+          <span class="brand-monogram">AC</span>
+          <div class="brand-meta">
+            <span class="brand-name">Aditya Chavan</span>
+            <span class="brand-role">SYS // ESSAYS</span>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="index.html">← All Dispatches</a></li>
+            <li><a href="../">Portfolio Home</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-controls">
+          <button id="open-terminal-btn" class="terminal-trigger-btn" title="Open Interactive Terminal (Press /)">
+            <span>[~]$</span>
+            <span class="kbd-shortcut">/</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Viewport -->
+  <main class="article-wrapper">
+    
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <a href="../">portfolio</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="index.html">blog</a>
+      <span class="breadcrumb-sep">/</span>
+      <span style="color: var(--text-primary);">open-source</span>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+      <h1 class="article-title">I Learned Open Source the Hard Way</h1>
+      <h2 class="article-subtitle">By failing publicly</h2>
+
+      <div class="article-meta-bar">
+        <span class="blog-tag">OPEN SOURCE · LESSONS</span>
+        <span>OCT 2025</span>
+        <span>·</span>
+        <span>4 MIN READ</span>
+        <span>·</span>
+        <span>BY ADITYA CHAVAN</span>
+      </div>
+    </header>
+
+    <!-- Exact Written Article Content Preserved Verbatim -->
+    <article class="article-prose">
+      <p>
+        A few days ago, I made a mistake — the kind that hurts your ego but upgrades your brain.
+      </p>
+
+      <p>
+        I wanted to make a quick open-source contribution. The motivation was familiar:
+        a merged pull request, a green square, something easy to point at.
+      </p>
+
+      <h3>The Shortcut Mindset</h3>
+
+      <p>
+        I searched GitHub for “good first issues” and found one quickly.
+        The task sounded trivial: add JavaDoc-style comments to a C header file.
+      </p>
+
+      <p>Instead of asking:</p>
+      <ul>
+        <li>What does this project do?</li>
+        <li>Why does it need documentation?</li>
+        <li>How does documentation work in C?</li>
+      </ul>
+
+      <p>I asked a different question:</p>
+
+      <p><strong>How fast can I finish this?</strong></p>
+
+      <p>
+        I copied the header file into an AI chatbot and asked it to generate comments.
+        I didn’t review the output. I didn’t understand it.
+        I didn’t even read the project README.
+      </p>
+
+      <p>I opened a pull request.</p>
+
+      <h3>The Reality Check</h3>
+
+      <p>
+        A few hours later, the maintainer replied.
+      </p>
+
+      <p>
+        Not only were the comments wrong — critical code had been removed.
+        Out of roughly 700 lines.
+      </p>
+
+      <p>
+        That’s not a small mistake.
+        That’s a trust-breaking one.
+      </p>
+
+      <p>I apologized and said I would fix it.</p>
+
+      <h3>Making the Same Mistake Twice</h3>
+
+      <p>
+        Instead of slowing down, I doubled down.
+      </p>
+
+      <p>
+        I went back to AI. Wrote “better prompts.” Trusted the output again.
+        Still didn’t review it. Still didn’t understand it.
+      </p>
+
+      <p>I opened another pull request.</p>
+
+      <p>
+        This time, the maintainer was furious — and rightfully so.
+        He accused me of using AI. I admitted it.
+      </p>
+
+      <p>
+        He told me not to touch his code anymore.
+      </p>
+
+      <h3>The Turning Point</h3>
+
+      <p>
+        After cooling down, I reread his comments.
+      </p>
+
+      <p>
+        This wasn’t arrogance or gatekeeping.
+        This was someone protecting their project, their time, and their standards.
+      </p>
+
+      <p>
+        I asked for one last chance — not to look good, but to do it right.
+        He gave it.
+      </p>
+
+      <h3>Doing the Actual Work</h3>
+
+      <p>This time, I slowed down.</p>
+
+      <ul>
+        <li>Read the project documentation</li>
+        <li>Learned what INI files are (it was an INI parser)</li>
+        <li>Understood JavaDoc vs Doxygen</li>
+        <li>Learned how documentation fits into C projects</li>
+        <li>Made changes incrementally</li>
+        <li>Reviewed every line</li>
+      </ul>
+
+      <p>
+        Within a few hours, I fixed the issue properly.
+        I learned more than I would have from ten “easy” pull requests.
+      </p>
+
+      <h3>What This Taught Me</h3>
+
+      <ul>
+        <li>AI accelerates work only when you already care about correctness</li>
+        <li>Open source is collaboration, not a résumé farm</li>
+        <li>Maintainers aren’t enemies — they’re guardians</li>
+        <li>Owning mistakes earns more respect than pretending competence</li>
+        <li>Public failure is brutal — and incredibly educational</li>
+      </ul>
+
+      <p>
+        I failed. I failed again. Then I learned.
+      </p>
+
+      <p>
+        That was my real first contribution.
+      </p>
+    </article>
+
+    <!-- Author Card -->
+    <div class="article-author-card">
+      <div class="author-info">
+        <span class="author-name">Aditya Chavan</span>
+        <span class="author-role">Systems &amp; Backend Software Engineer · Pune, India</span>
+        <p class="author-bio">
+          Undergraduate specializing in Linux internals, C/C++, and scalable Java backends. Merged contributor to <code>ccgargantua/ini</code> (PR #24).
+        </p>
+      </div>
+      <div>
+        <a href="../#dispatch" class="btn btn-secondary">Connect ↗</a>
+      </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div class="article-nav-footer">
+      <a href="index.html">← Back to all essays</a>
+      <a href="../">Portfolio Home →</a>
+    </div>
+
+  </main>
+
+  <!-- Terminal Modal Easter Egg -->
+  <div id="terminal-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Interactive Terminal Shell">
+    <div class="modal-terminal-card">
+      <div class="terminal-titlebar">
+        <div class="terminal-dots">
+          <span class="terminal-dot close" id="modal-close-dot"></span>
+          <span class="terminal-dot min"></span>
+          <span class="terminal-dot max"></span>
+        </div>
+        <div class="terminal-title">aditya@arch-pune: ~/blog (sh) — Press Esc to exit</div>
+        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close terminal">✕ Close</button>
+      </div>
+      <div class="terminal-body" id="modal-term-body" style="overflow-y:auto;flex:1;">
+        <div class="term-output" id="modal-term-output"></div>
+        <div class="term-prompt-line">
+          <span class="term-prompt">aditya@arch-pune:~$</span>
+          <input type="text" id="modal-term-input" class="term-input" spellcheck="false" autocomplete="off" aria-label="Interactive Command Input">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../terminal.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      const openTerminalBtn = document.getElementById('open-terminal-btn');
+      const modal = document.getElementById('terminal-modal');
+      const modalCloseBtn = document.getElementById('modal-close-btn');
+      const modalCloseDot = document.getElementById('modal-close-dot');
+      const modalInput = document.getElementById('modal-term-input');
+      const modalOutput = document.getElementById('modal-term-output');
+      const modalBody = document.getElementById('modal-term-body');
+
+      let modalTerminal = null;
+
+      function openModalTerminal() {
+        modal.classList.add('open');
+        if (!modalTerminal) {
+          modalTerminal = new window.TerminalEngine(
+            modalBody,
+            modalInput,
+            modalOutput,
+            () => closeModalTerminal(),
+            () => closeModalTerminal()
+          );
+        }
+        setTimeout(() => modalInput.focus(), 50);
+      }
+
+      function closeModalTerminal() {
+        modal.classList.remove('open');
+      }
+
+      openTerminalBtn.addEventListener('click', openModalTerminal);
+      modalCloseBtn.addEventListener('click', closeModalTerminal);
+      modalCloseDot.addEventListener('click', closeModalTerminal);
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModalTerminal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== modalInput && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          openModalTerminal();
+        } else if (e.key === 'Escape' && modal.classList.contains('open')) {
+          closeModalTerminal();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

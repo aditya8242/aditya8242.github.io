@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering Dispatches — Aditya Chavan</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Engineering Dispatches — Aditya Chavan">
+  <meta name="description" content="Essays and technical field notes on systems programming, defensive automation, open source, and software simplicity by Aditya Chavan.">
+  <meta name="author" content="Aditya Chavan">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aditya8242.github.io/blog/">
+  <meta property="og:title" content="Engineering Dispatches — Aditya Chavan">
+  <meta property="og:description" content="Essays and technical field notes on systems programming, defensive automation, open source, and software simplicity by Aditya Chavan.">
+  <meta property="og:site_name" content="Aditya Chavan Blog">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ad1tya24">
+  <meta name="twitter:creator" content="@ad1tya24">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" type="image/png" href="../favicon.png">
+
+  <!-- Typography: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="../" class="nav-brand" aria-label="Aditya Chavan Portfolio">
+          <span class="brand-monogram">AC</span>
+          <div class="brand-meta">
+            <span class="brand-name">Aditya Chavan</span>
+            <span class="brand-role">SYS // DISPATCHES</span>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="../">← Return to Portfolio</a></li>
+            <li><a href="../#systems">Systems</a></li>
+            <li><a href="../#timeline">Timeline</a></li>
+            <li><a href="../#specs">Specs</a></li>
+            <li><a href="../#dispatch">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-controls">
+          <!-- Quick Terminal Trigger Pill -->
+          <button id="open-terminal-btn" class="terminal-trigger-btn" title="Open Interactive Terminal (Press /)">
+            <span>[~]$</span>
+            <span class="kbd-shortcut">/</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN BLOG INDEX
+       ======================================================================== -->
+  <main class="section-wrapper" style="padding-top: 4rem;">
+    <div class="container">
+
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <a href="../">portfolio</a>
+        <span class="breadcrumb-sep">/</span>
+        <span style="color: var(--text-primary);">blog</span>
+      </nav>
+
+      <!-- Status Pill -->
+      <div class="hero-status-pill fade-in-entry delay-1">
+        <span class="live-indicator-dot"></span>
+        <span>Pune, IN · Systems, Philosophy &amp; Field Notes</span>
+      </div>
+
+      <div class="section-tag fade-in-entry delay-2">ENGINEERING ESSAYS &amp; DISPATCHES</div>
+      <h1 class="section-heading fade-in-entry delay-2" style="font-size: clamp(2.5rem, 5vw, 3.5rem);">
+        Engineering Dispatches.
+      </h1>
+      <p class="section-lead fade-in-entry delay-3">
+        Reflections on systems programming, defensive automation, open-source maintainers, and the deliberate pursuit of simplicity in software design.
+      </p>
+
+      <!-- Articles Grid -->
+      <div class="blog-grid fade-in-entry delay-4">
+
+        <!-- Article 01 -->
+        <a href="learned-open-source-the-hard-way.html" class="blog-card">
+          <div class="blog-card-meta">
+            <span class="blog-tag">OPEN SOURCE</span>
+            <span class="blog-date">OCT 2025</span>
+            <span class="blog-read-time">· 4 MIN READ</span>
+          </div>
+          <h2 class="blog-card-title">I Learned Open Source the Hard Way</h2>
+          <p class="blog-card-desc">
+            A firsthand account of failing publicly in open source and learning the real value of ownership, correctness, and trust. What happened when a rushed pull request met an uncompromising C library maintainer.
+          </p>
+          <div class="blog-card-cta">
+            <span>Read full essay</span>
+            <span class="mono">→</span>
+          </div>
+        </a>
+
+        <!-- Article 02 -->
+        <a href="automating-a-daily-task.html" class="blog-card">
+          <div class="blog-card-meta">
+            <span class="blog-tag">AUTOMATION &amp; DEFENSIVE DESIGN</span>
+            <span class="blog-date">2025</span>
+            <span class="blog-read-time">· 4 MIN READ</span>
+          </div>
+          <h2 class="blog-card-title">Automating a Daily Task Instead of Repeating It</h2>
+          <p class="blog-card-desc">
+            Replacing fragile manual work with a simple, failure-aware system using Python, Telegram Bot API, and scheduled GitHub Actions cron jobs. No databases, zero babysitting.
+          </p>
+          <div class="blog-card-cta">
+            <span>Read full essay</span>
+            <span class="mono">→</span>
+          </div>
+        </a>
+
+        <!-- Article 03: Placeholder -->
+        <div class="blog-card" style="opacity: 0.65; cursor: default;">
+          <div class="blog-card-meta">
+            <span class="blog-tag" style="color:var(--text-muted);border-color:var(--border);">PHILOSOPHY &amp; ARCHITECTURE</span>
+            <span class="blog-date">FORTHCOMING</span>
+          </div>
+          <h2 class="blog-card-title" style="color: var(--text-secondary);">Simplicity, Systems, and Engineering Discipline</h2>
+          <p class="blog-card-desc">
+            "An idiot admires complexity, a genius admires simplicity." — Terry A. Davis. Writing on why good systems should be easy to understand, easy to extend, and difficult to misuse.
+          </p>
+          <div class="blog-card-cta" style="color:var(--text-muted);">
+            <span>Draft in progress</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Section: Footer / Direct Dispatch -->
+  <footer id="dispatch" class="footer-dispatch">
+    <div class="container">
+      <div class="footer-bottom-bar">
+        <div>
+          <span>© 2026 Aditya Chavan · Systems &amp; Backend Engineering</span>
+        </div>
+        <div style="display:flex;gap:1rem;">
+          <a href="../" style="color:var(--text-secondary);text-decoration:none;">Portfolio Home</a>
+          <span>·</span>
+          <a href="https://github.com/aditya8242" target="_blank" rel="noopener noreferrer" style="color:var(--text-secondary);text-decoration:none;">GitHub</a>
+          <span>·</span>
+          <a href="https://linkedin.com/in/adityachavan24" target="_blank" rel="noopener noreferrer" style="color:var(--text-secondary);text-decoration:none;">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       EASTER EGG MODAL TERMINAL (PRESS / OR CLICK [~]$)
+       ======================================================================== -->
+  <div id="terminal-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Interactive Terminal Shell">
+    <div class="modal-terminal-card">
+      <div class="terminal-titlebar">
+        <div class="terminal-dots">
+          <span class="terminal-dot close" id="modal-close-dot"></span>
+          <span class="terminal-dot min"></span>
+          <span class="terminal-dot max"></span>
+        </div>
+        <div class="terminal-title">aditya@arch-pune: ~/blog (sh) — Press Esc to exit</div>
+        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close terminal">✕ Close</button>
+      </div>
+      <div class="terminal-body" id="modal-term-body" style="overflow-y:auto;flex:1;">
+        <div class="term-output" id="modal-term-output"></div>
+        <div class="term-prompt-line">
+          <span class="term-prompt">aditya@arch-pune:~/blog$</span>
+          <input type="text" id="modal-term-input" class="term-input" spellcheck="false" autocomplete="off" aria-label="Interactive Command Input">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" aria-live="polite"></div>
+
+  <script src="../terminal.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      const openTerminalBtn = document.getElementById('open-terminal-btn');
+      const modal = document.getElementById('terminal-modal');
+      const modalCloseBtn = document.getElementById('modal-close-btn');
+      const modalCloseDot = document.getElementById('modal-close-dot');
+      const modalInput = document.getElementById('modal-term-input');
+      const modalOutput = document.getElementById('modal-term-output');
+      const modalBody = document.getElementById('modal-term-body');
+
+      let modalTerminal = null;
+
+      function openModalTerminal() {
+        modal.classList.add('open');
+        if (!modalTerminal) {
+          modalTerminal = new window.TerminalEngine(
+            modalBody,
+            modalInput,
+            modalOutput,
+            () => closeModalTerminal(),
+            () => closeModalTerminal()
+          );
+        }
+        setTimeout(() => modalInput.focus(), 50);
+      }
+
+      function closeModalTerminal() {
+        modal.classList.remove('open');
+      }
+
+      openTerminalBtn.addEventListener('click', openModalTerminal);
+      modalCloseBtn.addEventListener('click', closeModalTerminal);
+      modalCloseDot.addEventListener('click', closeModalTerminal);
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModalTerminal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== modalInput && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          openModalTerminal();
+        } else if (e.key === 'Escape' && modal.classList.contains('open')) {
+          closeModalTerminal();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

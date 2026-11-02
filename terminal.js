@@ -1,0 +1,591 @@
+/**
+ * ADITYA CHAVAN — UNIX TERMINAL EMULATOR & EASTER EGG ENGINE
+ * Provides interactive CLI shell experience for recruiters and systems engineers.
+ */
+
+(function () {
+  'use strict';
+
+  const TERMINAL_BANNER = `
+   ______   _____    ______  ______  __  __   ______  
+  /\\  __ \\ /\\  __-. /\\__  _\\/\\__  _\\/\\ \\_\\ \\ /\\  __ \\ 
+  \\ \\  __ \\\\ \\ \\/\\ \\\\/_/\\ \\/\\/_/\\ \\/\\ \\____ \\\\ \\  __ \\ 
+   \\ \\_\\ \\_\\\\ \\____-   \\ \\_\\   \\ \\_\\ \\/\\_____\\\\ \\_\\ \\_\\
+    \\/_/\\/_/ \\/____/    \\/_/    \\/_/  \\/_____/ \\/_/\\/_/
+  
+  ADITYA CHAVAN — SYSTEMS & BACKEND ARCHITECTURE
+  Linux Internals · C/C++ · High-Concurrency Networking · Java/Spring Boot
+  Type 'help' to inspect available system commands.
+`;
+
+  const COMMANDS = {
+    help: {
+      desc: 'Show available system commands',
+      exec: () => `
+SYSTEM CALLS & RECRUITER CLI UTILITIES:
+  help               Display this operational manual
+  whoami             Print engineer identity and design philosophy
+  ls [path]          List projects, blog posts, and filesystem entries
+  cat <file>         Print file contents (e.g. cat resume.txt, cat cvfs.c)
+  blog               Explore engineering dispatches and essays
+  open <target>      Open in browser (open resume.pdf, open blog, open github)
+  skills             Display hardware-grade technical specifications
+  experience         Print corporate B2B & systems career timeline
+  contact            Output direct dispatch communication endpoints
+  git log            Show recent systems & architecture commits
+  top                Display running simulated kernel processes
+  uname -a           Print operating system kernel architecture
+  pwd                Print current working directory
+  id                 Print current user identity and group privileges
+  clear              Purge current terminal buffer
+  gui                Toggle back to Apple hardware editorial view
+  exit               Close terminal environment
+`
+    },
+
+    whoami: {
+      desc: 'Print engineer identity and positioning',
+      exec: () => `
+ENGINEER: Aditya Chavan
+LOCATION: Pune, Maharashtra, India
+ROLE:     Systems & Backend Software Engineer | Founder @ Iron & Logic
+DOMAIN:   Linux Internals, C/C++, POSIX Sockets, Scalable Spring Boot Backends, B2B SaaS
+QUOTE:    "Brute force the logic first. Optimize it later."
+STATUS:   Available for backend engineering roles, systems architecture, and technical consulting.
+`
+    },
+
+    pwd: {
+      desc: 'Print current working directory',
+      exec: () => '/home/aditya/portfolio'
+    },
+
+    id: {
+      desc: 'Print user and group IDs',
+      exec: () => 'uid=1000(aditya) gid=1000(aditya) groups=1000(aditya),998(wheel),992(docker),990(kvm)'
+    },
+
+    ls: {
+      desc: 'List directory entries',
+      exec: (args) => {
+        const target = args[0] ? args[0].toLowerCase().replace(/\/$/, '') : '';
+        if (target === 'projects' || target === 'projects/') {
+          return `
+drwxr-xr-x  4 aditya staff   128 Feb 2025  01_CVFS_VirtualFileSystem (C++ / Linux Internals)
+drwxr-xr-x  4 aditya staff   128 Feb 2026  02_ConcurrentFTPServer    (C / POSIX Sockets)
+drwxr-xr-x  4 aditya staff   128 Jan 2025  03_EduTrack_Backend       (Java / Spring Boot / MongoDB)
+drwxr-xr-x  4 aditya staff   128 Jul 2026  04_IronVault_Archiver     (Java / Binary Packing / XOR)
+`;
+        }
+        if (target === 'blog' || target === 'blog/') {
+          return `
+-rw-r--r--  1 aditya staff  5056 Oct 2025  learned-open-source-the-hard-way.html
+-rw-r--r--  1 aditya staff  5663 Jan 2025  automating-a-daily-task.html
+-rw-r--r--  1 aditya staff  1024 Forthcoming  simplicity-and-systems.txt
+`;
+        }
+        return `
+drwxr-xr-x  4 aditya staff   128 Nov 02 11:00  projects/
+drwxr-xr-x  4 aditya staff   128 Nov 02 11:25  blog/
+-rw-r--r--  1 aditya staff  2840 Nov 02 11:00  resume.txt
+-rw-r--r--  1 aditya staff  7590 Oct 23 09:53  Resume.pdf
+-rw-r--r--  1 aditya staff  1024 Feb 15  2025  cvfs.c
+-rw-r--r--  1 aditya staff   890 Feb 20  2026  ftp_protocol.txt
+-rw-r--r--  1 aditya staff   512 Nov 02 11:00  contact.sh
+-rw-r--r--  1 aditya staff   940 Nov 02 11:00  specs.json
+`;
+      }
+    },
+
+    blog: {
+      desc: 'List engineering essays and articles',
+      exec: () => `
+================================================================================
+ENGINEERING DISPATCHES & FIELD NOTES (aditya8242.github.io/blog)
+================================================================================
+[01] I Learned Open Source the Hard Way
+     Subtitle: By failing publicly
+     Date:     October 2025 · 4 min read
+     Tags:     Open Source · C/Doxygen · Maintainer Reality
+     URI:      /blog/learned-open-source-the-hard-way.html
+
+[02] Automating a Daily Task Instead of Repeating It
+     Subtitle: Replacing fragile manual work with a simple system
+     Date:     2025 · 4 min read
+     Tags:     Defensive Programming · Python · GitHub Actions
+     URI:      /blog/automating-a-daily-task.html
+
+Type 'open blog' to launch the essays portal in your browser.
+`
+    },
+
+    open: {
+      desc: 'Open a document or link',
+      exec: (args) => {
+        if (!args[0]) return 'open: missing filename. Usage: open resume.pdf, open blog';
+        const target = args[0].toLowerCase();
+        if (target.includes('blog')) {
+          window.location.href = 'blog/';
+          return 'Navigating to /blog...';
+        }
+        if (target.includes('resume')) {
+          window.open('Resume.pdf', '_blank');
+          return 'Opening Resume.pdf in a new tab...';
+        }
+        if (target.includes('github')) {
+          window.open('https://github.com/aditya8242', '_blank');
+          return 'Navigating to github.com/aditya8242...';
+        }
+        if (target.includes('linkedin')) {
+          window.open('https://linkedin.com/in/adityachavan24', '_blank');
+          return 'Navigating to linkedin.com/in/adityachavan24...';
+        }
+        return `open: unable to open ${args[0]}`;
+      }
+    },
+
+    cat: {
+      desc: 'Concatenate and display files',
+      exec: (args) => {
+        if (!args[0]) return 'cat: missing operand. Usage: cat <filename>';
+        const file = args[0].toLowerCase();
+
+        if (file === 'resume.pdf') {
+          window.open('Resume.pdf', '_blank');
+          return '[Binary PDF Stream: Opening Resume.pdf in browser viewer...]';
+        }
+
+        if (file === 'resume.txt' || file === 'resume') {
+          return `
+================================================================================
+                                ADITYA CHAVAN
+                Pune, India · aditya.h.chavan@gmail.com · +91 86699 06901
+     linkedin.com/in/adityachavan24 · github.com/aditya8242 · aditya8242.github.io
+================================================================================
+
+SUMMARY:
+Systems & Backend Engineer specializing in Linux internals, C/C++, and scalable
+Java/Spring Boot backends—paired with frontline B2B software architecture.
+Bridging low-level UNIX programming with high-velocity revenue engineering.
+
+EDUCATION:
+Bachelor of Science, Computer Science — 7.8 CGPA (2023 – 2026)
+Savitribai Phule Pune University, Pune, India
+
+WORK EXPERIENCE:
+1. Brilliant Info Systems Pvt. Ltd. | Technical Sales Intern (Nov 2026 – Present · Pune)
+   • Operating at the intersection of engineering and revenue.
+   • Structuring CRM data models across the B2B sales cycle.
+   • Conducting technical product demos & translating client workflows to engineering specs.
+
+2. Iron & Logic | Founder & Web Architect (Aug 2026 – Present · Pune)
+   • Built high-performance web architecture and direct booking integrations.
+   • Handled end-to-end client research, UI/UX, B2B outreach tooling, and deployment.
+
+SELECTED SYSTEMS PROJECTS:
+• Customized Virtual File System (CVFS) — C++ / Linux Internals (Feb 2025)
+  In-memory UNIX UFS-modeled file system from scratch with custom inode tables,
+  User File Descriptor Table (UFDT), and 7 core system calls (creat, open, read,
+  write, unlink, stat, ls).
+• Concurrent FTP Server — C / Sockets / Linux (Feb 2026)
+  High-concurrency TCP file server using fork-per-connection architecture with
+  custom line-based wire protocol over raw sockets.
+• EduTrack — Java / Spring Boot / MongoDB / Docker (Jan 2025)
+  Production RESTful backend with layered architecture (Controller-Service-Repo),
+  Dockerized on Render with MongoDB Atlas.
+• IronVault — Java / Swing / Cryptography (Jul 2026)
+  Zero-dependency binary file archiver packing 18+ formats using custom headers
+  and repeating XOR encryption.
+
+OPEN SOURCE & HONORS:
+• Merged contributor to ccgargantua/ini (PR #24) — Doxygen C documentation.
+• PostgreSQL Developer (Infosys Springboard) · Basics of Python (Infosys Springboard)
+`;
+        }
+
+        if (file === 'cvfs.c') {
+          return `
+/*
+ * Customized Virtual File System (CVFS) - Core System Call Table
+ * Modeling UNIX UFS Inode & User File Descriptor Table (UFDT)
+ */
+
+typedef struct inode {
+    char FileName[50];
+    int InodeNumber;
+    int FileSize;
+    int FileActualSize;
+    int FileType;           // Regular file or Directory
+    char *Buffer;           // 1024-byte in-memory data block
+    int LinkCount;
+    int ReferenceCount;
+    int Permission;         // 1: Read, 2: Write, 3: Read+Write
+    struct inode *next;
+} INODE, *PINODE;
+
+typedef struct filetable {
+    int readoffset;
+    int writeoffset;
+    int count;
+    int mode;
+    PINODE ptrinode;
+} FILETABLE, *PFILETABLE;
+
+typedef struct ufdt {
+    PFILETABLE ptrfiletable;
+} UFDT;
+
+UFDT UFDTArr[50]; // User File Descriptor Table array
+
+// 7 Supported Core System Calls:
+// int CreateFile(char *name, int permission);
+// int OpenFile(char *name, int mode);
+// int ReadFile(int fd, char *arr, int isize);
+// int WriteFile(int fd, char *arr, int isize);
+// int CloseFileByName(char *name);
+// int rm_File(char *name);
+// int fstat_file(int fd);
+`;
+        }
+
+        if (file === 'ftp_protocol.txt') {
+          return `
+================================================================================
+CONCURRENT FTP SERVER WIRE PROTOCOL SPECIFICATION
+================================================================================
+
+CLIENT                                        SERVER (Master Listening on :2121)
+  │                                                      │
+  │─── TCP Handshake (SYN) ─────────────────────────────►│
+  │◄── TCP Handshake (SYN-ACK) ──────────────────────────│
+  │                                                      │
+  │                                            [fork() child process]
+  │                                            [PID: 2841, Isolated Socket]
+  │                                                      │
+  │─── "RETR dataset.tar.gz\\n" ─────────────────────────►│
+  │                                                      │
+  │◄── "SIZE 4194304\\n" ─────────────────────────────────│ (File Size Header)
+  │─── "ACK\\n" ──────────────────────────────────────────►│
+  │                                                      │
+  │◄── [Raw Byte Stream: 4.19MB Chunked @ 4KB Buffer] ───│
+  │                                                      │
+  │─── "TRANSFER_COMPLETE\\n" ────────────────────────────►│
+  │◄── "226 Closing Data Connection\\n" ──────────────────│
+`;
+        }
+
+        if (file === 'specs.json') {
+          return `
+{
+  "engineer": "Aditya Chavan",
+  "languages": ["C", "C++", "Java", "Python", "JavaScript", "Bash"],
+  "systems": ["Linux Internals", "POSIX Sockets", "In-Memory Filesystems", "Concurrency", "Process Forking"],
+  "backend": ["Spring Boot", "REST APIs", "Layered Architecture", "JDBC"],
+  "databases": ["PostgreSQL", "MongoDB", "MySQL", "SQLite"],
+  "infrastructure": ["Docker", "Git", "GitHub Actions CI/CD", "Vercel", "Cloudflare", "Vim"]
+}
+`;
+        }
+
+        if (file === 'contact.sh') {
+          return `
+#!/usr/bin/env bash
+echo "Aditya Chavan Direct Dispatch:"
+echo "Email:    aditya.h.chavan@gmail.com"
+echo "Phone:    +91 86699 06901"
+echo "GitHub:   https://github.com/aditya8242"
+echo "LinkedIn: https://linkedin.com/in/adityachavan24"
+echo "X:        https://x.com/ad1tya24"
+`;
+        }
+
+        return `cat: ${args[0]}: No such file or directory. Try 'ls' to see files.`;
+      }
+    },
+
+    top: {
+      desc: 'Display running system processes',
+      exec: () => `
+top - 11:24:02 up 14 days,  3:18,  1 user,  load average: 0.12, 0.08, 0.04
+Tasks: 4 total, 1 running, 3 sleeping, 0 stopped, 0 zombie
+%Cpu(s):  1.2 us,  0.4 sy,  0.0 ni, 98.4 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :  32142.8 total,  24118.2 free,   4812.4 used,   3212.2 buff/cache
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+ 2841 aditya    20   0  142.8m  24.2m  12.1m S   0.0   0.1   0:00.12 cvfs_engine
+ 2852 aditya    20   0   98.4m  18.6m   9.4m S   0.0   0.1   0:00.08 ftp_daemon
+ 3104 aditya    20   0 1024.0m 340.2m  45.1m S   0.2   1.1   0:01.45 edutrack_api
+ 4012 aditya    20   0   48.2m  12.4m   8.2m R   0.0   0.0   0:00.02 bash
+`
+    },
+
+    git: {
+      desc: 'Version control actions',
+      exec: (args) => {
+        if (args.includes('log')) {
+          return `
+commit 7f2026a (HEAD -> main, origin/main)
+Author: Aditya Chavan <aditya.h.chavan@gmail.com>
+Date:   Mon Nov 2 11:00:00 2026 +0530
+
+    feat(systems): optimize byte offset tracking in CVFS in-memory UFDT
+
+commit 4a981c2
+Author: Aditya Chavan <aditya.h.chavan@gmail.com>
+Date:   Fri Feb 20 18:24:10 2026 +0530
+
+    feat(ftp): fork-per-connection concurrency with isolated child process pipes
+
+commit 21b589d
+Author: Aditya Chavan <aditya.h.chavan@gmail.com>
+Date:   Wed Jan 15 14:10:02 2025 +0530
+
+    feat(edutrack): containerize Spring Boot service with Docker and MongoDB Atlas
+
+commit 19d84e1
+Author: Aditya Chavan <aditya.h.chavan@gmail.com>
+Date:   Sun Oct 12 09:12:44 2025 +0530
+
+    docs(upstream): ccgargantua/ini PR #24 merged - Doxygen compatibility
+`;
+        }
+        return 'git: specify command (e.g. git log)';
+      }
+    },
+
+    skills: {
+      desc: 'Hardware-grade technical specification',
+      exec: () => `
+================================================================================
+TECHNICAL SPECIFICATION SHEET
+================================================================================
+SYSTEMS & LANGUAGES:
+  • C, C++, Java, Python, JavaScript, Bash / Shell
+  • Linux / UNIX Internals, POSIX Sockets, Concurrency, File System Architecture
+
+BACKEND & DATA:
+  • Spring Boot, REST APIs, Controller-Service-Repository Pattern
+  • PostgreSQL, MongoDB, MySQL, SQLite, JDBC
+
+INFRASTRUCTURE & TOOLING:
+  • Docker, Git, GitHub Actions CI/CD, Vercel, Cloudflare, Vim, Linux CLI
+
+ACADEMICS & OPEN SOURCE:
+  • Savitribai Phule Pune University — B.Sc. Computer Science (7.8 CGPA, 2023–2026)
+  • Open Source Contributor: ccgargantua/ini (PR #24 Merged)
+`
+    },
+
+    experience: {
+      desc: 'Display professional engineering & B2B timeline',
+      exec: () => `
+================================================================================
+CHRONOLOGY & B2B EXECUTION
+================================================================================
+
+[01] Brilliant Info Systems Pvt. Ltd. — Technical Sales Intern
+     Period:   Nov 2026 – Present · Pune, India
+     Scope:    Operating at the intersection of engineering and revenue.
+               Structuring CRM data models across enterprise sales cycles,
+               running technical demos, and turning customer workflows into
+               concrete engineering specifications.
+
+[02] Iron & Logic — Founder & Web Architect
+     Period:   Aug 2026 – Present · Pune, India
+     Scope:    Audited local business digital infrastructure, built automated
+               B2B lead generation tooling, and engineered high-speed booking
+               engines deployed on modern React/Vercel architecture.
+`
+    },
+
+    contact: {
+      desc: 'Output direct communication channels',
+      exec: () => `
+DIRECT DISPATCH ENDPOINTS:
+  Email:    aditya.h.chavan@gmail.com (Click or type to email)
+  Phone:    +91 86699 06901
+  GitHub:   https://github.com/aditya8242
+  LinkedIn: https://linkedin.com/in/adityachavan24
+  Twitter:  https://x.com/ad1tya24
+  Location: Pune, Maharashtra, India
+`
+    },
+
+    uname: {
+      desc: 'Print system information',
+      exec: (args) => {
+        if (args.includes('-a') || args.length === 0) {
+          return 'Linux arch-pune 6.12.4-arch1-1-custom #1 SMP PREEMPT_DYNAMIC Aditya x86_64 GNU/Linux';
+        }
+        return 'Linux';
+      }
+    },
+
+    date: {
+      desc: 'Print system time',
+      exec: () => new Date().toString()
+    },
+
+    echo: {
+      desc: 'Display line of text',
+      exec: (args) => args.join(' ')
+    },
+
+    sudo: {
+      desc: 'Execute command with elevated privileges',
+      exec: () => `aditya is not in the sudoers file. This incident will be reported to Linus Torvalds.`
+    },
+
+    matrix: {
+      desc: 'Wake up, Neo...',
+      exec: () => `01000001 01000100 01010100 01011001 01000001\nFollow the white rabbit into the kernel.`
+    }
+  };
+
+  class TerminalEngine {
+    constructor(containerEl, inputEl, outputEl, onGuiRequested, onCloseRequested) {
+      this.container = containerEl;
+      this.input = inputEl;
+      this.output = outputEl;
+      this.onGuiRequested = onGuiRequested;
+      this.onCloseRequested = onCloseRequested;
+      this.history = [];
+      this.historyIndex = -1;
+
+      this.init();
+    }
+
+    init() {
+      this.print(TERMINAL_BANNER.trim());
+      this.print(`System initialized at ${new Date().toLocaleTimeString()} IST. Ready.\n`);
+
+      this.input.addEventListener('keydown', (e) => this.handleKeyDown(e));
+      this.container.addEventListener('click', () => this.input.focus());
+    }
+
+    print(text, isError = false) {
+      const line = document.createElement('div');
+      line.className = 'term-line';
+      if (isError) line.style.color = '#F87171';
+      line.textContent = text;
+      this.output.appendChild(line);
+      this.container.scrollTop = this.container.scrollHeight;
+    }
+
+    clear() {
+      this.output.innerHTML = '';
+    }
+
+    execute(cmdString) {
+      const trimmed = cmdString.trim();
+      if (!trimmed) return;
+
+      // Log prompt command in output
+      const cmdEcho = document.createElement('div');
+      cmdEcho.className = 'term-line';
+      cmdEcho.innerHTML = `<span style="color:var(--accent-green);font-weight:600;">aditya@arch-pune:~$</span> ${escapeHtml(trimmed)}`;
+      this.output.appendChild(cmdEcho);
+
+      // Save history
+      this.history.push(trimmed);
+      this.historyIndex = this.history.length;
+
+      const parts = trimmed.split(/\s+/);
+      const commandName = parts[0].toLowerCase();
+      const args = parts.slice(1);
+
+      if (commandName === 'clear') {
+        this.clear();
+        return;
+      }
+
+      if (commandName === 'gui') {
+        if (this.onGuiRequested) this.onGuiRequested();
+        return;
+      }
+
+      if (commandName === 'exit') {
+        if (this.onCloseRequested) this.onCloseRequested();
+        return;
+      }
+
+      if (commandName === 'history') {
+        const histText = this.history.map((h, i) => `  ${i + 1}  ${h}`).join('\n');
+        this.print(histText);
+        return;
+      }
+
+      if (COMMANDS[commandName]) {
+        try {
+          const result = COMMANDS[commandName].exec(args);
+          if (result) this.print(result);
+        } catch (err) {
+          this.print(`Execution error: ${err.message}`, true);
+        }
+      } else {
+        this.print(`bash: ${commandName}: command not found. Type 'help' to inspect available commands.`, true);
+      }
+    }
+
+    handleKeyDown(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const value = this.input.value;
+        this.input.value = '';
+        this.execute(value);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (this.history.length === 0) return;
+        if (this.historyIndex > 0) {
+          this.historyIndex--;
+        }
+        this.input.value = this.history[this.historyIndex] || '';
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (this.historyIndex < this.history.length - 1) {
+          this.historyIndex++;
+          this.input.value = this.history[this.historyIndex];
+        } else {
+          this.historyIndex = this.history.length;
+          this.input.value = '';
+        }
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        this.handleTabCompletion();
+      }
+    }
+
+    handleTabCompletion() {
+      const current = this.input.value.trim();
+      if (!current) return;
+
+      const words = current.split(/\s+/);
+      if (words.length === 1) {
+        // Autocomplete command
+        const matches = Object.keys(COMMANDS).concat(['clear', 'gui', 'exit', 'history', 'open', 'top', 'git'])
+          .filter(c => c.startsWith(words[0].toLowerCase()));
+        if (matches.length === 1) {
+          this.input.value = matches[0] + ' ';
+        } else if (matches.length > 1) {
+          this.print(`Possible completions:\n  ${matches.join('  ')}`);
+        }
+      } else if (words.length === 2 && (words[0] === 'cat' || words[0] === 'ls' || words[0] === 'open')) {
+        const fileList = ['resume.txt', 'Resume.pdf', 'cvfs.c', 'ftp_protocol.txt', 'specs.json', 'contact.sh', 'projects/'];
+        const matches = fileList.filter(f => f.toLowerCase().startsWith(words[1].toLowerCase()));
+        if (matches.length === 1) {
+          this.input.value = `${words[0]} ${matches[0]}`;
+        } else if (matches.length > 1) {
+          this.print(`Matching files:\n  ${matches.join('  ')}`);
+        }
+      }
+    }
+  }
+
+  function escapeHtml(text) {
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // Export to window
+  window.TerminalEngine = TerminalEngine;
+  window.AVAILABLE_COMMANDS = COMMANDS;
+})();

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#0A0A0A"/>
+  <rect x="1" y="1" width="62" height="62" rx="13" fill="none" stroke="#222222" stroke-width="1.5"/>
+  <!-- Razor sharp Monogram AC -->
+  <path d="M16 46 L27 18 L33 18 L44 46 M20.5 37 L39.5 37" fill="none" stroke="#FAFAFA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="48" cy="19" r="2.5" fill="#10B981"/>
+</svg>
