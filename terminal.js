@@ -84,6 +84,7 @@ drwxr-xr-x  4 aditya staff   128 Dec 2024  07_maKneeTrack_CLI          (Java / J
           return `
 -rw-r--r--  1 aditya staff  5056 Oct 2025  learned-open-source-the-hard-way.html
 -rw-r--r--  1 aditya staff  5663 Jan 2025  automating-a-daily-task.html
+  -rw-r--r--  1 aditya staff  4890 Nov 2026  simplicity-systems-discipline.html
 -rw-r--r--  1 aditya staff  1024 Forthcoming  simplicity-and-systems.txt
 `;
         }
@@ -117,6 +118,12 @@ ENGINEERING DISPATCHES & FIELD NOTES (aditya8242.github.io/blog)
      Date:     2025 · 4 min read
      Tags:     Defensive Programming · Python · GitHub Actions
      URI:      /blog/automating-a-daily-task.html
+
+  [03] Simplicity, Systems, and Engineering Discipline
+       Subtitle: Why the best software is hard to mess up
+       Date:     2026 · 3 min read
+       Tags:     Philosophy · Systems Architecture · Discipline
+       URI:      /blog/simplicity-systems-discipline.html
 
 Type 'open blog' to launch the essays portal in your browser.
 `

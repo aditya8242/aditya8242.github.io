@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simplicity, Systems, and Engineering Discipline — Aditya Chavan</title>
+  
+  <!-- Security Directives -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; base-uri 'self'; form-action 'self';">
+
+  <meta name="description" content="Why the best software is hard to mess up. Thoughts on Terry Davis, cutting out clever bloat, and keeping systems dead simple.">
+  <meta name="author" content="Aditya Chavan">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://aditya8242.github.io/blog/simplicity-systems-discipline.html">
+  <meta property="og:title" content="Simplicity, Systems, and Engineering Discipline — Aditya Chavan">
+  <meta property="og:description" content="Why the best software is hard to mess up. Thoughts on Terry Davis, cutting out clever bloat, and keeping systems dead simple.">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ad1tya24">
+  <meta name="twitter:creator" content="@ad1tya24">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- Typography: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="./" class="nav-brand" aria-label="Aditya Chavan Portfolio">
+          <span class="brand-monogram">AC</span>
+          <div class="brand-meta">
+            <span class="brand-name">Aditya Chavan</span>
+            <span class="brand-role">SYS // ESSAYS</span>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="blog/index.html">← All Dispatches</a></li>
+            <li><a href="./">Portfolio Home</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-controls">
+          <button id="open-terminal-btn" class="terminal-trigger-btn" title="Open Interactive Terminal (Press /)">
+            <span>[~]$</span>
+            <span class="kbd-shortcut">/</span>
+          </button>
+
+          <!-- Mobile Navigation Toggle -->
+          <button id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+            <span class="menu-icon">☰</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+      <ul class="mobile-nav-list">
+        <li><a href="blog/index.html" class="mobile-nav-link"><span>← All Engineering Dispatches</span><span>↖</span></a></li>
+        <li><a href="index.html" class="mobile-nav-link"><span>01 // Portfolio Home</span><span>↗</span></a></li>
+        <li><a href="index.html#systems" class="mobile-nav-link"><span>02 // Systems &amp; Architecture</span><span>↓</span></a></li>
+        <li><a href="index.html#dispatch" class="mobile-nav-link accent"><span>06 // Contact / Dispatch</span><span>↓</span></a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Article Viewport -->
+  <main class="article-wrapper">
+    
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <a href="./">portfolio</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="blog/index.html">blog</a>
+      <span class="breadcrumb-sep">/</span>
+      <span style="color: var(--text-primary);">simplicity</span>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+      <h1 class="article-title">Simplicity, Systems, and Engineering Discipline</h1>
+      <h2 class="article-subtitle">Why the best software is hard to mess up</h2>
+
+      <div class="article-meta-bar">
+        <span class="blog-tag">PHILOSOPHY &amp; ARCHITECTURE</span>
+        <span>2026</span>
+        <span>·</span>
+        <span>3 MIN READ</span>
+        <span>·</span>
+        <span>BY ADITYA CHAVAN</span>
+      </div>
+    </header>
+
+    <!-- Article Content -->
+    <article class="article-prose">
+      <p>
+        When you start out in coding, you think complex code means smart code.
+      </p>
+
+      <p>
+        You want your project to look impressive. You want design patterns. You want six different folders for a basic form. You want databases, message queues, and background workers for an app that only has five users.
+      </p>
+
+      <p>
+        It feels like "real engineering."
+      </p>
+
+      <p>
+        In reality, you're usually just trying to look clever.
+      </p>
+
+      <h3>The Problem With "Clever" Code</h3>
+
+      <p>
+        Clever code makes you feel smart for twenty minutes. Then you have to wake up at 2:00 AM to fix it because nobody—including you—understands how it works.
+      </p>
+
+      <p>Every extra piece you add has a cost:</p>
+      <ul>
+        <li>More files mean more places for bugs to hide.</li>
+        <li>More external tools mean more things that can randomly break.</li>
+        <li>Big fancy setups turn a five-minute fix into a three-hour headache.</li>
+      </ul>
+
+      <p>
+        If you can't explain what your code does in plain words on a piece of paper, you don't actually understand the problem yet.
+      </p>
+
+      <h3>Discipline Means Knowing What <em>Not</em> to Build</h3>
+
+      <p>
+        There’s a famous quote by programmer Terry Davis that stuck with me:
+      </p>
+
+      <blockquote>
+        "An idiot admires complexity, a genius admires simplicity."
+      </blockquote>
+
+      <p>
+        Keeping things simple is actually very hard. It means you understand the problem so well that you know exactly what you can throw away without breaking anything.
+      </p>
+
+      <p>
+        When I built the daily price bot for local egg traders in Pune, I could have used a database, a virtual server, and a bunch of cloud tools. It would have looked fancy on my resume.
+      </p>
+
+      <p>
+        Instead, I wrote fifty lines of basic Python, ran it on a free daily GitHub timer, and sent the text straight to Telegram. Total monthly bill: ₹0. Total time spent fixing it: zero.
+      </p>
+
+      <p>
+        When I build systems at Iron &amp; Logic, local cafes and clinics don’t need a heavy website packed with twenty plugins that takes five seconds to open on a phone. They just need a clean page that loads instantly and sends orders straight to WhatsApp.
+      </p>
+
+      <p>
+        Real skill isn't about how much code you can write. It's about how much friction you can take away.
+      </p>
+
+      <h3>Three Rules I Build By</h3>
+
+      <p>Whenever I write software now, I follow three simple rules:</p>
+
+      <ol>
+        <li>
+          <strong>Get the basic logic working first. Optimize later.</strong><br>
+          Don't build complex caching or speed tricks before you even know if the code works.
+        </li>
+        <li>
+          <strong>Wrong data is worse than no data.</strong><br>
+          If an input is broken, fail cleanly right away. Never guess.
+        </li>
+        <li>
+          <strong>Make mistakes hard to make.</strong><br>
+          Design your code and buttons so that doing the right thing is easy, and doing the wrong thing is difficult.
+        </li>
+      </ol>
+
+      <h3>The Takeaway</h3>
+
+      <p>
+        Today, AI can generate hundreds of lines of code in seconds. Code is cheap.
+      </p>
+
+      <p>
+        Typing more code isn't where an engineer’s value is anymore.
+      </p>
+
+      <p>
+        The real value is knowing what to say no to, what to delete, and keeping things dead simple.
+      </p>
+    </article>
+
+    <!-- Author Card -->
+    <div class="article-author-card">
+      <div class="author-info">
+        <span class="author-name">Aditya Chavan</span>
+        <span class="author-role">Systems &amp; Backend Software Engineer · Pune, India</span>
+        <p class="author-bio">
+          Undergraduate specializing in Linux internals, C/C++, and scalable Java backends. Founder at Iron &amp; Logic.
+        </p>
+      </div>
+      <div>
+        <a href="index.html#dispatch" class="btn btn-secondary">Connect ↗</a>
+      </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div class="article-nav-footer">
+      <a href="blog/index.html">← Back to all essays</a>
+      <a href="./">Portfolio Home →</a>
+    </div>
+
+  </main>
+
+  <!-- Terminal Modal Easter Egg -->
+  <div id="terminal-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Interactive Terminal Shell">
+    <div class="modal-terminal-card">
+      <div class="terminal-titlebar">
+        <div class="terminal-dots">
+          <span class="terminal-dot close" id="modal-close-dot"></span>
+          <span class="terminal-dot min"></span>
+          <span class="terminal-dot max"></span>
+        </div>
+        <div class="terminal-title">aditya@arch-pune: ~/blog (sh) — Press Esc to exit</div>
+        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close terminal">✕ Close</button>
+      </div>
+      <div class="terminal-body" id="modal-term-body" style="overflow-y:auto;flex:1;">
+        <div class="term-output" id="modal-term-output"></div>
+        <div class="term-prompt-line">
+          <span class="term-prompt">aditya@arch-pune:~$</span>
+          <input type="text" id="modal-term-input" class="term-input" spellcheck="false" autocomplete="off" aria-label="Interactive Command Input">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="terminal.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      const openTerminalBtn = document.getElementById('open-terminal-btn');
+      const modal = document.getElementById('terminal-modal');
+      const modalCloseBtn = document.getElementById('modal-close-btn');
+      const modalCloseDot = document.getElementById('modal-close-dot');
+      const modalInput = document.getElementById('modal-term-input');
+      const modalOutput = document.getElementById('modal-term-output');
+      const modalBody = document.getElementById('modal-term-body');
+
+      let modalTerminal = null;
+
+      function openModalTerminal() {
+        modal.classList.add('open');
+        if (!modalTerminal) {
+          modalTerminal = new window.TerminalEngine(
+            modalBody,
+            modalInput,
+            modalOutput,
+            () => closeModalTerminal(),
+            () => closeModalTerminal()
+          );
+        }
+        setTimeout(() => modalInput.focus(), 50);
+      }
+
+      function closeModalTerminal() {
+        modal.classList.remove('open');
+      }
+
+      openTerminalBtn.addEventListener('click', openModalTerminal);
+      modalCloseBtn.addEventListener('click', closeModalTerminal);
+      modalCloseDot.addEventListener('click', closeModalTerminal);
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModalTerminal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== modalInput && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          openModalTerminal();
+        } else if (e.key === 'Escape' && modal.classList.contains('open')) {
+          closeModalTerminal();
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    const mBtn = document.getElementById('mobile-menu-btn');
+    const mDrawer = document.getElementById('mobile-nav-drawer');
+    if (mBtn && mDrawer) {
+      mBtn.addEventListener('click', () => {
+        const isOpen = mDrawer.classList.toggle('open');
+        const iconSpan = mBtn.querySelector('.menu-icon');
+        if (iconSpan) iconSpan.textContent = isOpen ? '✕' : '☰';
+      });
+      mDrawer.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mDrawer.classList.remove('open');
+          const iconSpan = mBtn.querySelector('.menu-icon');
+          if (iconSpan) iconSpan.textContent = '☰';
+        });
+      });
+    }
+  </script>
+</body>
+</html>
