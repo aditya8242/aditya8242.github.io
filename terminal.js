@@ -174,51 +174,72 @@ Type 'open blog' to launch the essays portal in your browser.
 ================================================================================
 
 SUMMARY:
-Systems & Backend Engineer specializing in Linux internals, C/C++, and scalable
-Java/Spring Boot backends—with practical experience building custom software at Iron & Logic.
+Computer Science undergraduate specializing in systems programming and backend
+development. Built a complete in-memory Unix-like virtual file system in C++
+featuring custom inode tables, file descriptor management, and seven core system
+calls. Strong foundation in Linux internals, C/C++, Java/Spring Boot, and clean
+layered architecture. Focused on correctness, simplicity, and production-ready code.
 
 EDUCATION:
 Bachelor of Science, Computer Science — 7.8 CGPA (2023 – 2026)
 Savitribai Phule Pune University, Pune, India
 
-WORK EXPERIENCE:
-1. Brilliant Info Systems Pvt. Ltd. | Intern (Oct 2026 – Present · Kothrud, Pune)
-   • Understand customer requirements and communicate specifications to technical team.
-   • Support software solutions demonstrations, product presentations, and technical proposals.
-   • Structure client data, maintain internal records, and conduct market/competitor research.
-   • Coordinate with internal teams to resolve queries across the software sales cycle.
+EXPERIENCE:
+1. Brilliant Info Systems Pvt. Ltd. — Intern (Oct 2026 – Present · Kothrud, Pune)
+   • Capture customer requirements, support software demos and proposals, and
+     maintain client records and market research.
 
-2. Iron & Logic | Web Architect & Software Engineer (Aug 2026 – Present · Pune)
-   • Building high-performance web architecture and direct booking integrations.
-   • Developing custom, AI-integrated internal tooling for B2B outreach and lead generation.
-   • Focusing on clean, native-feeling UIs and reliable backend infrastructure.
+2. Iron & Logic — Web Architect & Software Engineer (Aug 2026 – Present · Pune, India)
+   • Build web architecture and booking integrations for local Pune businesses;
+     develop AI-integrated tooling for B2B lead generation.
 
-SELECTED SYSTEMS PROJECTS:
-• Customized Virtual File System (CVFS) — C++ / Linux Internals (Feb 2025)
-  In-memory UNIX UFS-modeled file system from scratch with custom inode tables,
-  User File Descriptor Table (UFDT), and 7 core system calls.
-• Concurrent FTP Server — C / Sockets / Linux (Feb 2026)
-  High-concurrency TCP file server using fork-per-connection architecture with
-  custom line-based wire protocol over raw sockets.
-• EggRateBot — Python / Telegram / GitHub Actions (Jan 2025)
-  Defensive automated scraper broadcasting wholesale rates via Telegram Bot API
-  on scheduled GitHub Actions cron jobs. Designed to fail safely without emitting corrupt data.
-• FaceRecogESP — C++ / ESP32-CAM / Embedded (Mar 2025)
-  Biometric facial recognition pipeline running on ESP32-CAM microcontroller hardware
-  with external PSRAM optimization and Wi-Fi MJPEG streaming.
-• EduTrack — Java / Spring Boot / MongoDB / Docker (Jan 2025)
-  Production RESTful backend with layered architecture (Controller-Service-Repo),
-  Dockerized on Render with MongoDB Atlas.
-• IronVault — Java / Swing / Cryptography (Jul 2026)
-  Zero-dependency binary file archiver packing 18+ formats using custom headers
-  and repeating XOR encryption.
-• maKneeTrack — Java / SQLite / JDBC (Dec 2024)
-  Console expense engine engineered on strict 3-layer architecture with parameterized
-  SQL persistence.
+TECHNICAL SKILLS:
+Languages: C, C++, Java, Python, JavaScript
+Systems:   Linux, UNIX internals, Bash/Shell scripting, OS concepts (processes, memory, file systems)
+Backend:   Spring Boot, REST APIs, Layered Architecture (Controller–Service–Repository)
+Frontend:  React, Tailwind CSS
+Databases: MySQL, PostgreSQL, MongoDB, SQLite, JDBC
+Tools:     Git, Docker, GitHub Actions, Vercel, Cloudflare, Vim, IntelliJ IDEA, VS Code
 
-OPEN SOURCE & HONORS:
-• Merged contributor to ccgargantua/ini (PR #24) — Doxygen C documentation.
-• PostgreSQL Developer (Infosys Springboard) · Basics of Python (Infosys Springboard)
+TECHNICAL PROJECTS:
+• Customized Virtual File System (CVFS) — Feb 2025 | C++ / Linux
+  github.com/aditya8242/CustomizedVirtualFileSystem
+  • Designed and implemented a fully in-memory Unix-like virtual file system from
+    scratch, including custom inode tables, User File Descriptor Table (UFDT),
+    and precise file offset tracking.
+  • Built seven core system calls (creat, open, read, write, unlink, stat, ls)
+    modeled on UNIX UFS internals, with permission handling, structured error codes,
+    and a clean CLI interface.
+
+• Concurrent FTP Server — Feb 2026 | C / Sockets / Linux
+  github.com/aditya8242/ConcurrentFTPServer
+  • Built a TCP file-transfer server using fork-per-connection architecture,
+    allowing multiple clients to download files in parallel via isolated child processes.
+  • Designed a custom line-based protocol (filename request -> size header -> raw
+    byte stream) for reliable file transfer over raw sockets.
+
+• IronVault — File Archiver with Encryption — Jul 2026 | Java / Swing
+  github.com/aditya8242/IronVault
+  • Built a file archiver that packs an entire directory into a single binary
+    archive using a custom header format and repeating XOR encryption keyed to a
+    user-supplied password.
+  • Supports 18 file formats including documents, images, source code, and media.
+    Ships with a Swing GUI — no external dependencies.
+
+• EduTrack — Classroom & Student Management Portal — Jan 2025 | Java / Spring Boot / MongoDB / Docker
+  github.com/aditya8242/EduTrack · Live: edutrack-3426.onrender.com
+  • Developed a production-ready Spring Boot backend with RESTful CRUD APIs for
+    courses and fee management, using MongoDB and clean Controller–Service–Repository architecture.
+  • Dockerized and deployed on Render with MongoDB Atlas — live at edutrack-3426.onrender.com
+
+OPEN SOURCE:
+• Contributed Doxygen-compatible documentation to ccgargantua/ini (C library).
+  Iterated through maintainer review, verified IDE rendering, and confirmed
+  clean Doxygen build output. PR #24 merged.
+
+CERTIFICATIONS:
+• PostgreSQL Developer — Infosys Springboard (2025)
+• Basics of Python — Infosys Springboard (2025)
 `;
         }
 
