@@ -182,10 +182,16 @@ Bachelor of Science, Computer Science — 7.8 CGPA (2023 – 2026)
 Savitribai Phule Pune University, Pune, India
 
 WORK EXPERIENCE:
-1. Iron & Logic | Founder & Web Architect (Aug 2026 – Present · Pune)
-   • Built and deployed fast, responsive websites for local businesses using React, Tailwind CSS, and Vercel.
-   • Handled end-to-end client research, UI/UX, B2B outreach tooling, and deployment.
-   • Developed automated Python scrapers and internal lead qualification tools.
+1. Brilliant Info Systems Pvt. Ltd. | Intern (Oct 2026 – Present · Kothrud, Pune)
+   • Understand customer requirements and communicate specifications to technical team.
+   • Support software solutions demonstrations, product presentations, and technical proposals.
+   • Structure client data, maintain internal records, and conduct market/competitor research.
+   • Coordinate with internal teams to resolve queries across the software sales cycle.
+
+2. Iron & Logic | Web Architect & Software Engineer (Aug 2026 – Present · Pune)
+   • Building high-performance web architecture and direct booking integrations.
+   • Developing custom, AI-integrated internal tooling for B2B outreach and lead generation.
+   • Focusing on clean, native-feeling UIs and reliable backend infrastructure.
 
 SELECTED SYSTEMS PROJECTS:
 • Customized Virtual File System (CVFS) — C++ / Linux Internals (Feb 2025)
@@ -396,12 +402,18 @@ ACADEMICS & OPEN SOURCE:
 EXPERIENCE & WORK
 ================================================================================
 
-[01] Iron & Logic — Founder & Web Architect
+[01] Brilliant Info Systems Pvt. Ltd. — Intern
+     Period:   Oct 2026 – Present · Kothrud, Pune
+     Scope:    Understanding customer requirements, communicating specifications
+               to the technical team, supporting software product demonstrations
+               and technical proposals, structuring client data, and supporting
+               operations across the enterprise B2B sales cycle.
+
+[02] Iron & Logic — Web Architect & Software Engineer
      Period:   Aug 2026 – Present · Pune, India
-     Scope:    Building custom web software, booking flows, and digital tools
-               for local businesses in Pune. Full project lifecycle from client
-               scoping, UI/UX, and development to React/Tailwind frontend,
-               backend integrations, and Vercel deployments.
+     Scope:    Building high-performance web architecture, direct booking
+               integrations, and AI-integrated internal B2B outreach tooling
+               for businesses and venues in Pune.
 `
     },
 
