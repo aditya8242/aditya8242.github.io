@@ -75,6 +75,7 @@ drwxr-xr-x  4 aditya staff   128 Feb 2025  01_CVFS_VirtualFileSystem   (C++ / Li
 drwxr-xr-x  4 aditya staff   128 Feb 2026  02_ConcurrentFTPServer      (C / POSIX Sockets)
 drwxr-xr-x  4 aditya staff   128 Jan 2025  03_EggRateBot_Automation    (Python / GitHub Actions)
 drwxr-xr-x  4 aditya staff   128 Mar 2025  04_FaceRecogESP_Embedded    (C++ / ESP32-CAM / CV)
+drwxr-xr-x  4 aditya staff   128 Nov 2026  08_BastiDrift_AudioLab      (Web Audio / OpenDAW)
 drwxr-xr-x  4 aditya staff   128 Jan 2025  05_EduTrack_Backend         (Java / Spring Boot / MongoDB)
 drwxr-xr-x  4 aditya staff   128 Jul 2026  06_IronVault_Archiver       (Java / Binary Packing / XOR)
 drwxr-xr-x  4 aditya staff   128 Dec 2024  07_maKneeTrack_CLI          (Java / JDBC / SQLite)
