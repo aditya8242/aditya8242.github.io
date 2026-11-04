@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basti Drift: Engineering an In-Browser Vocal Studio & Beat Lab — Aditya Chavan</title>
+  
+  <!-- Security Directives -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; base-uri 'self'; form-action 'self';">
+
+  <meta name="description" content="Building zero-dependency Web Audio tools, GPU-accelerated responsive ambient lighting, and open DAW standards for underground music production.">
+  <meta name="author" content="Aditya Chavan">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://aditya8242.github.io/blog/basti-drift-audio-lab.html">
+  <meta property="og:title" content="Basti Drift: Engineering an In-Browser Vocal Studio & Beat Lab — Aditya Chavan">
+  <meta property="og:description" content="Zero dependencies, GPU-accelerated ambient lighting, and open DAW standards for underground music production.">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ad1tya24">
+  <meta name="twitter:creator" content="@ad1tya24">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" type="image/png" href="../favicon.png">
+
+  <!-- Typography: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
+  </noscript>
+
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="../" class="nav-brand" aria-label="Aditya Chavan Portfolio">
+          <span class="brand-monogram">AC</span>
+          <div class="brand-meta">
+            <span class="brand-name">Aditya Chavan</span>
+            <span class="brand-role">SYS // AUDIO LAB</span>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="index.html">← All Dispatches</a></li>
+            <li><a href="../">Portfolio Home</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-controls">
+          <button id="open-terminal-btn" class="terminal-trigger-btn" title="Open Interactive Terminal (Press /)">
+            <span>[~]$</span>
+            <span class="kbd-shortcut">/</span>
+          </button>
+
+          <button id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+            <span class="menu-icon">☰</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html" class="mobile-nav-link"><span>← All Engineering Dispatches</span><span>↖</span></a></li>
+        <li><a href="../index.html" class="mobile-nav-link"><span>01 // Portfolio Home</span><span>↗</span></a></li>
+        <li><a href="../index.html#systems" class="mobile-nav-link"><span>02 // Systems &amp; Architecture</span><span>↓</span></a></li>
+        <li><a href="../index.html#dispatch" class="mobile-nav-link accent"><span>06 // Contact / Dispatch</span><span>↓</span></a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Article Viewport -->
+  <main class="article-wrapper">
+    
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <a href="../">portfolio</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="index.html">blog</a>
+      <span class="breadcrumb-sep">/</span>
+      <span style="color: var(--text-primary);">basti-drift</span>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+      <h1 class="article-title">Basti Drift: Engineering an In-Browser Vocal Studio & Beat Lab</h1>
+      <h2 class="article-subtitle">Zero dependencies, GPU-accelerated ambient lighting, and open DAW standards for underground music production.</h2>
+
+      <div class="article-meta-bar">
+        <span class="blog-tag">AUDIO &amp; SYSTEMS</span>
+        <span>NOV 2026</span>
+        <span>·</span>
+        <span>4 MIN READ</span>
+        <span>·</span>
+        <span>BY ADITYA CHAVAN</span>
+      </div>
+    </header>
+
+    <!-- Article Content -->
+    <article class="article-prose">
+      <p>
+        Most commercial music software is built like enterprise legacy bloat. If an artist wants to rehearse lyrics over a raw instrumental, they are forced to fire up a 12-gigabyte digital audio workstation, route ASIO drivers, configure buffer latencies, and manually scroll a notes app on a second monitor.
+      </p>
+
+      <p>
+        The creative momentum is dead before the microphone even arms.
+      </p>
+
+      <p>
+        Today I packaged the complete production workflow for <strong>Basti Drift (Kaalya Raatri)</strong> into an open, self-contained system. It marries two distinct disciplines: raw, gritty Marathi trap sound design and lightweight web-native audio engineering.
+      </p>
+
+      <h3>1. The In-Browser Vocal Studio</h3>
+
+      <p>
+        Instead of relying on electron wrappers or external recording apps, I engineered <code>index.html</code> inside <a href="https://github.com/aditya8242/basti-drift-audio-lab" target="_blank" rel="noopener noreferrer">basti-drift-audio-lab</a> as an entirely zero-dependency, single-file tracking booth.
+      </p>
+
+      <ul>
+        <li><strong>Zero Cloud Latency:</strong> The instrumental is directly embedded into the document using base64 audio data URIs. It opens instantaneously without requiring an active internet connection or streaming CDN.</li>
+        <li><strong>Dynamic Stage Lighting:</strong> A GPU-accelerated ambient background layer shifts its color temperature in real time—flaring into crimson red on heavy 808 drops and pulsing amber on siren cues.</li>
+        <li><strong>In-Browser Microphone Tracking:</strong> Using the browser's native <code>MediaStream</code> and <code>MediaRecorder</code> APIs, pressing <code>M</code> immediately arms the microphone and tracks vocal takes. When stopped, it compiles and downloads a timestamped <code>.webm</code> take straight to disk—never sending a single byte to an external server.</li>
+        <li><strong>Frictionless Keyboard Navigation:</strong> Rehearsal flow demands muscle memory. <code>Space</code> controls playback, <code>R</code> snaps back to start, <code>L</code> opens the full lyrics and translation drawer, and arrow keys seek in five-second increments.</li>
+      </ul>
+
+      <h3>2. The Anti-Lock-In Standard: Open DAW</h3>
+
+      <p>
+        Proprietary project formats (like <code>.flp</code>, <code>.cpr</code>, or <code>.als</code>) lock music behind expensive license walls and platform gates. If a producer switches from macOS to Linux or moves between studios, the session breaks.
+      </p>
+
+      <p>
+        For this project, the core arrangement is saved as <code>crazybeat.dawproject</code>. The <strong>DAWProject</strong> format is an open XML/ZIP container standard backed by Bitwig and PreSonus that standardizes track structures, automation lanes, audio clips, and tempo markers across modern DAWs. Anyone on Linux, Windows, or Mac can load the session immediately.
+      </p>
+
+      <h3>3. Curating the Street Sound Kit</h3>
+
+      <p>
+        Great sound design is disciplined curation. Rather than shipping a chaotic 20GB dump of generic loops, the repository isolates exactly what gives the 140 BPM D-Minor rhythm its weight:
+      </p>
+
+      <ul>
+        <li><strong>Tuned 808s:</strong> Exact pitch allocations at C, D, and F# ensuring basslines sit flush with kick transients without phase cancellation.</li>
+        <li><strong>Atmospheric Textures:</strong> Reverse breath rises, street foley (spray cans, AK47 mechanical clicks, police sirens), and spoken tags recorded in Pune.</li>
+      </ul>
+
+      <h3>Experience the Live Studio</h3>
+
+      <p>
+        The entire vocal studio is open-sourced and hosted live on GitHub Pages. You can test your delivery, practice the timing, or drop your own instrumental right into the player:
+      </p>
+
+      <p>
+        👉 <a href="https://aditya8242.github.io/basti-drift-audio-lab/" target="_blank" rel="noopener noreferrer"><strong>Launch the Live Kaalya Raatri Vocal Studio ↗</strong></a><br>
+        📦 <a href="https://github.com/aditya8242/basti-drift-audio-lab" target="_blank" rel="noopener noreferrer"><strong>Inspect the Source Code on GitHub ↗</strong></a>
+      </p>
+
+    </article>
+
+  </main>
+
+  <!-- Section: Footer -->
+  <footer id="dispatch" class="footer-dispatch">
+    <div class="container">
+      <div class="footer-bottom-bar">
+        <div>
+          <span>© 2026 Aditya Chavan · Systems &amp; Audio Engineering</span>
+        </div>
+        <div style="display:flex;gap:1rem;">
+          <a href="../" style="color:var(--text-secondary);text-decoration:none;">Portfolio Home</a>
+          <span>·</span>
+          <a href="index.html" style="color:var(--text-secondary);text-decoration:none;">All Dispatches</a>
+          <span>·</span>
+          <a href="https://github.com/aditya8242" target="_blank" rel="noopener noreferrer" style="color:var(--text-secondary);text-decoration:none;">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Terminal Shell -->
+  <div id="terminal-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Interactive Terminal Shell">
+    <div class="modal-terminal-card">
+      <div class="terminal-titlebar">
+        <div class="terminal-dots">
+          <span class="terminal-dot close" id="modal-close-dot"></span>
+          <span class="terminal-dot min"></span>
+          <span class="terminal-dot max"></span>
+        </div>
+        <div class="terminal-title">aditya@arch-pune: ~/blog (sh) — Press Esc to exit</div>
+        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close terminal">✕ Close</button>
+      </div>
+      <div class="terminal-body" id="modal-term-body" style="overflow-y:auto;flex:1;">
+        <div class="term-output" id="modal-term-output"></div>
+        <div class="term-prompt-line">
+          <span class="term-prompt">aditya@arch-pune:~/blog$</span>
+          <input type="text" id="modal-term-input" class="term-input" spellcheck="false" autocomplete="off" aria-label="Interactive Command Input">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../terminal.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
-/**
- * ADITYA CHAVAN — UNIX TERMINAL EMULATOR & EASTER EGG ENGINE
+﻿/**
+ * ADITYA CHAVAN â€” UNIX TERMINAL EMULATOR & EASTER EGG ENGINE
  * Provides interactive CLI shell experience for recruiters and systems engineers.
  */
 
@@ -13,8 +13,8 @@
    \\ \\_\\ \\_\\\\ \\____-   \\ \\_\\   \\ \\_\\ \\/\\_____\\\\ \\_\\ \\_\\
     \\/_/\\/_/ \\/____/    \\/_/    \\/_/  \\/_____/ \\/_/\\/_/
   
-  ADITYA CHAVAN — SYSTEMS & BACKEND ARCHITECTURE
-  Linux Internals · C/C++ · High-Concurrency Networking · Java/Spring Boot
+  ADITYA CHAVAN â€” SYSTEMS & BACKEND ARCHITECTURE
+  Linux Internals Â· C/C++ Â· High-Concurrency Networking Â· Java/Spring Boot
   Type 'help' to inspect available system commands.
 `;
 
@@ -85,6 +85,7 @@ drwxr-xr-x  4 aditya staff   128 Dec 2024  07_maKneeTrack_CLI          (Java / J
 -rw-r--r--  1 aditya staff  5056 Oct 2025  learned-open-source-the-hard-way.html
 -rw-r--r--  1 aditya staff  5663 Jan 2025  automating-a-daily-task.html
   -rw-r--r--  1 aditya staff  4890 Nov 2026  simplicity-systems-discipline.html
+-rw-r--r--  1 aditya staff  7200 Nov 2026  basti-drift-audio-lab.html
 -rw-r--r--  1 aditya staff  1024 Forthcoming  simplicity-and-systems.txt
 `;
         }
@@ -109,21 +110,27 @@ ENGINEERING DISPATCHES & FIELD NOTES (aditya8242.github.io/blog)
 ================================================================================
 [01] I Learned Open Source the Hard Way
      Subtitle: By failing publicly
-     Date:     October 2025 · 4 min read
-     Tags:     Open Source · C/Doxygen · Maintainer Reality
+     Date:     October 2025 Â· 4 min read
+     Tags:     Open Source Â· C/Doxygen Â· Maintainer Reality
      URI:      /blog/learned-open-source-the-hard-way.html
 
 [02] Automating a Daily Task Instead of Repeating It
      Subtitle: Replacing fragile manual work with a simple system
-     Date:     2025 · 4 min read
-     Tags:     Defensive Programming · Python · GitHub Actions
+     Date:     2025 Â· 4 min read
+     Tags:     Defensive Programming Â· Python Â· GitHub Actions
      URI:      /blog/automating-a-daily-task.html
 
   [03] Simplicity, Systems, and Engineering Discipline
        Subtitle: Why the best software is hard to mess up
-       Date:     2026 · 3 min read
-       Tags:     Philosophy · Systems Architecture · Discipline
+       Date:     2026 Â· 3 min read
+       Tags:     Philosophy Â· Systems Architecture Â· Discipline
        URI:      /blog/simplicity-systems-discipline.html
+
+  [04] Basti Drift: Engineering an In-Browser Vocal Studio & Beat Lab
+       Subtitle: Zero dependencies, GPU-accelerated ambient lighting, and open DAW standards
+       Date:     Nov 2026 · 4 min read
+       Tags:     Audio Engineering · Web Audio API · Open Standards
+       URI:      /blog/basti-drift-audio-lab.html
 
 Type 'open blog' to launch the essays portal in your browser.
 `
@@ -137,6 +144,10 @@ Type 'open blog' to launch the essays portal in your browser.
         if (target.includes('blog')) {
           window.location.href = 'blog/';
           return 'Navigating to /blog...';
+        }
+        if (target.includes('basti') || target.includes('studio') || target.includes('vocal')) {
+          window.open('https://aditya8242.github.io/basti-drift-audio-lab/', '_blank');
+          return 'Opening Basti Drift // Kaalya Raatri Vocal Studio in a new tab...';
         }
         if (target.includes('resume')) {
           window.open('Resume.pdf', '_blank');
@@ -169,8 +180,8 @@ Type 'open blog' to launch the essays portal in your browser.
           return `
 ================================================================================
                                 ADITYA CHAVAN
-                Pune, India · aditya.h.chavan@gmail.com · +91 86699 06901
-     linkedin.com/in/adityachavan24 · github.com/aditya8242 · aditya8242.github.io
+                Pune, India Â· aditya.h.chavan@gmail.com Â· +91 86699 06901
+     linkedin.com/in/adityachavan24 Â· github.com/aditya8242 Â· aditya8242.github.io
 ================================================================================
 
 SUMMARY:
@@ -181,65 +192,65 @@ calls. Strong foundation in Linux internals, C/C++, Java/Spring Boot, and clean
 layered architecture. Focused on correctness, simplicity, and production-ready code.
 
 EDUCATION:
-Bachelor of Science, Computer Science — 7.8 CGPA (2023 – 2026)
+Bachelor of Science, Computer Science â€” 7.8 CGPA (2023 â€“ 2026)
 Savitribai Phule Pune University, Pune, India
 
 EXPERIENCE:
-1. Brilliant Info Systems Pvt. Ltd. — Intern (Oct 2026 – Present · Kothrud, Pune)
-   • Capture customer requirements, support software demos and proposals, and
+1. Brilliant Info Systems Pvt. Ltd. â€” Intern (Oct 2026 â€“ Present Â· Kothrud, Pune)
+   â€¢ Capture customer requirements, support software demos and proposals, and
      maintain client records and market research.
 
-2. Iron & Logic — Web Architect & Software Engineer (Aug 2026 – Present · Pune, India)
-   • Build web architecture and booking integrations for local Pune businesses;
+2. Iron & Logic â€” Web Architect & Software Engineer (Aug 2026 â€“ Present Â· Pune, India)
+   â€¢ Build web architecture and booking integrations for local Pune businesses;
      develop AI-integrated tooling for B2B lead generation.
 
 TECHNICAL SKILLS:
 Languages: C, C++, Java, Python, JavaScript
 Systems:   Linux, UNIX internals, Bash/Shell scripting, OS concepts (processes, memory, file systems)
-Backend:   Spring Boot, REST APIs, Layered Architecture (Controller–Service–Repository)
+Backend:   Spring Boot, REST APIs, Layered Architecture (Controllerâ€“Serviceâ€“Repository)
 Frontend:  React, Tailwind CSS
 Databases: MySQL, PostgreSQL, MongoDB, SQLite, JDBC
 Tools:     Git, Docker, GitHub Actions, Vercel, Cloudflare, Vim, IntelliJ IDEA, VS Code
 
 TECHNICAL PROJECTS:
-• Customized Virtual File System (CVFS) — Feb 2025 | C++ / Linux
+â€¢ Customized Virtual File System (CVFS) â€” Feb 2025 | C++ / Linux
   github.com/aditya8242/CustomizedVirtualFileSystem
-  • Designed and implemented a fully in-memory Unix-like virtual file system from
+  â€¢ Designed and implemented a fully in-memory Unix-like virtual file system from
     scratch, including custom inode tables, User File Descriptor Table (UFDT),
     and precise file offset tracking.
-  • Built seven core system calls (creat, open, read, write, unlink, stat, ls)
+  â€¢ Built seven core system calls (creat, open, read, write, unlink, stat, ls)
     modeled on UNIX UFS internals, with permission handling, structured error codes,
     and a clean CLI interface.
 
-• Concurrent FTP Server — Feb 2026 | C / Sockets / Linux
+â€¢ Concurrent FTP Server â€” Feb 2026 | C / Sockets / Linux
   github.com/aditya8242/ConcurrentFTPServer
-  • Built a TCP file-transfer server using fork-per-connection architecture,
+  â€¢ Built a TCP file-transfer server using fork-per-connection architecture,
     allowing multiple clients to download files in parallel via isolated child processes.
-  • Designed a custom line-based protocol (filename request -> size header -> raw
+  â€¢ Designed a custom line-based protocol (filename request -> size header -> raw
     byte stream) for reliable file transfer over raw sockets.
 
-• IronVault — File Archiver with Encryption — Jul 2026 | Java / Swing
+â€¢ IronVault â€” File Archiver with Encryption â€” Jul 2026 | Java / Swing
   github.com/aditya8242/IronVault
-  • Built a file archiver that packs an entire directory into a single binary
+  â€¢ Built a file archiver that packs an entire directory into a single binary
     archive using a custom header format and repeating XOR encryption keyed to a
     user-supplied password.
-  • Supports 18 file formats including documents, images, source code, and media.
-    Ships with a Swing GUI — no external dependencies.
+  â€¢ Supports 18 file formats including documents, images, source code, and media.
+    Ships with a Swing GUI â€” no external dependencies.
 
-• EduTrack — Classroom & Student Management Portal — Jan 2025 | Java / Spring Boot / MongoDB / Docker
-  github.com/aditya8242/EduTrack · Live: edutrack-3426.onrender.com
-  • Developed a production-ready Spring Boot backend with RESTful CRUD APIs for
-    courses and fee management, using MongoDB and clean Controller–Service–Repository architecture.
-  • Dockerized and deployed on Render with MongoDB Atlas — live at edutrack-3426.onrender.com
+â€¢ EduTrack â€” Classroom & Student Management Portal â€” Jan 2025 | Java / Spring Boot / MongoDB / Docker
+  github.com/aditya8242/EduTrack Â· Live: edutrack-3426.onrender.com
+  â€¢ Developed a production-ready Spring Boot backend with RESTful CRUD APIs for
+    courses and fee management, using MongoDB and clean Controllerâ€“Serviceâ€“Repository architecture.
+  â€¢ Dockerized and deployed on Render with MongoDB Atlas â€” live at edutrack-3426.onrender.com
 
 OPEN SOURCE:
-• Contributed Doxygen-compatible documentation to ccgargantua/ini (C library).
+â€¢ Contributed Doxygen-compatible documentation to ccgargantua/ini (C library).
   Iterated through maintainer review, verified IDE rendering, and confirmed
   clean Doxygen build output. PR #24 merged.
 
 CERTIFICATIONS:
-• PostgreSQL Developer — Infosys Springboard (2025)
-• Basics of Python — Infosys Springboard (2025)
+â€¢ PostgreSQL Developer â€” Infosys Springboard (2025)
+â€¢ Basics of Python â€” Infosys Springboard (2025)
 `;
         }
 
@@ -295,22 +306,22 @@ CONCURRENT FTP SERVER WIRE PROTOCOL SPECIFICATION
 ================================================================================
 
 CLIENT                                        SERVER (Master Listening on :2121)
-  │                                                      │
-  │─── TCP Handshake (SYN) ─────────────────────────────►│
-  │◄── TCP Handshake (SYN-ACK) ──────────────────────────│
-  │                                                      │
-  │                                            [fork() child process]
-  │                                            [PID: 2841, Isolated Socket]
-  │                                                      │
-  │─── "RETR dataset.tar.gz\\n" ─────────────────────────►│
-  │                                                      │
-  │◄── "SIZE 4194304\\n" ─────────────────────────────────│ (File Size Header)
-  │─── "ACK\\n" ──────────────────────────────────────────►│
-  │                                                      │
-  │◄── [Raw Byte Stream: 4.19MB Chunked @ 4KB Buffer] ───│
-  │                                                      │
-  │─── "TRANSFER_COMPLETE\\n" ────────────────────────────►│
-  │◄── "226 Closing Data Connection\\n" ──────────────────│
+  â”‚                                                      â”‚
+  â”‚â”€â”€â”€ TCP Handshake (SYN) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–ºâ”‚
+  â”‚â—„â”€â”€ TCP Handshake (SYN-ACK) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”‚
+  â”‚                                                      â”‚
+  â”‚                                            [fork() child process]
+  â”‚                                            [PID: 2841, Isolated Socket]
+  â”‚                                                      â”‚
+  â”‚â”€â”€â”€ "RETR dataset.tar.gz\\n" â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–ºâ”‚
+  â”‚                                                      â”‚
+  â”‚â—„â”€â”€ "SIZE 4194304\\n" â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”‚ (File Size Header)
+  â”‚â”€â”€â”€ "ACK\\n" â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–ºâ”‚
+  â”‚                                                      â”‚
+  â”‚â—„â”€â”€ [Raw Byte Stream: 4.19MB Chunked @ 4KB Buffer] â”€â”€â”€â”‚
+  â”‚                                                      â”‚
+  â”‚â”€â”€â”€ "TRANSFER_COMPLETE\\n" â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–ºâ”‚
+  â”‚â—„â”€â”€ "226 Closing Data Connection\\n" â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”‚
 `;
         }
 
@@ -400,19 +411,19 @@ Date:   Sun Oct 12 09:12:44 2025 +0530
 TECHNICAL SPECIFICATION SHEET
 ================================================================================
 SYSTEMS & LANGUAGES:
-  • C, C++, Java, Python, JavaScript, Bash / Shell
-  • Linux / UNIX Internals, POSIX Sockets, Concurrency, File System Architecture
+  â€¢ C, C++, Java, Python, JavaScript, Bash / Shell
+  â€¢ Linux / UNIX Internals, POSIX Sockets, Concurrency, File System Architecture
 
 BACKEND & DATA:
-  • Spring Boot, REST APIs, Controller-Service-Repository Pattern
-  • PostgreSQL, MongoDB, MySQL, SQLite, JDBC
+  â€¢ Spring Boot, REST APIs, Controller-Service-Repository Pattern
+  â€¢ PostgreSQL, MongoDB, MySQL, SQLite, JDBC
 
 INFRASTRUCTURE & TOOLING:
-  • Docker, Git, GitHub Actions CI/CD, Vercel, Cloudflare, Vim, Linux CLI
+  â€¢ Docker, Git, GitHub Actions CI/CD, Vercel, Cloudflare, Vim, Linux CLI
 
 ACADEMICS & OPEN SOURCE:
-  • Savitribai Phule Pune University — B.Sc. Computer Science (7.8 CGPA, 2023–2026)
-  • Open Source Contributor: ccgargantua/ini (PR #24 Merged)
+  â€¢ Savitribai Phule Pune University â€” B.Sc. Computer Science (7.8 CGPA, 2023â€“2026)
+  â€¢ Open Source Contributor: ccgargantua/ini (PR #24 Merged)
 `
     },
 
@@ -423,15 +434,15 @@ ACADEMICS & OPEN SOURCE:
 EXPERIENCE & WORK
 ================================================================================
 
-[01] Brilliant Info Systems Pvt. Ltd. — Intern
-     Period:   Oct 2026 – Present · Kothrud, Pune
+[01] Brilliant Info Systems Pvt. Ltd. â€” Intern
+     Period:   Oct 2026 â€“ Present Â· Kothrud, Pune
      Scope:    Understanding customer requirements, communicating specifications
                to the technical team, supporting software product demonstrations
                and technical proposals, structuring client data, and supporting
                operations across the enterprise B2B sales cycle.
 
-[02] Iron & Logic — Web Architect & Software Engineer
-     Period:   Aug 2026 – Present · Pune, India
+[02] Iron & Logic â€” Web Architect & Software Engineer
+     Period:   Aug 2026 â€“ Present Â· Pune, India
      Scope:    Building high-performance web architecture, direct booking
                integrations, and AI-integrated internal B2B outreach tooling
                for businesses and venues in Pune.
