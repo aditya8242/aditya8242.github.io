@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>I Learned Open Source the Hard Way — Aditya Chavan</title>
+  <title>I Learned Open Source the Hard Way &mdash; Aditya Chavan</title>
   
   <!-- Security Directives -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -18,7 +19,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://aditya8242.github.io/blog/learned-open-source-the-hard-way.html">
-  <meta property="og:title" content="I Learned Open Source the Hard Way — Aditya Chavan">
+  <meta property="og:title" content="I Learned Open Source the Hard Way &mdash; Aditya Chavan">
   <meta property="og:description" content="A firsthand account of failing publicly in open source and learning the real value of ownership, correctness, and trust.">
 
   <!-- Twitter -->
@@ -57,7 +58,7 @@
 
         <nav>
           <ul class="nav-links">
-            <li><a href="index.html">← All Dispatches</a></li>
+            <li><a href="index.html">&larr; All Dispatches</a></li>
             <li><a href="../">Portfolio Home</a></li>
           </ul>
         </nav>
@@ -70,7 +71,7 @@
 
           <!-- Mobile Navigation Toggle -->
           <button id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
-            <span class="menu-icon">☰</span>
+            <span class="menu-icon">&#9776;</span>
           </button>
         </div>
       </div>
@@ -79,10 +80,10 @@
     <!-- Mobile Navigation Drawer -->
     <div id="mobile-nav-drawer" class="mobile-nav-drawer">
       <ul class="mobile-nav-list">
-        <li><a href="index.html" class="mobile-nav-link"><span>← All Engineering Dispatches</span><span>↖</span></a></li>
-        <li><a href="../index.html" class="mobile-nav-link"><span>01 // Portfolio Home</span><span>↗</span></a></li>
-        <li><a href="../index.html#systems" class="mobile-nav-link"><span>02 // Systems &amp; Architecture</span><span>↓</span></a></li>
-        <li><a href="../index.html#dispatch" class="mobile-nav-link accent"><span>06 // Contact / Dispatch</span><span>↓</span></a></li>
+        <li><a href="index.html" class="mobile-nav-link"><span>&larr; All Engineering Dispatches</span><span>&#8598;</span></a></li>
+        <li><a href="../index.html" class="mobile-nav-link"><span>01 // Portfolio Home</span><span>&#8599;</span></a></li>
+        <li><a href="../index.html#systems" class="mobile-nav-link"><span>02 // Systems &amp; Architecture</span><span>&darr;</span></a></li>
+        <li><a href="../index.html#dispatch" class="mobile-nav-link accent"><span>06 // Contact / Dispatch</span><span>&darr;</span></a></li>
       </ul>
     </div>
   </header>
@@ -105,11 +106,11 @@
       <h2 class="article-subtitle">By failing publicly</h2>
 
       <div class="article-meta-bar">
-        <span class="blog-tag">OPEN SOURCE · LESSONS</span>
+        <span class="blog-tag">OPEN SOURCE &middot; LESSONS</span>
         <span>OCT 2025</span>
-        <span>·</span>
+        <span>&middot;</span>
         <span>4 MIN READ</span>
-        <span>·</span>
+        <span>&middot;</span>
         <span>BY ADITYA CHAVAN</span>
       </div>
     </header>
@@ -117,7 +118,7 @@
     <!-- Exact Written Article Content Preserved Verbatim -->
     <article class="article-prose">
       <p>
-        A few days ago, I made a mistake — the kind that hurts your ego but upgrades your brain.
+        A few days ago, I made a mistake &mdash; the kind that hurts your ego but upgrades your brain.
       </p>
 
       <p>
@@ -128,7 +129,7 @@
       <h3>The Shortcut Mindset</h3>
 
       <p>
-        I searched GitHub for “good first issues” and found one quickly.
+        I searched GitHub for &ldquo;good first issues&rdquo; and found one quickly.
         The task sounded trivial: add JavaDoc-style comments to a C header file.
       </p>
 
@@ -145,8 +146,8 @@
 
       <p>
         I copied the header file into an AI chatbot and asked it to generate comments.
-        I didn’t review the output. I didn’t understand it.
-        I didn’t even read the project README.
+        I didn&rsquo;t review the output. I didn&rsquo;t understand it.
+        I didn&rsquo;t even read the project README.
       </p>
 
       <p>I opened a pull request.</p>
@@ -158,13 +159,13 @@
       </p>
 
       <p>
-        Not only were the comments wrong — critical code had been removed.
+        Not only were the comments wrong &mdash; critical code had been removed.
         Out of roughly 700 lines.
       </p>
 
       <p>
-        That’s not a small mistake.
-        That’s a trust-breaking one.
+        That&rsquo;s not a small mistake.
+        That&rsquo;s a trust-breaking one.
       </p>
 
       <p>I apologized and said I would fix it.</p>
@@ -176,14 +177,14 @@
       </p>
 
       <p>
-        I went back to AI. Wrote “better prompts.” Trusted the output again.
-        Still didn’t review it. Still didn’t understand it.
+        I went back to AI. Wrote &ldquo;better prompts.&rdquo; Trusted the output again.
+        Still didn&rsquo;t review it. Still didn&rsquo;t understand it.
       </p>
 
       <p>I opened another pull request.</p>
 
       <p>
-        This time, the maintainer was furious — and rightfully so.
+        This time, the maintainer was furious &mdash; and rightfully so.
         He accused me of using AI. I admitted it.
       </p>
 
@@ -198,12 +199,12 @@
       </p>
 
       <p>
-        This wasn’t arrogance or gatekeeping.
+        This wasn&rsquo;t arrogance or gatekeeping.
         This was someone protecting their project, their time, and their standards.
       </p>
 
       <p>
-        I asked for one last chance — not to look good, but to do it right.
+        I asked for one last chance &mdash; not to look good, but to do it right.
         He gave it.
       </p>
 
@@ -222,17 +223,17 @@
 
       <p>
         Within a few hours, I fixed the issue properly.
-        I learned more than I would have from ten “easy” pull requests.
+        I learned more than I would have from ten &ldquo;easy&rdquo; pull requests.
       </p>
 
       <h3>What This Taught Me</h3>
 
       <ul>
         <li>AI accelerates work only when you already care about correctness</li>
-        <li>Open source is collaboration, not a résumé farm</li>
-        <li>Maintainers aren’t enemies — they’re guardians</li>
+        <li>Open source is collaboration, not a r&eacute;sum&eacute; farm</li>
+        <li>Maintainers aren&rsquo;t enemies &mdash; they&rsquo;re guardians</li>
         <li>Owning mistakes earns more respect than pretending competence</li>
-        <li>Public failure is brutal — and incredibly educational</li>
+        <li>Public failure is brutal &mdash; and incredibly educational</li>
       </ul>
 
       <p>
@@ -248,20 +249,20 @@
     <div class="article-author-card">
       <div class="author-info">
         <span class="author-name">Aditya Chavan</span>
-        <span class="author-role">Systems &amp; Backend Software Engineer · Pune, India</span>
+        <span class="author-role">Systems &amp; Backend Software Engineer &middot; Pune, India</span>
         <p class="author-bio">
           Undergraduate specializing in Linux internals, C/C++, and scalable Java backends. Merged contributor to <code>ccgargantua/ini</code> (PR #24).
         </p>
       </div>
       <div>
-        <a href="../#dispatch" class="btn btn-secondary">Connect ↗</a>
+        <a href="../#dispatch" class="btn btn-secondary">Connect &#8599;</a>
       </div>
     </div>
 
     <!-- Navigation Footer -->
     <div class="article-nav-footer">
-      <a href="index.html">← Back to all essays</a>
-      <a href="../">Portfolio Home →</a>
+      <a href="index.html">&larr; Back to all essays</a>
+      <a href="../">Portfolio Home &rarr;</a>
     </div>
 
   </main>
@@ -275,8 +276,8 @@
           <span class="terminal-dot min"></span>
           <span class="terminal-dot max"></span>
         </div>
-        <div class="terminal-title">aditya@arch-pune: ~/blog (sh) — Press Esc to exit</div>
-        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close terminal">✕ Close</button>
+        <div class="terminal-title">aditya@arch-pune: ~/blog (sh) &mdash; Press Esc to exit</div>
+        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close terminal">&#10005; Close</button>
       </div>
       <div class="terminal-body" id="modal-term-body" style="overflow-y:auto;flex:1;">
         <div class="term-output" id="modal-term-output"></div>
@@ -346,13 +347,13 @@
       mBtn.addEventListener('click', () => {
         const isOpen = mDrawer.classList.toggle('open');
         const iconSpan = mBtn.querySelector('.menu-icon');
-        if (iconSpan) iconSpan.textContent = isOpen ? '✕' : '☰';
+        if (iconSpan) iconSpan.textContent = isOpen ? '&#10005;' : '&#9776;';
       });
       mDrawer.querySelectorAll('.mobile-nav-link').forEach(link => {
         link.addEventListener('click', () => {
           mDrawer.classList.remove('open');
           const iconSpan = mBtn.querySelector('.menu-icon');
-          if (iconSpan) iconSpan.textContent = '☰';
+          if (iconSpan) iconSpan.textContent = '&#9776;';
         });
       });
     }

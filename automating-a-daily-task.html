@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Automating a Daily Task Instead of Repeating It — Aditya Chavan</title>
+  <title>Automating a Daily Task Instead of Repeating It &mdash; Aditya Chavan</title>
   
   <!-- Security Directives -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -18,7 +19,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://aditya8242.github.io/blog/automating-a-daily-task.html">
-  <meta property="og:title" content="Automating a Daily Task Instead of Repeating It — Aditya Chavan">
+  <meta property="og:title" content="Automating a Daily Task Instead of Repeating It &mdash; Aditya Chavan">
   <meta property="og:description" content="A small automation project that replaces repetitive daily work with a reliable, failure-aware system.">
 
   <!-- Twitter -->
@@ -57,7 +58,7 @@
 
         <nav>
           <ul class="nav-links">
-            <li><a href="index.html">← All Dispatches</a></li>
+            <li><a href="index.html">&larr; All Dispatches</a></li>
             <li><a href="../">Portfolio Home</a></li>
           </ul>
         </nav>
@@ -70,7 +71,7 @@
 
           <!-- Mobile Navigation Toggle -->
           <button id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
-            <span class="menu-icon">☰</span>
+            <span class="menu-icon">&#9776;</span>
           </button>
         </div>
       </div>
@@ -79,10 +80,10 @@
     <!-- Mobile Navigation Drawer -->
     <div id="mobile-nav-drawer" class="mobile-nav-drawer">
       <ul class="mobile-nav-list">
-        <li><a href="blog/index.html" class="mobile-nav-link"><span>← All Engineering Dispatches</span><span>↖</span></a></li>
-        <li><a href="./index.html" class="mobile-nav-link"><span>01 // Portfolio Home</span><span>↗</span></a></li>
-        <li><a href="./index.html#systems" class="mobile-nav-link"><span>02 // Systems &amp; Architecture</span><span>↓</span></a></li>
-        <li><a href="./index.html#dispatch" class="mobile-nav-link accent"><span>06 // Contact / Dispatch</span><span>↓</span></a></li>
+        <li><a href="blog/index.html" class="mobile-nav-link"><span>&larr; All Engineering Dispatches</span><span>&#8598;</span></a></li>
+        <li><a href="./index.html" class="mobile-nav-link"><span>01 // Portfolio Home</span><span>&#8599;</span></a></li>
+        <li><a href="./index.html#systems" class="mobile-nav-link"><span>02 // Systems &amp; Architecture</span><span>&darr;</span></a></li>
+        <li><a href="./index.html#dispatch" class="mobile-nav-link accent"><span>06 // Contact / Dispatch</span><span>&darr;</span></a></li>
       </ul>
     </div>
   </header>
@@ -105,11 +106,11 @@
       <h2 class="article-subtitle">Replacing fragile manual work with a simple system</h2>
 
       <div class="article-meta-bar">
-        <span class="blog-tag">AUTOMATION · DEFENSIVE DESIGN</span>
+        <span class="blog-tag">AUTOMATION &middot; DEFENSIVE DESIGN</span>
         <span>2025</span>
-        <span>·</span>
+        <span>&middot;</span>
         <span>4 MIN READ</span>
-        <span>·</span>
+        <span>&middot;</span>
         <span>BY ADITYA CHAVAN</span>
       </div>
     </header>
@@ -134,7 +135,7 @@
       <p>Every day, the same steps:</p>
       <ul>
         <li>Open a website</li>
-        <li>Find today’s price</li>
+        <li>Find today&rsquo;s price</li>
         <li>Read the numbers</li>
         <li>Share them with others</li>
       </ul>
@@ -144,7 +145,7 @@
       </p>
 
       <p>
-        I didn’t want dashboards. I didn’t want alerts, logins, or subscriptions.
+        I didn&rsquo;t want dashboards. I didn&rsquo;t want alerts, logins, or subscriptions.
       </p>
 
       <p>I wanted the system to:</p>
@@ -165,7 +166,7 @@
         <li>Sends an HTTP request to a public website</li>
         <li>Parses the returned HTML</li>
         <li>Locates the table containing the Pune egg rates</li>
-        <li>Extracts only today’s row</li>
+        <li>Extracts only today&rsquo;s row</li>
         <li>Reads values for piece, tray, 100 eggs, and peti</li>
       </ul>
 
@@ -175,13 +176,13 @@
 
       <p>If:</p>
       <ul>
-        <li>Today’s data isn’t present, or</li>
+        <li>Today&rsquo;s data isn&rsquo;t present, or</li>
         <li>The page structure changes</li>
       </ul>
 
       <p>
         It does not guess.
-        It fails cleanly and sends a clear “data unavailable” message instead of incorrect numbers.
+        It fails cleanly and sends a clear &ldquo;data unavailable&rdquo; message instead of incorrect numbers.
       </p>
 
       <p>
@@ -191,7 +192,7 @@
       <h3>Delivery, Not Just Extraction</h3>
 
       <p>
-        Once the data is extracted, it’s formatted into a simple, readable message.
+        Once the data is extracted, it&rsquo;s formatted into a simple, readable message.
       </p>
 
       <p>
@@ -212,7 +213,7 @@
       <h3>Full Automation with GitHub Actions</h3>
 
       <p>
-        I didn’t want this tied to my laptop.
+        I didn&rsquo;t want this tied to my laptop.
       </p>
 
       <p>
@@ -228,7 +229,7 @@
       </ul>
 
       <p>
-        All sensitive values — bot token and recipient IDs — are handled through environment variables and GitHub Secrets.
+        All sensitive values &mdash; bot token and recipient IDs &mdash; are handled through environment variables and GitHub Secrets.
         No secrets in code. No shortcuts.
       </p>
 
@@ -287,7 +288,7 @@
       </p>
 
       <p>
-        And that’s usually the best place to start.
+        And that&rsquo;s usually the best place to start.
       </p>
     </article>
 
@@ -295,20 +296,20 @@
     <div class="article-author-card">
       <div class="author-info">
         <span class="author-name">Aditya Chavan</span>
-        <span class="author-role">Systems &amp; Backend Software Engineer · Pune, India</span>
+        <span class="author-role">Systems &amp; Backend Software Engineer &middot; Pune, India</span>
         <p class="author-bio">
           Undergraduate specializing in Linux internals, C/C++, and scalable Java backends. Founder at Iron &amp; Logic.
         </p>
       </div>
       <div>
-        <a href="../#dispatch" class="btn btn-secondary">Connect ↗</a>
+        <a href="../#dispatch" class="btn btn-secondary">Connect &#8599;</a>
       </div>
     </div>
 
     <!-- Navigation Footer -->
     <div class="article-nav-footer">
-      <a href="index.html">← Back to all essays</a>
-      <a href="../">Portfolio Home →</a>
+      <a href="index.html">&larr; Back to all essays</a>
+      <a href="../">Portfolio Home &rarr;</a>
     </div>
 
   </main>
@@ -322,8 +323,8 @@
           <span class="terminal-dot min"></span>
           <span class="terminal-dot max"></span>
         </div>
-        <div class="terminal-title">aditya@arch-pune: ~/blog (sh) — Press Esc to exit</div>
-        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close terminal">✕ Close</button>
+        <div class="terminal-title">aditya@arch-pune: ~/blog (sh) &mdash; Press Esc to exit</div>
+        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close terminal">&#10005; Close</button>
       </div>
       <div class="terminal-body" id="modal-term-body" style="overflow-y:auto;flex:1;">
         <div class="term-output" id="modal-term-output"></div>
@@ -393,13 +394,13 @@
       mBtn.addEventListener('click', () => {
         const isOpen = mDrawer.classList.toggle('open');
         const iconSpan = mBtn.querySelector('.menu-icon');
-        if (iconSpan) iconSpan.textContent = isOpen ? '✕' : '☰';
+        if (iconSpan) iconSpan.textContent = isOpen ? '&#10005;' : '&#9776;';
       });
       mDrawer.querySelectorAll('.mobile-nav-link').forEach(link => {
         link.addEventListener('click', () => {
           mDrawer.classList.remove('open');
           const iconSpan = mBtn.querySelector('.menu-icon');
-          if (iconSpan) iconSpan.textContent = '☰';
+          if (iconSpan) iconSpan.textContent = '&#9776;';
         });
       });
     }
