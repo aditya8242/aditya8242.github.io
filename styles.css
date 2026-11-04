@@ -270,7 +270,7 @@ body {
   padding: 4px 10px;
   border-radius: 4px;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -298,7 +298,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .terminal-trigger-btn:hover {
@@ -509,7 +509,7 @@ body {
   text-decoration: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
   white-space: nowrap;
 }
 
@@ -729,7 +729,7 @@ body {
   background: #191919;
   border: 1px solid var(--border);
   border-radius: 4px;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .link-btn:hover {
@@ -914,7 +914,7 @@ body {
   color: #CCCCCC;
   padding: 0.25rem 0.6rem;
   border-radius: 4px;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .spec-token:hover {
@@ -1000,7 +1000,7 @@ body {
   border-radius: 6px;
   text-decoration: none;
   color: inherit;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
   cursor: pointer;
   position: relative;
 }
@@ -1409,11 +1409,11 @@ body.mode-terminal #terminal-fullview {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--accent-green);
-  transition: gap var(--transition-fast);
+  transition: color var(--transition-fast);
 }
 
 .blog-card:hover .blog-card-cta {
-  gap: 0.65rem;
+  color: var(--text-primary);
 }
 
 /* Single Article Reader View */
@@ -1635,7 +1635,7 @@ body.mode-terminal #terminal-fullview {
   font-family: var(--font-mono);
   font-size: 0.9rem;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .mobile-menu-toggle:hover {
@@ -1786,4 +1786,11 @@ body.mode-terminal #terminal-fullview {
   max-width: 100%;
   height: auto;
   border-radius: 6px;
+}
+
+
+/* Offscreen layout containment for mobile GPU optimization */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
 }

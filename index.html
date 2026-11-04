@@ -38,7 +38,11 @@
   <!-- Typography: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
+  </noscript>
 
   <link rel="stylesheet" href="styles.css">
 
@@ -212,7 +216,7 @@
     </section>
 
     <!-- Section 02: Selected Engineering (Bento / Technical Spec Grid) -->
-    <section id="systems" class="section-wrapper">
+    <section id="systems" class="section-wrapper content-auto">
       <div class="container">
         <div class="section-tag">01 // SELECTED ENGINEERING</div>
         <h2 class="section-heading">Systems & Protocol Architecture.</h2>
@@ -557,7 +561,7 @@
     </section>
 
     <!-- Section 03: Experience (Clean Timeline) -->
-    <section id="timeline" class="section-wrapper">
+    <section id="timeline" class="section-wrapper content-auto">
       <div class="container">
         <div class="section-tag">02 // WORK &amp; EXPERIENCE</div>
         <h2 class="section-heading">Work Experience.</h2>
@@ -611,7 +615,7 @@
     </section>
 
     <!-- Section 04: Technical Specification Sheet (Apple-Style Hardware Spec Table) -->
-    <section id="specs" class="section-wrapper">
+    <section id="specs" class="section-wrapper content-auto">
       <div class="container">
         <div class="section-tag">03 // HARDWARE &amp; SOFTWARE MATRIX</div>
         <h2 class="section-heading">Technical Specification Sheet.</h2>
@@ -724,7 +728,7 @@
     </section>
 
     <!-- Section 05: Engineering Dispatches & Writings (/blog) -->
-    <section id="writing" class="section-wrapper">
+    <section id="writing" class="section-wrapper content-auto">
       <div class="container">
         <div class="section-tag">04 // FIELD NOTES &amp; ESSAYS</div>
         <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 2rem;">
@@ -912,7 +916,7 @@
           <div class="term-output" id="full-term-output"></div>
           <div class="term-prompt-line">
             <span class="term-prompt">aditya@arch-pune:~$</span>
-            <input type="text" id="full-term-input" class="term-input" spellcheck="false" autocomplete="off" autofocus aria-label="Terminal Input">
+            <input type="text" id="full-term-input" class="term-input" spellcheck="false" autocomplete="off" data-lpignore="true" data-1p-ignore="true" data-form-type="other" aria-label="Terminal Input">
           </div>
         </div>
       </div>
@@ -937,7 +941,7 @@
         <div class="term-output" id="modal-term-output"></div>
         <div class="term-prompt-line">
           <span class="term-prompt">aditya@arch-pune:~$</span>
-          <input type="text" id="modal-term-input" class="term-input" spellcheck="false" autocomplete="off" aria-label="Interactive Command Input">
+          <input type="text" id="modal-term-input" class="term-input" spellcheck="false" autocomplete="off" data-lpignore="true" data-1p-ignore="true" data-form-type="other" aria-label="Interactive Command Input">
         </div>
       </div>
     </div>
@@ -947,7 +951,7 @@
   <div id="toast-container" aria-live="polite"></div>
 
   <!-- Scripts -->
-  <script src="terminal.js"></script>
+  <script src="terminal.js" defer></script>
   <script>
     (function() {
       'use strict';
@@ -1086,16 +1090,23 @@
         }
       });
 
-      // Mouse Spotlight Hover effect on Spec Cards (Linear / Apple style)
-      document.querySelectorAll('.spec-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          card.style.setProperty('--mouse-x', `${x}px`);
-          card.style.setProperty('--mouse-y', `${y}px`);
+      // Mouse Spotlight Hover effect on Spec Cards (Optimized: pointer devices only, throttled with rAF)
+      if (window.matchMedia && window.matchMedia('(hover: hover)').matches) {
+        document.querySelectorAll('.spec-card').forEach(card => {
+          let ticking = false;
+          card.addEventListener('mousemove', (e) => {
+            if (!ticking) {
+              window.requestAnimationFrame(() => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                ticking = false;
+              });
+              ticking = true;
+            }
+          }, { passive: true });
         });
-      });
+      }
 
       // Mobile Drawer Toggle
       const mobileBtn = document.getElementById('mobile-menu-btn');
