@@ -71,14 +71,15 @@ STATUS:   Available for backend engineering roles, systems architecture, and tec
         const target = args[0] ? args[0].toLowerCase().replace(/\/$/, '') : '';
         if (target === 'projects' || target === 'projects/') {
           return `
-drwxr-xr-x  4 aditya staff   128 Feb 2025  01_CVFS_VirtualFileSystem   (C++ / Linux Internals)
-drwxr-xr-x  4 aditya staff   128 Feb 2026  02_ConcurrentFTPServer      (C / POSIX Sockets)
-drwxr-xr-x  4 aditya staff   128 Jan 2025  03_EggRateBot_Automation    (Python / GitHub Actions)
-drwxr-xr-x  4 aditya staff   128 Mar 2025  04_FaceRecogESP_Embedded    (C++ / ESP32-CAM / CV)
-drwxr-xr-x  4 aditya staff   128 Nov 2026  08_BastiDrift_AudioLab      (Web Audio / OpenDAW)
-drwxr-xr-x  4 aditya staff   128 Jan 2025  05_EduTrack_Backend         (Java / Spring Boot / MongoDB)
-drwxr-xr-x  4 aditya staff   128 Jul 2026  06_IronVault_Archiver       (Java / Binary Packing / XOR)
-drwxr-xr-x  4 aditya staff   128 Dec 2024  07_maKneeTrack_CLI          (Java / JDBC / SQLite)
+drwxr-xr-x  4 aditya staff   128 Nov 2026  01_OmniScreen_Intelligence  (Python / Kotlin / Local-First)
+drwxr-xr-x  4 aditya staff   128 Feb 2025  02_CVFS_VirtualFileSystem   (C++ / Linux Internals)
+drwxr-xr-x  4 aditya staff   128 Feb 2026  03_ConcurrentFTPServer      (C / POSIX Sockets)
+drwxr-xr-x  4 aditya staff   128 Jan 2025  04_EduTrack_Backend         (Java / Spring Boot / MongoDB)
+drwxr-xr-x  4 aditya staff   128 Jul 2026  05_IronVault_Archiver       (Java / Binary Packing / XOR)
+drwxr-xr-x  4 aditya staff   128 Jan 2025  06_EggRateBot_Automation    (Python / GitHub Actions)
+drwxr-xr-x  4 aditya staff   128 Mar 2025  07_FaceRecogESP_Embedded    (C++ / ESP32-CAM / CV)
+drwxr-xr-x  4 aditya staff   128 Dec 2024  08_maKneeTrack_CLI          (Java / JDBC / SQLite)
+drwxr-xr-x  4 aditya staff   128 Nov 2026  09_BastiDrift_AudioLab      (Web Audio / OpenDAW)
 `;
         }
         if (target === 'blog' || target === 'blog/') {
@@ -215,6 +216,13 @@ Databases: MySQL, PostgreSQL, MongoDB, SQLite, JDBC
 Tools:     Git, Docker, GitHub Actions, Vercel, Cloudflare, Vim, IntelliJ IDEA, VS Code
 
 TECHNICAL PROJECTS:
+* OmniScreen -- Nov 2026 | Python / Kotlin / SQLite / Local-First
+  github.com/aditya8242/omniscreen-agent
+  * Local-first cross-device screen time intelligence platform solving siloed clock
+    double-counting across Windows, Android, and Smart TV hardware over local Wi-Fi.
+  * Sweep-line interval union engine (A ∪ B), attention fragmentation monitor (A ∩ B),
+    Win32 ctypes system tray daemon, Kotlin UsageEvents companion, and 100% local SQLite WAL.
+
 * Basti Drift Audio Lab -- Nov 2026 | Web Audio / OpenDAW / JS
   github.com/aditya8242/basti-drift-audio-lab
   * Engineered zero-dependency in-browser vocal rehearsal studio and teleprompter
