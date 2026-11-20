@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Modern Screen Time is Mathematically Flawed &mdash; Aditya Chavan</title>
+  
+  <!-- Security Directives -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; base-uri 'self'; form-action 'self';">
+
+  <meta name="description" content="Why conventional digital wellbeing trackers double-count multi-device screen time, and how I built a local-first interval union engine in Python and Kotlin.">
+  <meta name="author" content="Aditya Chavan">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://aditya8242.github.io/blog/why-modern-screen-time-is-mathematically-flawed.html">
+  <meta property="og:title" content="Why Modern Screen Time is Mathematically Flawed &mdash; Aditya Chavan">
+  <meta property="og:description" content="Why conventional digital wellbeing trackers double-count multi-device screen time, and how I built a local-first interval union engine in Python and Kotlin.">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ad1tya24">
+  <meta name="twitter:creator" content="@ad1tya24">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" type="image/png" href="../favicon.png">
+
+  <!-- Typography: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
+  </noscript>
+
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="../" class="nav-brand" aria-label="Aditya Chavan Portfolio">
+          <span class="brand-monogram">AC</span>
+          <div class="brand-meta">
+            <span class="brand-name">Aditya Chavan</span>
+            <span class="brand-role">SYS // ESSAYS</span>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="index.html">&larr; All Dispatches</a></li>
+            <li><a href="../">Portfolio Home</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-controls">
+          <button id="open-terminal-btn" class="terminal-trigger-btn" title="Open Interactive Terminal (Press /)">
+            <span>[~]$</span>
+            <span class="kbd-shortcut">/</span>
+          </button>
+
+          <!-- Mobile Navigation Toggle -->
+          <button id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+            <span class="menu-icon">&#9776;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html" class="mobile-nav-link"><span>&larr; All Engineering Dispatches</span><span>&#8598;</span></a></li>
+        <li><a href="../index.html" class="mobile-nav-link"><span>01 // Portfolio Home</span><span>&#8599;</span></a></li>
+        <li><a href="../index.html#systems" class="mobile-nav-link"><span>02 // Systems &amp; Architecture</span><span>&darr;</span></a></li>
+        <li><a href="../index.html#dispatch" class="mobile-nav-link accent"><span>06 // Contact / Dispatch</span><span>&darr;</span></a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Article Viewport -->
+  <main class="article-wrapper">
+    
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <a href="../">portfolio</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="index.html">blog</a>
+      <span class="breadcrumb-sep">/</span>
+      <span style="color: var(--text-primary);">interval-engine</span>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+      <h1 class="article-title">Why Modern Screen Time is Mathematically Flawed</h1>
+      <h2 class="article-subtitle">Building a local-first cross-device interval engine in Python and Kotlin</h2>
+
+      <div class="article-meta-bar">
+        <span class="blog-tag">SYSTEMS &middot; LOCAL-FIRST</span>
+        <span>NOV 2026</span>
+        <span>&middot;</span>
+        <span>6 MIN READ</span>
+        <span>&middot;</span>
+        <span>BY ADITYA CHAVAN</span>
+      </div>
+    </header>
+
+    <!-- Article Content -->
+    <article class="article-prose">
+      <p>
+        Most screen time tools suffer from a fundamental mathematical flaw: they compute total screen exposure by summing independent device scalars rather than calculating the union of overlapping time intervals.
+      </p>
+
+      <p>
+        If you spend two hours working on a laptop while occasionally responding to messages on your phone for 30 minutes, standard digital wellbeing trackers report 2 hours and 30 minutes of screen time. Your biological eyes were exposed to displays for exactly 2 hours, with 30 minutes spent in a state of multi-device fragmentation ("second-screening").
+      </p>
+
+      <p>
+        To solve this, I built <strong>OmniScreen</strong>: an open-source, local-first engine for Windows and Android that synchronizes active screen sessions over your local Wi-Fi network and computes the mathematical interval union with zero cloud servers and zero telemetry.
+      </p>
+
+      <h3>1. The Mathematical Problem: Scalar Sum vs. Interval Union</h3>
+
+      <p>Every operating system measures screen activity as discrete active sessions:</p>
+
+      <pre><code>Session S = [t_start, t_end]</code></pre>
+
+      <p>When aggregating screen time across multiple devices, existing digital wellbeing dashboards compute the naive sum:</p>
+
+      <pre><code>Raw Exposure = Duration(Device 1) + Duration(Device 2) + ... + Duration(Device N)</code></pre>
+
+      <p>When multiple devices are active simultaneously, this naive scalar addition double-counts the overlapping period.</p>
+
+      <h4>The Correct Formulation: Interval Union</h4>
+
+      <p>True screen exposure is the measure of the mathematical union of all session intervals across all devices along a single real timeline:</p>
+
+      <pre><code>True Exposure = Measure( Union of all [t_start, t_end] across Device 1 .. N )</code></pre>
+
+      <p>Where overlapping intervals are merged into continuous spans so that 1 minute of real wall-clock time never counts as more than 1 minute of physical screen exposure.</p>
+
+      <p>From this, we derive the exact duration of concurrent multi-screening:</p>
+
+      <pre><code>Second-Screening Duration = Raw Exposure - True Exposure</code></pre>
+
+      <p>We also compute an <strong>Attention Fragmentation Index</strong> (or Second-Screening Index, SSI):</p>
+
+      <pre><code>Attention Fragmentation Index (SSI) = ( Second-Screening Duration / True Exposure ) * 100%</code></pre>
+
+      <p>A high SSI indicates fragmented cognitive attention, where your focus was repeatedly split across multiple glowing displays simultaneously.</p>
+
+      <h3>2. Implementing the Interval Union in O(N log N)</h3>
+
+      <p>To compute the interval union efficiently on a low-power local background daemon, we use a sorted sweep-line interval merge algorithm:</p>
+
+<pre><code class="language-python">def calculate_interval_union(sessions: list[tuple[float, float]]) -> float:
+    """
+    Computes the total non-overlapping duration from a list of [start_ts, end_ts] intervals.
+    Time Complexity: O(N log N) due to sorting.
+    Space Complexity: O(N) to store merged intervals.
+    """
+    if not sessions:
+        return 0.0
+
+    # 1. Sort intervals by start timestamp
+    sorted_intervals = sorted(sessions, key=lambda x: x[0])
+
+    merged = []
+    current_start, current_end = sorted_intervals[0]
+
+    for start, end in sorted_intervals[1:]:
+        if start <= current_end:
+            # Overlapping or contiguous interval: extend the current boundary
+            current_end = max(current_end, end)
+        else:
+            # Disjoint interval: commit previous interval and advance
+            merged.append((current_start, current_end))
+            current_start, current_end = start, end
+
+    merged.append((current_start, current_end))
+
+    # 2. Sum the durations of disjoint merged intervals
+    return sum(end - start for start, end in merged)
+</code></pre>
+
+      <p>Running this on thousands of raw session intervals takes less than 2 milliseconds on standard hardware, eliminating CPU overhead on the host machine.</p>
+
+      <h3>3. System Architecture: Local-First with SQLite WAL</h3>
+
+      <p>
+        Screen time data is among the most sensitive personal telemetry possible: it records the exact minute you wake up, every application you switch to, and when you go to bed. Storing this on third-party cloud servers poses unacceptable privacy risks.
+      </p>
+
+      <p>OmniScreen is architected strictly as a local-first system:</p>
+
+<pre><code>+-------------------------------------------------------------+
+|                      Local Wi-Fi Network                    |
+|                                                             |
+|   +-------------------+              +------------------+   |
+|   |   Android Agent   |  UDP Probe   |  Windows PC Hub  |   |
+|   |  (Kotlin Sensor)  | -----------> | (FastAPI+SQLite) |   |
+|   |                   | <----------- |                  |   |
+|   |                   |  HTTP Sync   |                  |   |
+|   +-------------------+              +------------------+   |
+|                                                |            |
+|                                                v            |
+|                                         +--------------+    |
+|                                         | SQLite (WAL) |    |
+|                                         | Local Storage|    |
+|                                         +--------------+    |
++-------------------------------------------------------------+
+</code></pre>
+
+      <p>The local PC hub uses SQLite with Write-Ahead Logging (WAL) enabled:</p>
+
+<pre><code class="language-python">conn.execute("PRAGMA journal_mode=WAL")
+conn.execute("PRAGMA synchronous=NORMAL")
+conn.execute("PRAGMA busy_timeout=15000")
+</code></pre>
+
+      <ul>
+        <li>WAL mode allows concurrent readers (such as the web dashboard querying metrics) while background agent syncs write incoming sessions without locking the database file.</li>
+        <li>All administrative and mutating endpoints (<code>/api/device/delete</code>, <code>/api/device/rename</code>, <code>/api/tv/add</code>) enforce loopback checks (<code>require_localhost</code>), ensuring external network requests cannot modify device records even on an open Wi-Fi network.</li>
+      </ul>
+
+      <h3>4. Native Device Sensors</h3>
+
+      <h4>Windows Win32 Agent</h4>
+      <p>
+        The desktop background agent runs quietly in the Windows System Tray with zero terminal windows:
+      </p>
+      <ul>
+        <li>Uses <code>ctypes</code> to call Win32 APIs: <code>GetForegroundWindow()</code>, <code>GetWindowTextW()</code>, and <code>GetWindowThreadProcessId()</code>.</li>
+        <li>Implements tick-gap detection: rather than assuming continuous usage, the polling loop calculates elapsed wall-clock time between iterations. If the system sleeps, hibernates, or locks, the gap is automatically detected and excluded from active session recording.</li>
+      </ul>
+
+      <h4>Android Companion Sensor</h4>
+      <p>
+        On Android, query polling drains battery. Instead, OmniScreen uses native Kotlin with <code>UsageStatsManager.queryEvents()</code>:
+      </p>
+      <ul>
+        <li>Queries raw OS events (<code>UsageEvents.Event.ACTIVITY_RESUMED</code> and <code>UsageEvents.Event.ACTIVITY_PAUSED</code>).</li>
+        <li>Clamps event boundaries strictly to local midnight (<code>00:00:00</code>) to prevent multi-day leakage.</li>
+        <li>Filters out system launchers and navigation overlays, tracking only genuine foreground applications.</li>
+      </ul>
+
+      <h3>5. Local Wi-Fi Auto-Discovery: Eliminating Cloud Relays</h3>
+
+      <p>To allow the Android app to communicate with the PC hub without requiring static IP configurations or central accounts, OmniScreen implements a dual-discovery protocol:</p>
+
+      <ol>
+        <li><strong>UDP Broadcast Auto-Discovery:</strong> The Android client broadcasts a lightweight discovery payload over UDP port <code>8766</code>. The PC hub listens on <code>0.0.0.0:8766</code> and responds with its local LAN IP address and HTTP port (<code>8765</code>).</li>
+        <li><strong>1-Tap QR Fallback:</strong> The desktop dashboard generates a local QR code encoding <code>omniscreen://pair?host=&lt;LAN_IP&gt;:8765</code>. Scanning the QR code deep-links directly into the Android app and establishes pairing in less than 2 seconds.</li>
+      </ol>
+
+      <h3>6. Key Takeaways &amp; Open Source</h3>
+
+      <p>Building OmniScreen reinforced several systems engineering principles:</p>
+      <ul>
+        <li><strong>Always question basic domain math:</strong> The double-counting error in digital wellbeing metrics had existed unchallenged simply because naive summation is easier to compute than interval unions.</li>
+        <li><strong>Local-first is performant and viable:</strong> Complex multi-device synchronization does not require cloud infrastructure or subscriptions. Local networks and SQLite WAL handle modern workloads effortlessly with zero latency.</li>
+        <li><strong>Security through minimal surface area:</strong> By refusing external cloud relays, all data remains on your physical hardware under your control.</li>
+      </ul>
+
+      <p>OmniScreen is 100% free and open source under the <strong>GNU General Public License v3.0 (GPL-3.0)</strong>.</p>
+
+      <p>
+        &rarr; <strong>GitHub Repository:</strong> <a href="https://github.com/aditya8242/omniscreen-agent" target="_blank" rel="noopener">https://github.com/aditya8242/omniscreen-agent</a><br>
+        &rarr; <strong>Windows &amp; Android Release:</strong> <a href="https://github.com/aditya8242/omniscreen-agent/releases/tag/v0.9-beta" target="_blank" rel="noopener">v0.9-beta Releases</a>
+      </p>
+    </article>
+
+    <!-- Author Card -->
+    <div class="article-author-card">
+      <div class="author-info">
+        <span class="author-name">Aditya Chavan</span>
+        <span class="author-role">Systems &amp; Backend Software Engineer &middot; Pune, India</span>
+        <p class="author-bio">
+          Undergraduate specializing in Linux internals, distributed systems, and local-first software. Creator of OmniScreen.
+        </p>
+      </div>
+      <div>
+        <a href="../#dispatch" class="btn btn-secondary">Connect &#8599;</a>
+      </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div class="article-nav-footer">
+      <a href="index.html">&larr; Back to all essays</a>
+      <a href="../">Portfolio Home &rarr;</a>
+    </div>
+
+  </main>
+
+  <!-- Terminal Modal Easter Egg -->
+  <div id="terminal-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Interactive Terminal Shell">
+    <div class="modal-terminal-card">
+      <div class="terminal-titlebar">
+        <div class="terminal-dots">
+          <span class="terminal-dot close" id="modal-close-dot"></span>
+          <span class="terminal-dot min"></span>
+          <span class="terminal-dot max"></span>
+        </div>
+        <div class="terminal-title">aditya@arch-pune: ~/blog (sh) &mdash; Press Esc to exit</div>
+        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close terminal">&#10005; Close</button>
+      </div>
+      <div class="terminal-body" id="modal-term-body" style="overflow-y:auto;flex:1;">
+        <div class="term-output" id="modal-term-output"></div>
+        <div class="term-prompt-line">
+          <span class="term-prompt">aditya@arch-pune:~$</span>
+          <input type="text" id="modal-term-input" class="term-input" spellcheck="false" autocomplete="off" aria-label="Interactive Command Input">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../terminal.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      const openTerminalBtn = document.getElementById('open-terminal-btn');
+      const modal = document.getElementById('terminal-modal');
+      const modalCloseBtn = document.getElementById('modal-close-btn');
+      const modalCloseDot = document.getElementById('modal-close-dot');
+      const modalInput = document.getElementById('modal-term-input');
+      const modalOutput = document.getElementById('modal-term-output');
+      const modalBody = document.getElementById('modal-term-body');
+
+      let modalTerminal = null;
+
+      function openModalTerminal() {
+        modal.classList.add('open');
+        if (!modalTerminal) {
+          modalTerminal = new window.TerminalEngine(
+            modalBody,
+            modalInput,
+            modalOutput,
+            () => closeModalTerminal(),
+            () => closeModalTerminal()
+          );
+        }
+        setTimeout(() => modalInput.focus(), 50);
+      }
+
+      function closeModalTerminal() {
+        modal.classList.remove('open');
+      }
+
+      openTerminalBtn.addEventListener('click', openModalTerminal);
+      modalCloseBtn.addEventListener('click', closeModalTerminal);
+      modalCloseDot.addEventListener('click', closeModalTerminal);
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModalTerminal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== modalInput && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          openModalTerminal();
+        } else if (e.key === 'Escape' && modal.classList.contains('open')) {
+          closeModalTerminal();
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    const mBtn = document.getElementById('mobile-menu-btn');
+    const mDrawer = document.getElementById('mobile-nav-drawer');
+    if (mBtn && mDrawer) {
+      mBtn.addEventListener('click', () => {
+        const isOpen = mDrawer.classList.toggle('open');
+        const iconSpan = mBtn.querySelector('.menu-icon');
+        if (iconSpan) iconSpan.textContent = isOpen ? '&#10005;' : '&#9776;';
+      });
+      mDrawer.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mDrawer.classList.remove('open');
+          const iconSpan = mBtn.querySelector('.menu-icon');
+          if (iconSpan) iconSpan.textContent = '&#9776;';
+        });
+      });
+    }
+  </script>
+</body>
+</html>

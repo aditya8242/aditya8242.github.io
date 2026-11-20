@@ -110,7 +110,13 @@ drwxr-xr-x  4 aditya staff   128 Nov 02 11:25  blog/
 ================================================================================
 ENGINEERING DISPATCHES & FIELD NOTES (aditya8242.github.io/blog)
 ================================================================================
-[01] I Learned Open Source the Hard Way
+[01] Why Modern Screen Time is Mathematically Flawed
+     Subtitle: Building a local-first cross-device interval engine in Python & Kotlin
+     Date:     November 2026 | 6 min read
+     Tags:     Systems Architecture | Interval Union Math | Local-First
+     URI:      /blog/why-modern-screen-time-is-mathematically-flawed.html
+
+[02] I Learned Open Source the Hard Way
      Subtitle: By failing publicly
      Date:     October 2025 | 4 min read
      Tags:     Open Source | C/Doxygen | Maintainer Reality
