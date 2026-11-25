@@ -10,66 +10,153 @@
   let pageFlipInstance = null;
   let isTomeOpen = false;
 
-  // Synthesize realistic audio (Paper flip rustle & Metallic sword resonance)
+  // Synthesize realistic audio (Berserk Dragonslayer Iron CLANG & Real Page Flip)
   function playAudioCue(type) {
     try {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if (!AudioCtx) return;
       const ctx = new AudioCtx();
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+
+      const now = ctx.currentTime;
 
       if (type === 'page-flip') {
-        // Realistic paper rustle / page turn swoosh (bandpass filtered white noise)
-        const bufferSize = ctx.sampleRate * 0.18;
-        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) {
-          data[i] = Math.random() * 2 - 1;
+        // --- REALISTIC PHYSICAL MANGA PAGE TURN ---
+        // Stage 1: Paper separation flick (crisp edge peel)
+        const flickLen = Math.floor(ctx.sampleRate * 0.04);
+        const flickBuf = ctx.createBuffer(1, flickLen, ctx.sampleRate);
+        const flickData = flickBuf.getChannelData(0);
+        for (let i = 0; i < flickLen; i++) {
+          flickData[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.008));
         }
+        const flickSource = ctx.createBufferSource();
+        flickSource.buffer = flickBuf;
+        const flickFilter = ctx.createBiquadFilter();
+        flickFilter.type = 'bandpass';
+        flickFilter.frequency.setValueAtTime(2400, now);
+        flickFilter.Q.setValueAtTime(2.0, now);
+        const flickGain = ctx.createGain();
+        flickGain.gain.setValueAtTime(0.25, now);
+        flickGain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+        flickSource.connect(flickFilter);
+        flickFilter.connect(flickGain);
+        flickGain.connect(ctx.destination);
+        flickSource.start(now);
 
-        const noise = ctx.createBufferSource();
-        noise.buffer = buffer;
+        // Stage 2: Aerodynamic paper swoosh through air
+        const swooshLen = Math.floor(ctx.sampleRate * 0.16);
+        const swooshBuf = ctx.createBuffer(1, swooshLen, ctx.sampleRate);
+        const swooshData = swooshBuf.getChannelData(0);
+        for (let i = 0; i < swooshLen; i++) {
+          swooshData[i] = Math.random() * 2 - 1;
+        }
+        const swooshSource = ctx.createBufferSource();
+        swooshSource.buffer = swooshBuf;
+        const swooshFilter = ctx.createBiquadFilter();
+        swooshFilter.type = 'bandpass';
+        swooshFilter.frequency.setValueAtTime(950, now);
+        swooshFilter.frequency.exponentialRampToValueAtTime(380, now + 0.16);
+        swooshFilter.Q.setValueAtTime(1.8, now);
+        const swooshGain = ctx.createGain();
+        swooshGain.gain.setValueAtTime(0.01, now);
+        swooshGain.gain.linearRampToValueAtTime(0.35, now + 0.04);
+        swooshGain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+        swooshSource.connect(swooshFilter);
+        swooshFilter.connect(swooshGain);
+        swooshGain.connect(ctx.destination);
+        swooshSource.start(now);
 
-        const filter = ctx.createBiquadFilter();
-        filter.type = 'bandpass';
-        filter.frequency.setValueAtTime(800, ctx.currentTime);
-        filter.frequency.exponentialRampToValueAtTime(320, ctx.currentTime + 0.18);
-        filter.Q.setValueAtTime(2.5, ctx.currentTime);
+        // Stage 3: Soft paper slap against opposing page
+        const slapOsc = ctx.createOscillator();
+        const slapGain = ctx.createGain();
+        slapOsc.type = 'triangle';
+        slapOsc.frequency.setValueAtTime(160, now + 0.12);
+        slapOsc.frequency.exponentialRampToValueAtTime(45, now + 0.18);
+        slapGain.gain.setValueAtTime(0.18, now + 0.12);
+        slapGain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+        slapOsc.connect(slapGain);
+        slapGain.connect(ctx.destination);
+        slapOsc.start(now + 0.12);
+        slapOsc.stop(now + 0.18);
 
-        const gain = ctx.createGain();
-        gain.gain.setValueAtTime(0.3, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
-
-        noise.connect(filter);
-        filter.connect(gain);
-        gain.connect(ctx.destination);
-
-        noise.start();
-        noise.stop(ctx.currentTime + 0.18);
       } else if (type === 'sword-open') {
-        // Deep Eclipse metallic bell & Dragonslayer blade ring
-        const osc1 = ctx.createOscillator();
-        const osc2 = ctx.createOscillator();
-        const gain = ctx.createGain();
+        // --- BERSERK DRAGONSLAYER HEAVY IRON "CLANG" & METALLIC RESONANCE ---
+        // 1. Massive iron impact body (low frequency punch)
+        const punchOsc = ctx.createOscillator();
+        const punchGain = ctx.createGain();
+        punchOsc.type = 'sine';
+        punchOsc.frequency.setValueAtTime(180, now);
+        punchOsc.frequency.exponentialRampToValueAtTime(40, now + 0.35);
+        punchGain.gain.setValueAtTime(0.45, now);
+        punchGain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        punchOsc.connect(punchGain);
+        punchGain.connect(ctx.destination);
+        punchOsc.start(now);
+        punchOsc.stop(now + 0.35);
 
-        osc1.type = 'sawtooth';
-        osc1.frequency.setValueAtTime(82, ctx.currentTime);
-        osc1.frequency.exponentialRampToValueAtTime(41, ctx.currentTime + 0.8);
+        // 2. Heavy steel inharmonic metallic ring partials (the signature "CLANG")
+        const metalFreqs = [440, 680, 1120, 1780, 2840];
+        const metalGains = [0.35, 0.28, 0.20, 0.14, 0.08];
+        const decayTimes = [0.9, 0.75, 0.6, 0.45, 0.3];
 
-        osc2.type = 'sine';
-        osc2.frequency.setValueAtTime(1240, ctx.currentTime);
-        osc2.frequency.exponentialRampToValueAtTime(620, ctx.currentTime + 0.5);
+        metalFreqs.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = idx % 2 === 0 ? 'square' : 'sawtooth';
+          osc.frequency.setValueAtTime(freq, now);
+          osc.frequency.exponentialRampToValueAtTime(freq * 0.96, now + 0.1);
 
-        gain.gain.setValueAtTime(0.2, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
+          const filter = ctx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.frequency.setValueAtTime(freq, now);
+          filter.Q.setValueAtTime(12.0, now);
 
-        osc1.connect(gain);
-        osc2.connect(gain);
-        gain.connect(ctx.destination);
+          gain.gain.setValueAtTime(metalGains[idx], now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + decayTimes[idx]);
 
-        osc1.start();
-        osc2.start();
-        osc1.stop(ctx.currentTime + 0.8);
-        osc2.stop(ctx.currentTime + 0.8);
+          osc.connect(filter);
+          filter.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + decayTimes[idx]);
+        });
+
+        // 3. Steel blade scrape friction on draw
+        const scrapeLen = Math.floor(ctx.sampleRate * 0.22);
+        const scrapeBuf = ctx.createBuffer(1, scrapeLen, ctx.sampleRate);
+        const scrapeData = scrapeBuf.getChannelData(0);
+        for (let i = 0; i < scrapeLen; i++) {
+          scrapeData[i] = Math.random() * 2 - 1;
+        }
+        const scrapeSource = ctx.createBufferSource();
+        scrapeSource.buffer = scrapeBuf;
+        const scrapeFilter = ctx.createBiquadFilter();
+        scrapeFilter.type = 'highpass';
+        scrapeFilter.frequency.setValueAtTime(3200, now);
+        scrapeFilter.frequency.exponentialRampToValueAtTime(1200, now + 0.22);
+        const scrapeGain = ctx.createGain();
+        scrapeGain.gain.setValueAtTime(0.2, now);
+        scrapeGain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+        scrapeSource.connect(scrapeFilter);
+        scrapeFilter.connect(scrapeGain);
+        scrapeGain.connect(ctx.destination);
+        scrapeSource.start(now);
+
+      } else if (type === 'tome-close') {
+        // --- HEAVY TOME CLOSING (SOLID DAMPED LEATHER THUD) ---
+        const thudOsc = ctx.createOscillator();
+        const thudGain = ctx.createGain();
+        thudOsc.type = 'sine';
+        thudOsc.frequency.setValueAtTime(110, now);
+        thudOsc.frequency.exponentialRampToValueAtTime(35, now + 0.2);
+        thudGain.gain.setValueAtTime(0.4, now);
+        thudGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+        thudOsc.connect(thudGain);
+        thudGain.connect(ctx.destination);
+        thudOsc.start(now);
+        thudOsc.stop(now + 0.2);
       }
     } catch (e) {
       // Audio autoplay policy fallback
@@ -541,6 +628,7 @@
     isTomeOpen = false;
     modal.classList.remove('active');
     document.body.style.overflow = '';
+    playAudioCue('tome-close');
   }
 
   // Toggle Tome

@@ -37,7 +37,6 @@
   line-height: 1;
   color: #EF4444;
   filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.8));
-  animation: brand-heartbeat 1.8s infinite ease-in-out;
 }
 
 .manga-btn-text {
@@ -91,7 +90,6 @@
   line-height: 1;
   color: #EF4444;
   filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.85));
-  animation: brand-heartbeat 1.6s infinite ease-in-out;
 }
 
 .hero-manga-sub {
@@ -126,11 +124,6 @@
   background: rgba(220, 38, 38, 0.25);
   border-color: #EF4444;
   color: #FFF;
-}
-
-@keyframes brand-heartbeat {
-  0%, 100% { transform: scale(1); opacity: 0.7; }
-  50% { transform: scale(1.6); opacity: 1; filter: drop-shadow(0 0 8px #EF4444); }
 }
 
 /* --- 2. FULLSCREEN BERSERK TOME MODAL OVERLAY --- */
@@ -197,7 +190,6 @@
   line-height: 1;
   color: #EF4444;
   filter: drop-shadow(0 0 8px #EF4444);
-  animation: brand-heartbeat 1.5s infinite ease-in-out;
 }
 
 .tome-actions {
@@ -371,7 +363,6 @@
   color: #DC2626;
   filter: drop-shadow(0 0 25px rgba(220, 38, 38, 0.8)) drop-shadow(0 0 50px rgba(220, 38, 38, 0.45));
   margin: 14px 0;
-  animation: brand-heartbeat 1.8s infinite ease-in-out;
   user-select: none;
 }
 
@@ -381,7 +372,6 @@
   color: #DC2626;
   filter: drop-shadow(0 0 25px #DC2626) drop-shadow(0 0 50px rgba(220, 38, 38, 0.5));
   margin: 12px 0;
-  animation: brand-heartbeat 1.8s infinite ease-in-out;
 }
 
 .cover-title {
@@ -677,7 +667,6 @@
   filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.75));
   margin-bottom: 12px;
   user-select: none;
-  animation: brand-heartbeat 2s infinite ease-in-out;
 }
 
 .miura-title {
