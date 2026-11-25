@@ -1,248 +1,636 @@
 /**
- * BERSERK MANGA EDITION // THE TOME OF THE BRANDED
- * Interactive Kentaro Miura / Guts Dark Fantasy Experience
- * Aditya Chavan Portfolio Easter Egg
+ * BERSERK MANGA EDITION // 3D INTERACTIVE FLIPPING TOME
+ * Powered by StPageFlip (Real-life 3D Page Turn Physics)
+ * Inspired by Kentaro Miura's Berserk & Guts
  */
 
 (function () {
   'use strict';
 
-  // The 5 Manga Chapters mapped to Portfolio Sections
-  const CHAPTERS = [
-    { id: 'hero', name: 'PROLOGUE // THE BRANDED SWORDSMAN', num: 'I' },
-    { id: 'systems', name: 'CH. 1 // IN-MEMORY UNIX INTERNALS', num: 'II' },
-    { id: 'timeline', name: 'CH. 2 // BATTLE LOG & BAND OF THE HAWK', num: 'III' },
-    { id: 'dispatch', name: 'CH. 3 // DISPATCHES FROM THE ECLIPSE', num: 'IV' }
-  ];
+  let pageFlipInstance = null;
+  let isTomeOpen = false;
 
-  let currentChapterIndex = 0;
-  let isBerserkMode = false;
-
-  // Synthesize epic metallic sword slash sound using Web Audio API (Zero external audio files needed!)
-  function playSwordSound() {
+  // Synthesize realistic audio (Paper flip rustle & Metallic sword resonance)
+  function playAudioCue(type) {
     try {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContext) return;
-      const ctx = new AudioContext();
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
 
-      // Deep Eclipse Drone
-      const droneOsc = ctx.createOscillator();
-      const droneGain = ctx.createGain();
-      droneOsc.type = 'sawtooth';
-      droneOsc.frequency.setValueAtTime(65, ctx.currentTime);
-      droneOsc.frequency.exponentialRampToValueAtTime(32, ctx.currentTime + 0.9);
-      droneGain.gain.setValueAtTime(0.18, ctx.currentTime);
-      droneGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.9);
-      droneOsc.connect(droneGain);
-      droneGain.connect(ctx.destination);
-      droneOsc.start();
-      droneOsc.stop(ctx.currentTime + 0.9);
+      if (type === 'page-flip') {
+        // Realistic paper rustle / page turn swoosh (bandpass filtered white noise)
+        const bufferSize = ctx.sampleRate * 0.18;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
 
-      // Metallic Blade Ring (The Dragonslayer)
-      const bladeOsc = ctx.createOscillator();
-      const bladeGain = ctx.createGain();
-      bladeOsc.type = 'sine';
-      bladeOsc.frequency.setValueAtTime(1480, ctx.currentTime);
-      bladeOsc.frequency.exponentialRampToValueAtTime(740, ctx.currentTime + 0.6);
-      bladeGain.gain.setValueAtTime(0.22, ctx.currentTime);
-      bladeGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
-      bladeOsc.connect(bladeGain);
-      bladeGain.connect(ctx.destination);
-      bladeOsc.start();
-      bladeOsc.stop(ctx.currentTime + 0.6);
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(800, ctx.currentTime);
+        filter.frequency.exponentialRampToValueAtTime(320, ctx.currentTime + 0.18);
+        filter.Q.setValueAtTime(2.5, ctx.currentTime);
+
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+
+        noise.start();
+        noise.stop(ctx.currentTime + 0.18);
+      } else if (type === 'sword-open') {
+        // Deep Eclipse metallic bell & Dragonslayer blade ring
+        const osc1 = ctx.createOscillator();
+        const osc2 = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc1.type = 'sawtooth';
+        osc1.frequency.setValueAtTime(82, ctx.currentTime);
+        osc1.frequency.exponentialRampToValueAtTime(41, ctx.currentTime + 0.8);
+
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(1240, ctx.currentTime);
+        osc2.frequency.exponentialRampToValueAtTime(620, ctx.currentTime + 0.5);
+
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
+
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc1.start();
+        osc2.start();
+        osc1.stop(ctx.currentTime + 0.8);
+        osc2.stop(ctx.currentTime + 0.8);
+      }
     } catch (e) {
       // Audio autoplay policy fallback
     }
   }
 
-  // Inject Shockwave Overlay into DOM
-  function createShockwaveElement() {
-    if (document.getElementById('berserk-shockwave')) return;
+  // Construct the 3D Manga Tome DOM structure
+  function createMangaTomeDOM() {
+    if (document.getElementById('berserk-modal')) return;
 
-    const overlay = document.createElement('div');
-    overlay.id = 'berserk-shockwave';
-    overlay.innerHTML = `
-      <svg viewBox="0 0 100 140" class="shockwave-symbol">
-        <g stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="50" y1="8" x2="50" y2="132" stroke-width="6" />
-          <path d="M 28 26 C 24 10, 44 8, 50 24 C 56 8, 76 10, 72 26" stroke-width="5.5" />
-          <path d="M 50 36 L 24 54 L 50 78" stroke-width="5.5" />
-          <path d="M 50 36 L 76 54 L 50 78" stroke-width="5.5" />
-          <line x1="28" y1="54" x2="72" y2="54" stroke-width="5" />
-          <line x1="36" y1="44" x2="64" y2="64" stroke-width="4" />
-          <line x1="64" y1="44" x2="36" y2="64" stroke-width="4" />
-          <path d="M 50 78 L 22 108" stroke-width="5.5" />
-          <path d="M 50 78 L 78 108" stroke-width="5.5" />
-        </g>
-      </svg>
-      <div class="shockwave-text">生贄の烙印 &bull; THE ECLIPSE AWAKENS</div>
+    const modal = document.createElement('div');
+    modal.id = 'berserk-modal';
+    modal.innerHTML = `
+      <!-- Top Tome Controls -->
+      <header class="tome-topbar">
+        <div class="tome-brand-title">
+          <svg viewBox="0 0 100 140">
+            <g stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="50" y1="8" x2="50" y2="132" stroke-width="6" />
+              <path d="M 28 26 C 24 10, 44 8, 50 24 C 56 8, 76 10, 72 26" stroke-width="5.5" />
+              <path d="M 50 36 L 24 54 L 50 78" stroke-width="5.5" />
+              <path d="M 50 36 L 76 54 L 50 78" stroke-width="5.5" />
+              <line x1="28" y1="54" x2="72" y2="54" stroke-width="5" />
+              <path d="M 50 78 L 22 108" stroke-width="5.5" />
+              <path d="M 50 78 L 78 108" stroke-width="5.5" />
+            </g>
+          </svg>
+          <span>THE STRUGGLER'S TOME // BERSERK EDITION</span>
+        </div>
+        <div class="tome-actions">
+          <button id="tome-jump-cover" class="tome-btn" title="Jump to Front Cover">Cover</button>
+          <button id="tome-jump-systems" class="tome-btn" title="Jump to Systems Chapter">Systems</button>
+          <button id="tome-jump-projects" class="tome-btn" title="Jump to Production Chapter">Production</button>
+          <button id="tome-close-btn" class="tome-close-btn" title="Close Tome (Esc)">
+            <span>&times;</span>
+            <span>CLOSE (ESC)</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- 3D Book Stage -->
+      <main class="tome-stage">
+        <div id="manga-book">
+          
+          <!-- PAGE 0: HARD FRONT COVER -->
+          <div class="manga-page page-cover" data-density="hard">
+            <div class="cover-front">
+              <div class="cover-border-frame">
+                <div class="cover-kanji">生 贄 の 書</div>
+                <div>
+                  <svg viewBox="0 0 100 140" class="cover-brand-rune">
+                    <g stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="50" y1="8" x2="50" y2="132" stroke-width="6" />
+                      <path d="M 28 26 C 24 10, 44 8, 50 24 C 56 8, 76 10, 72 26" stroke-width="5.5" />
+                      <path d="M 50 36 L 24 54 L 50 78" stroke-width="5.5" />
+                      <path d="M 50 36 L 76 54 L 50 78" stroke-width="5.5" />
+                      <line x1="28" y1="54" x2="72" y2="54" stroke-width="5" />
+                      <path d="M 50 78 L 22 108" stroke-width="5.5" />
+                      <path d="M 50 78 L 78 108" stroke-width="5.5" />
+                    </g>
+                  </svg>
+                  <h1 class="cover-title">ADITYA CHAVAN</h1>
+                  <div class="cover-subtitle">THE STRUGGLER'S CODEBOOK</div>
+                </div>
+                <div class="cover-author">SYSTEMS &bull; BACKEND ARCHITECTURE</div>
+                <div class="cover-hint">
+                  <span>DRAG CORNER OR CLICK TO OPEN</span>
+                  <span>&rarr;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PAGE 1: THE ECLIPSE & THE PROPHECY (LEFT SPREAD) -->
+          <div class="manga-page">
+            <div class="page-inner">
+              <div>
+                <span class="chapter-badge">THE PROPHECY</span>
+                <h2 class="chapter-title">THE ECLIPSE</h2>
+                
+                <div class="manga-panel" style="height: 180px;">
+                  <img src="berserk_assets/eclipse.webp" alt="The Berserk Eclipse" class="manga-art-img" />
+                  <span class="manga-sfx">ゴゴゴ...</span>
+                </div>
+
+                <div class="manga-quote-box">
+                  &ldquo;In this world, is the destiny of mankind controlled by some transcendental entity or law? At least it is true that man has no control; even over his own will.&rdquo;
+                  <span class="manga-quote-author">&mdash; Void // God Hand &bull; Kentaro Miura</span>
+                </div>
+
+                <p class="manga-body-text">
+                  Branded on the hand with the <strong>Brand of Sacrifice</strong>. Wielding code like forged iron. We reject bloated enterprise frameworks and fragile abstractions.
+                </p>
+              </div>
+
+              <div class="page-footer-num">
+                <span>VOL. 1 &bull; THE ECLIPSE</span>
+                <span>PAGE 01</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PAGE 2: CHAPTER I — THE BLACK SWORDSMAN (RIGHT SPREAD) -->
+          <div class="manga-page">
+            <div class="page-inner">
+              <div>
+                <span class="chapter-badge">CHAPTER I</span>
+                <h2 class="chapter-title">THE BLACK SWORDSMAN</h2>
+
+                <div class="manga-panel" style="height: 200px;">
+                  <img src="berserk_assets/guts.webp" alt="Guts The Black Swordsman" class="manga-art-img" />
+                  <span class="manga-sfx">ドン!</span>
+                </div>
+
+                <p class="manga-body-text">
+                  <strong>ADITYA CHAVAN</strong> &mdash; Systems & Backend Software Engineer based in Pune, India.
+                </p>
+
+                <div class="manga-project-card">
+                  <div class="manga-card-head">
+                    <span class="manga-card-title">IRON PHILOSOPHY</span>
+                    <span class="manga-card-tag">SYSTEMS</span>
+                  </div>
+                  <p class="manga-card-desc">
+                    &ldquo;Brute force the logic first. Optimize it later.&rdquo; Engineering from the metal up using Linux internals, C/C++, POSIX networking, and scalable Java/Spring Boot backends.
+                  </p>
+                </div>
+
+                <p class="manga-body-text" style="margin-top: 10px;">
+                  <strong>Academics:</strong> Savitribai Phule Pune University &mdash; B.Sc. Computer Science (7.8 CGPA, 2023&ndash;2026).
+                </p>
+              </div>
+
+              <div class="page-footer-num">
+                <span>ADITYA CHAVAN</span>
+                <span>PAGE 02</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PAGE 3: CHAPTER II — FORGED IN STEEL: CVFS (LEFT SPREAD) -->
+          <div class="manga-page">
+            <div class="page-inner">
+              <div>
+                <span class="chapter-badge">CHAPTER II</span>
+                <h2 class="chapter-title">FORGED IN STEEL: CVFS</h2>
+
+                <div class="manga-panel" style="height: 180px;">
+                  <img src="berserk_assets/guts2.webp" alt="Guts Combat" class="manga-art-img" />
+                  <span class="manga-sfx">ザッ!</span>
+                </div>
+
+                <div class="manga-project-card">
+                  <div class="manga-card-head">
+                    <span class="manga-card-title">Customized Virtual File System</span>
+                    <span class="manga-card-tag">C++ / Linux</span>
+                  </div>
+                  <p class="manga-card-desc">
+                    Fully in-memory Unix-like virtual filesystem designed from scratch. Features custom inode tables, User File Descriptor Table (UFDT), and file offset pointer management.
+                  </p>
+                  <p class="manga-card-desc" style="margin-top: 4px; font-family:'JetBrains Mono', monospace; font-size: 0.68rem; color:#FCA5A5;">
+                    Syscalls: creat, open, read, write, unlink, stat, ls
+                  </p>
+                  <a href="https://github.com/aditya8242/CustomizedVirtualFileSystem" target="_blank" rel="noopener noreferrer" class="manga-link">
+                    Inspect Repository &rarr;
+                  </a>
+                </div>
+              </div>
+
+              <div class="page-footer-num">
+                <span>SYSTEMS ARCHITECTURE</span>
+                <span>PAGE 03</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PAGE 4: CONCURRENT NETWORKING & ARCHIVERS (RIGHT SPREAD) -->
+          <div class="manga-page">
+            <div class="page-inner">
+              <div>
+                <span class="chapter-badge">CONCURRENCY & DATA</span>
+                <h2 class="chapter-title">NETWORK PROTOCOLS</h2>
+
+                <div class="manga-project-card" style="margin-top: 0;">
+                  <div class="manga-card-head">
+                    <span class="manga-card-title">Concurrent FTP Server</span>
+                    <span class="manga-card-tag">C / Sockets</span>
+                  </div>
+                  <p class="manga-card-desc">
+                    TCP file-transfer daemon built on raw POSIX sockets using fork-per-connection architecture. Multiple clients download simultaneously via isolated child processes.
+                  </p>
+                  <a href="https://github.com/aditya8242/ConcurrentFTPServer" target="_blank" rel="noopener noreferrer" class="manga-link">
+                    View Protocol Spec &rarr;
+                  </a>
+                </div>
+
+                <div class="manga-project-card" style="margin-top: 10px;">
+                  <div class="manga-card-head">
+                    <span class="manga-card-title">IronVault Archiver</span>
+                    <span class="manga-card-tag">Java / Swing</span>
+                  </div>
+                  <p class="manga-card-desc">
+                    Packs full directories into custom binary archives with repeating XOR encryption and 18 supported formats. Zero external libraries.
+                  </p>
+                </div>
+
+                <div class="manga-project-card" style="margin-top: 10px;">
+                  <div class="manga-card-head">
+                    <span class="manga-card-title">EduTrack Platform</span>
+                    <span class="manga-card-tag">Spring Boot</span>
+                  </div>
+                  <p class="manga-card-desc">
+                    Enterprise student management backend with REST CRUD APIs, MongoDB Atlas, and Docker containerization deployed on Render.
+                  </p>
+                </div>
+              </div>
+
+              <div class="page-footer-num">
+                <span>CONCURRENCY // DAEMONS</span>
+                <span>PAGE 04</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PAGE 5: CHAPTER III — THE BAND OF THE HAWK (LEFT SPREAD) -->
+          <div class="manga-page">
+            <div class="page-inner">
+              <div>
+                <span class="chapter-badge">CHAPTER III</span>
+                <h2 class="chapter-title">THE BAND OF THE HAWK</h2>
+
+                <div class="manga-panel" style="height: 180px;">
+                  <img src="berserk_assets/berserker_armor.webp" alt="Berserker Armor" class="manga-art-img" />
+                  <span class="manga-sfx">ガッ!</span>
+                </div>
+
+                <div class="manga-project-card">
+                  <div class="manga-card-head">
+                    <span class="manga-card-title">Iron & Logic</span>
+                    <span class="manga-card-tag">Founder</span>
+                  </div>
+                  <p class="manga-card-desc">
+                    Boutique systems studio in Pune building sub-400ms web architecture and direct booking engines that bypass 25% aggregator cuts (Practo/Swiggy).
+                  </p>
+                  <div style="display:flex; gap:10px; margin-top:6px;">
+                    <a href="https://ironandlogic.vercel.app/prototypes/clinic/" target="_blank" rel="noopener noreferrer" class="manga-link">Clinic Demo &rarr;</a>
+                    <a href="https://ironandlogic.vercel.app/prototypes/cafe/" target="_blank" rel="noopener noreferrer" class="manga-link">Cafe Demo &rarr;</a>
+                  </div>
+                </div>
+
+                <div class="manga-project-card" style="margin-top: 10px;">
+                  <div class="manga-card-head">
+                    <span class="manga-card-title">Brilliant Info Systems</span>
+                    <span class="manga-card-tag">Intern</span>
+                  </div>
+                  <p class="manga-card-desc">
+                    Enterprise supply chain software (WMS/IoT), B2B digital marketing automation in Zoho, and client technical requirements engineering.
+                  </p>
+                </div>
+              </div>
+
+              <div class="page-footer-num">
+                <span>PRODUCTION VENTURES</span>
+                <span>PAGE 05</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PAGE 6: CHAPTER IV — DISPATCHES FROM THE BATTLEFIELD (RIGHT SPREAD) -->
+          <div class="manga-page">
+            <div class="page-inner">
+              <div>
+                <span class="chapter-badge">CHAPTER IV</span>
+                <h2 class="chapter-title">FIELD DISPATCHES</h2>
+
+                <div class="manga-panel" style="height: 175px;">
+                  <img src="berserk_assets/guts_moon_field.webp" alt="Guts in Moonlit Field" class="manga-art-img" />
+                  <span class="manga-sfx">スッ...</span>
+                </div>
+
+                <p class="manga-body-text" style="font-weight: 700; color: #FFF; margin-bottom: 4px;">
+                  Published Technical Essays:
+                </p>
+
+                <div class="manga-project-card">
+                  <div class="manga-card-head">
+                    <span class="manga-card-title">Why Modern Screen Time is Flawed</span>
+                    <span class="manga-card-tag">Python/Kotlin</span>
+                  </div>
+                  <p class="manga-card-desc">
+                    Solving siloed clock double-counting across Windows, Android, and TVs using sweep-line interval union math.
+                  </p>
+                </div>
+
+                <div class="manga-project-card" style="margin-top: 8px;">
+                  <div class="manga-card-head">
+                    <span class="manga-card-title">I Learned Open Source the Hard Way</span>
+                    <span class="manga-card-tag">PR #24 Merged</span>
+                  </div>
+                  <p class="manga-card-desc">
+                    Contributing Doxygen documentation to ccgargantua/ini C library through strict maintainer reviews.
+                  </p>
+                </div>
+              </div>
+
+              <div class="page-footer-num">
+                <span>ESSAYS & WRITINGS</span>
+                <span>PAGE 06</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PAGE 7: CHAPTER V — SUMMON THE STRUGGLER (LEFT SPREAD) -->
+          <div class="manga-page">
+            <div class="page-inner">
+              <div>
+                <span class="chapter-badge">EPILOGUE</span>
+                <h2 class="chapter-title">SUMMON THE STRUGGLER</h2>
+
+                <div class="manga-quote-box">
+                  &ldquo;Struggle, endure, contend. For that alone is the sword of one who defies death.&rdquo;
+                  <span class="manga-quote-author">&mdash; Skull Knight to Guts // 烙印の者</span>
+                </div>
+
+                <p class="manga-body-text">
+                  Direct dispatch endpoints for systems engineering roles, high-concurrency backends, and architecture consulting:
+                </p>
+
+                <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px; font-family:'JetBrains Mono', monospace; font-size:0.75rem;">
+                  <div style="padding:8px 12px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:4px;">
+                    <span style="color:#F87171;">EMAIL:</span> <a href="mailto:aditya.h.chavan@gmail.com" style="color:#FFF; text-decoration:none;">aditya.h.chavan@gmail.com</a>
+                  </div>
+                  <div style="padding:8px 12px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:4px;">
+                    <span style="color:#F87171;">PHONE:</span> <span style="color:#FFF;">+91 86699 06901</span>
+                  </div>
+                  <div style="padding:8px 12px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:4px;">
+                    <span style="color:#F87171;">GITHUB:</span> <a href="https://github.com/aditya8242" target="_blank" rel="noopener noreferrer" style="color:#FFF; text-decoration:none;">github.com/aditya8242</a>
+                  </div>
+                  <div style="padding:8px 12px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:4px;">
+                    <span style="color:#F87171;">CALENDAR:</span> <a href="https://cal.com/aditya-zlapkf" target="_blank" rel="noopener noreferrer" style="color:#EF4444; text-decoration:none; font-weight:700;">cal.com/aditya-zlapkf &rarr;</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="page-footer-num">
+                <span>DIRECT DISPATCH</span>
+                <span>PAGE 07</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PAGE 8: HARD BACK COVER (THE TRIBUTE & DIETER RAMS SEAL) -->
+          <div class="manga-page page-cover" data-density="hard">
+            <div class="cover-front">
+              <div class="cover-border-frame">
+                <div class="cover-kanji">完 &bull; THE END</div>
+                
+                <div class="tribute-box">
+                  <div style="font-family:'JetBrains Mono', monospace; font-size:0.85rem; font-weight:700; color:#FFF; margin-bottom:6px;">
+                    &ldquo;Weniger, aber besser.&rdquo;
+                  </div>
+                  <div style="font-size:0.75rem; color:#A1A1AA; font-style:italic;">
+                    Less, but better.
+                  </div>
+                  <div style="margin-top:10px; font-family:'JetBrains Mono', monospace; font-size:0.75rem; color:#F87171; font-weight:800;">
+                    (Dieter Rams loved this.)
+                  </div>
+                </div>
+
+                <div>
+                  <svg viewBox="0 0 100 140" style="width:50px; height:70px; color:#DC2626; opacity:0.8;">
+                    <g stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="50" y1="8" x2="50" y2="132" stroke-width="6" />
+                      <path d="M 28 26 C 24 10, 44 8, 50 24 C 56 8, 76 10, 72 26" stroke-width="5.5" />
+                      <path d="M 50 36 L 24 54 L 50 78" stroke-width="5.5" />
+                      <path d="M 50 36 L 76 54 L 50 78" stroke-width="5.5" />
+                      <line x1="28" y1="54" x2="72" y2="54" stroke-width="5" />
+                      <path d="M 50 78 L 22 108" stroke-width="5.5" />
+                      <path d="M 50 78 L 78 108" stroke-width="5.5" />
+                    </g>
+                  </svg>
+                  <p style="font-size:0.72rem; color:#71717A; font-family:'JetBrains Mono', monospace; margin-top:8px;">
+                    Dedicated to Kentaro Miura (1966&ndash;2021)
+                  </p>
+                </div>
+
+                <div class="cover-hint" style="cursor:pointer;" id="tome-flip-back-first">
+                  <span>&larr; FLIP BACK TO FRONT</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <!-- Bottom Flip Controls Bar -->
+      <footer class="tome-bottombar">
+        <button id="tome-prev-arrow" class="tome-nav-arrow" title="Previous Page (Left Arrow)">&larr;</button>
+        <div id="tome-page-info" class="tome-page-counter">COVER &bull; DRAG OR CLICK TO TURN</div>
+        <button id="tome-next-arrow" class="tome-nav-arrow" title="Next Page (Right Arrow)">&rarr;</button>
+      </footer>
     `;
-    document.body.appendChild(overlay);
+
+    document.body.appendChild(modal);
+
+    // Bind navigation buttons
+    document.getElementById('tome-close-btn').addEventListener('click', closeTome);
+    document.getElementById('tome-prev-arrow').addEventListener('click', () => {
+      if (pageFlipInstance) pageFlipInstance.flipPrev();
+    });
+    document.getElementById('tome-next-arrow').addEventListener('click', () => {
+      if (pageFlipInstance) pageFlipInstance.flipNext();
+    });
+    document.getElementById('tome-jump-cover').addEventListener('click', () => {
+      if (pageFlipInstance) pageFlipInstance.flip(0);
+    });
+    document.getElementById('tome-jump-systems').addEventListener('click', () => {
+      if (pageFlipInstance) pageFlipInstance.flip(2);
+    });
+    document.getElementById('tome-jump-projects').addEventListener('click', () => {
+      if (pageFlipInstance) pageFlipInstance.flip(4);
+    });
+    document.getElementById('tome-flip-back-first').addEventListener('click', () => {
+      if (pageFlipInstance) pageFlipInstance.flip(0);
+    });
+
+    // Close when clicking modal backdrop
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeTome();
+    });
   }
 
-  // Inject Top Book HUD & Talisman
-  function createHudElements() {
-    if (document.getElementById('berserk-hud')) return;
+  // Initialize St.PageFlip Engine
+  function initPageFlipEngine() {
+    if (pageFlipInstance) return;
 
-    // Top Interactive Chapter HUD
-    const hud = document.createElement('aside');
-    hud.id = 'berserk-hud';
-    hud.setAttribute('role', 'region');
-    hud.setAttribute('aria-label', 'Berserk Manga Navigation');
-    hud.innerHTML = `
-      <div class="berserk-hud-title">
-        <svg viewBox="0 0 100 140" class="mini-brand">
-          <g stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="50" y1="8" x2="50" y2="132" stroke-width="6" />
-            <path d="M 28 26 C 24 10, 44 8, 50 24 C 56 8, 76 10, 72 26" stroke-width="5.5" />
-            <path d="M 50 36 L 24 54 L 50 78" stroke-width="5.5" />
-            <path d="M 50 36 L 76 54 L 50 78" stroke-width="5.5" />
-            <line x1="28" y1="54" x2="72" y2="54" stroke-width="5" />
-            <path d="M 50 78 L 22 108" stroke-width="5.5" />
-            <path d="M 50 78 L 78 108" stroke-width="5.5" />
-          </g>
-        </svg>
-        <span>MANGA TOME</span>
-      </div>
-
-      <nav class="berserk-chapter-nav">
-        <button id="berserk-prev-btn" class="berserk-nav-btn" title="Previous Chapter (Left Arrow)">&larr; PREV</button>
-        <div id="berserk-chapter-name" class="berserk-chapter-pill">PROLOGUE // THE BRANDED SWORDSMAN</div>
-        <button id="berserk-next-btn" class="berserk-nav-btn" title="Next Chapter (Right Arrow)">NEXT &rarr;</button>
-      </nav>
-
-      <button id="berserk-exit-btn" class="berserk-exit-btn" title="Exit Manga Mode (Esc)">
-        <span>&times;</span>
-        <span>EXIT (ESC)</span>
-      </button>
-    `;
-    document.body.appendChild(hud);
-
-    // Bottom Floating Talisman with Guts Quote
-    const talisman = document.createElement('aside');
-    talisman.id = 'berserk-talisman';
-    talisman.setAttribute('role', 'complementary');
-    talisman.setAttribute('title', 'The Brand of Sacrifice — Click to turn chapter');
-    talisman.innerHTML = `
-      <svg viewBox="0 0 100 140">
-        <g stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="50" y1="8" x2="50" y2="132" stroke-width="6" />
-          <path d="M 28 26 C 24 10, 44 8, 50 24 C 56 8, 76 10, 72 26" stroke-width="5.5" />
-          <path d="M 50 36 L 24 54 L 50 78" stroke-width="5.5" />
-          <path d="M 50 36 L 76 54 L 50 78" stroke-width="5.5" />
-          <line x1="28" y1="54" x2="72" y2="54" stroke-width="5" />
-          <path d="M 50 78 L 22 108" stroke-width="5.5" />
-          <path d="M 50 78 L 78 108" stroke-width="5.5" />
-        </g>
-      </svg>
-      <div class="berserk-quote-popup">
-        &ldquo;Struggle, endure, contend. For that alone is the sword of one who defies death.&rdquo;
-        <span class="berserk-quote-author">&mdash; Skull Knight to Guts // 烙印の者</span>
-      </div>
-    `;
-    document.body.appendChild(talisman);
-
-    // Event Listeners for HUD
-    document.getElementById('berserk-exit-btn').addEventListener('click', () => toggleBerserkMode(false));
-    document.getElementById('berserk-prev-btn').addEventListener('click', () => navigateChapter(-1));
-    document.getElementById('berserk-next-btn').addEventListener('click', () => navigateChapter(1));
-    talisman.addEventListener('click', () => navigateChapter(1));
-  }
-
-  // Update Chapter indicator
-  function updateChapterUI() {
-    const pill = document.getElementById('berserk-chapter-name');
-    if (!pill) return;
-    const ch = CHAPTERS[currentChapterIndex];
-    pill.textContent = ch.name;
-  }
-
-  // Scroll smoothly to selected Chapter
-  function navigateChapter(direction) {
-    currentChapterIndex += direction;
-    if (currentChapterIndex < 0) currentChapterIndex = CHAPTERS.length - 1;
-    if (currentChapterIndex >= CHAPTERS.length) currentChapterIndex = 0;
-
-    updateChapterUI();
-    playSwordSound();
-
-    const targetId = CHAPTERS[currentChapterIndex].id;
-    const targetEl = document.getElementById(targetId);
-    if (targetEl) {
-      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!window.St || !window.St.PageFlip) {
+      console.warn("St.PageFlip library not loaded yet.");
+      return;
     }
-  }
 
-  // Toggle Berserk Mode
-  function toggleBerserkMode(forceState) {
-    const nextState = typeof forceState === 'boolean' ? forceState : !isBerserkMode;
-    isBerserkMode = nextState;
+    const bookEl = document.getElementById('manga-book');
+    if (!bookEl) return;
 
-    createShockwaveElement();
-    createHudElements();
+    // Detect responsive dimensions
+    const isMobile = window.innerWidth <= 768;
+    const bookWidth = isMobile ? Math.min(window.innerWidth * 0.9, 440) : 480;
+    const bookHeight = isMobile ? Math.min(window.innerHeight * 0.72, 640) : 680;
 
-    if (isBerserkMode) {
-      // Trigger dramatic shockwave & sound
-      playSwordSound();
-      const shockwave = document.getElementById('berserk-shockwave');
-      if (shockwave) {
-        shockwave.classList.add('active');
-        setTimeout(() => shockwave.classList.remove('active'), 950);
+    pageFlipInstance = new window.St.PageFlip(bookEl, {
+      width: bookWidth,
+      height: bookHeight,
+      size: 'stretch',
+      minWidth: 320,
+      maxWidth: 580,
+      minHeight: 460,
+      maxHeight: 780,
+      maxShadowOpacity: 0.85,
+      showCover: true,
+      mobileScrollSupport: false,
+      usePortrait: true,
+      startPage: 0
+    });
+
+    const pages = bookEl.querySelectorAll('.manga-page');
+    pageFlipInstance.loadFromHTML(pages);
+
+    // Sound effect & page counter update on every flip
+    pageFlipInstance.on('flip', (e) => {
+      playAudioCue('page-flip');
+      const counterEl = document.getElementById('tome-page-info');
+      if (counterEl) {
+        const pageIdx = e.data;
+        if (pageIdx === 0) {
+          counterEl.textContent = 'FRONT COVER';
+        } else if (pageIdx >= pages.length - 1) {
+          counterEl.textContent = 'BACK COVER • DIETER RAMS INSCRIBED';
+        } else {
+          counterEl.textContent = `PAGES ${pageIdx} - ${Math.min(pageIdx + 1, pages.length - 1)} OF ${pages.length - 1}`;
+        }
       }
-
-      document.body.classList.add('berserk-mode');
-      localStorage.setItem('berserk_easter_egg', 'true');
-      updateChapterUI();
-    } else {
-      document.body.classList.remove('berserk-mode');
-      localStorage.removeItem('berserk_easter_egg');
-    }
+    });
   }
 
-  // Bind Trigger Button in Navbar
-  function initTriggerButton() {
+  // Open Manga Tome
+  function openTome() {
+    createMangaTomeDOM();
+    const modal = document.getElementById('berserk-modal');
+    if (!modal) return;
+
+    isTomeOpen = true;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    playAudioCue('sword-open');
+
+    // Ensure PageFlip is initialized after modal becomes visible
+    setTimeout(() => {
+      initPageFlipEngine();
+    }, 50);
+  }
+
+  // Close Manga Tome
+  function closeTome() {
+    const modal = document.getElementById('berserk-modal');
+    if (!modal) return;
+
+    isTomeOpen = false;
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Toggle Tome
+  function toggleTome() {
+    if (isTomeOpen) closeTome();
+    else openTome();
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    const activeTag = document.activeElement ? document.activeElement.tagName : '';
+    if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || (document.activeElement && document.activeElement.isContentEditable)) {
+      return;
+    }
+
+    if (e.key === 'b' || e.key === 'B') {
+      if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        toggleTome();
+      }
+    } else if (e.key === 'Escape' && isTomeOpen) {
+      e.preventDefault();
+      closeTome();
+    } else if (isTomeOpen && (e.key === 'ArrowRight' || e.key === 'PageDown')) {
+      e.preventDefault();
+      if (pageFlipInstance) pageFlipInstance.flipNext();
+    } else if (isTomeOpen && (e.key === 'ArrowLeft' || e.key === 'PageUp')) {
+      e.preventDefault();
+      if (pageFlipInstance) pageFlipInstance.flipPrev();
+    }
+  });
+
+  // Attach to trigger button
+  function initTrigger() {
     const btn = document.getElementById('berserk-rune-btn');
     if (btn) {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        toggleBerserkMode();
+        openTome();
       });
-    }
-
-    // Global Key Listener: Press 'B' to awaken, 'Esc' to exit
-    document.addEventListener('keydown', (e) => {
-      const activeTag = document.activeElement ? document.activeElement.tagName : '';
-      if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || (document.activeElement && document.activeElement.isContentEditable)) {
-        return;
-      }
-
-      if ((e.key === 'b' || e.key === 'B') && !e.ctrlKey && !e.metaKey && !e.altKey) {
-        e.preventDefault();
-        toggleBerserkMode();
-      } else if (e.key === 'Escape' && isBerserkMode) {
-        toggleBerserkMode(false);
-      } else if (isBerserkMode && e.key === 'ArrowRight') {
-        e.preventDefault();
-        navigateChapter(1);
-      } else if (isBerserkMode && e.key === 'ArrowLeft') {
-        e.preventDefault();
-        navigateChapter(-1);
-      }
-    });
-
-    // Check saved state
-    if (localStorage.getItem('berserk_easter_egg') === 'true') {
-      toggleBerserkMode(true);
     }
   }
 
-  // Expose to window for TerminalEngine integration
-  window.toggleBerserkMode = toggleBerserkMode;
+  // Expose to window for TerminalEngine & global triggers
+  window.openBerserkTome = openTome;
+  window.closeBerserkTome = closeTome;
+  window.toggleBerserkMode = openTome;
 
-  // Initialize once DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTriggerButton);
+    document.addEventListener('DOMContentLoaded', initTrigger);
   } else {
-    initTriggerButton();
+    initTrigger();
   }
 })();

@@ -1,10 +1,10 @@
 /* ==========================================================================
-   BERSERK MANGA EDITION // THE TOME OF THE BRANDED
+   BERSERK MANGA EDITION // 3D INTERACTIVE TOME (REAL PAGE FLIP)
    Inspired by Kentaro Miura's Berserk & Guts
-   Interactive Dark Fantasy Manga Tome Experience
+   Powered by StPageFlip 3D Engine & Vanilla JavaScript
    ========================================================================== */
 
-/* --- 1. RUNE TRIGGER BUTTON (DEFAULT NAVIGATION BAR) --- */
+/* --- 1. RUNE TRIGGER BUTTON IN SITE HEADER --- */
 .brand-rune-btn {
   display: inline-flex;
   align-items: center;
@@ -23,11 +23,11 @@
 }
 
 .brand-rune-btn:hover {
-  background: rgba(220, 38, 38, 0.12);
-  border-color: rgba(239, 68, 68, 0.5);
+  background: rgba(220, 38, 38, 0.15);
+  border-color: rgba(239, 68, 68, 0.6);
   color: #EF4444;
-  transform: scale(1.06);
-  box-shadow: 0 0 16px rgba(220, 38, 38, 0.45);
+  transform: scale(1.08);
+  box-shadow: 0 0 18px rgba(220, 38, 38, 0.5);
 }
 
 .brand-rune-btn .rune-icon {
@@ -44,8 +44,8 @@
   position: absolute;
   top: 4px;
   right: 4px;
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: #DC2626;
   opacity: 0.6;
@@ -55,421 +55,558 @@
 .brand-rune-btn:hover .brand-glow-dot {
   opacity: 1;
   box-shadow: 0 0 8px #EF4444;
-  animation: brand-heartbeat 1.2s infinite ease-in-out;
+  animation: brand-heartbeat 1s infinite ease-in-out;
 }
 
 @keyframes brand-heartbeat {
   0%, 100% { transform: scale(1); opacity: 0.7; }
-  50% { transform: scale(1.6); opacity: 1; filter: drop-shadow(0 0 6px #EF4444); }
+  50% { transform: scale(1.6); opacity: 1; filter: drop-shadow(0 0 8px #EF4444); }
 }
 
-/* --- 2. BERSERK MANGA MODE (ACTIVE STATE) --- */
-body.berserk-mode {
-  --bg-primary: #050507 !important;
-  --bg-surface: #0B0B0F !important;
-  --bg-card: #0E0E14 !important;
-  --accent-green: #EF4444 !important; /* Replace emerald with blood crimson */
-  --accent-cyan: #DC2626 !important;
-  --accent-purple: #B91C1C !important;
-  --text-primary: #F4F4F5 !important;
-  --text-secondary: #D4D4D8 !important;
-  --border-subtle: rgba(220, 38, 38, 0.22) !important;
-  --border-strong: rgba(239, 68, 68, 0.5) !important;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-}
-
-/* Manga Screentone & Ink Halftone Layer */
-body.berserk-mode::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: 
-    radial-gradient(circle at 82% 14%, rgba(185, 28, 28, 0.22) 0%, transparent 45%),
-    radial-gradient(circle at 18% 85%, rgba(127, 29, 29, 0.18) 0%, transparent 40%),
-    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 7px 7px;
-  pointer-events: none;
-  z-index: 9990;
-  opacity: 0.85;
-}
-
-/* Blood Moon / Eclipse Vignette Horizon */
-body.berserk-mode::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: linear-gradient(90deg, #7F1D1D, #DC2626, #EF4444, #DC2626, #7F1D1D);
-  box-shadow: 0 0 25px rgba(239, 68, 68, 0.8), 0 0 50px rgba(185, 28, 28, 0.5);
-  z-index: 9999;
-  pointer-events: none;
-  animation: eclipse-pulse 3s infinite ease-in-out;
-}
-
-@keyframes eclipse-pulse {
-  0%, 100% { opacity: 0.8; filter: brightness(1); }
-  50% { opacity: 1; filter: brightness(1.35); }
-}
-
-/* Active Trigger State */
-body.berserk-mode .brand-rune-btn {
-  background: rgba(220, 38, 38, 0.25);
-  border-color: #EF4444;
-  color: #F87171;
-  box-shadow: 0 0 20px rgba(220, 38, 38, 0.6);
-}
-body.berserk-mode .brand-rune-btn .brand-glow-dot {
-  opacity: 1;
-  animation: brand-heartbeat 0.9s infinite ease-in-out;
-}
-
-/* --- 3. MANGA TOME FLOATING CONTROLS HUD --- */
-#berserk-hud {
+/* --- 2. FULLSCREEN BERSERK TOME MODAL OVERLAY --- */
+#berserk-modal {
   display: none;
   position: fixed;
-  top: 76px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(94vw, 860px);
-  background: rgba(11, 11, 15, 0.94);
-  border: 1px solid rgba(220, 38, 38, 0.45);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(220, 38, 38, 0.2);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 14px;
-  padding: 8px 14px;
-  z-index: 9995;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(30, 10, 10, 0.98) 0%, rgba(10, 8, 12, 0.99) 50%, #040305 100%);
+  z-index: 99999;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#berserk-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* Atmospheric Ambient Ink Vignette */
+#berserk-modal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 80% 20%, rgba(185, 28, 28, 0.25) 0%, transparent 45%),
+    radial-gradient(circle at 20% 80%, rgba(127, 29, 29, 0.2) 0%, transparent 45%),
+    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 8px 8px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- 3. TOP TOME BAR --- */
+.tome-topbar {
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  right: 24px;
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
   font-family: 'JetBrains Mono', monospace;
 }
 
-body.berserk-mode #berserk-hud {
-  display: flex;
-  animation: hud-slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes hud-slide-down {
-  from { opacity: 0; transform: translate(-50%, -15px); }
-  to { opacity: 1; transform: translate(-50%, 0); }
-}
-
-.berserk-hud-title {
+.tome-brand-title {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.725rem;
-  letter-spacing: 0.15em;
+  gap: 10px;
   color: #FCA5A5;
+  font-size: 0.8rem;
   font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  white-space: nowrap;
+  text-shadow: 0 0 12px rgba(220, 38, 38, 0.6);
 }
 
-.berserk-hud-title .mini-brand {
-  width: 14px;
-  height: 19px;
+.tome-brand-title svg {
+  width: 18px;
+  height: 24px;
   color: #EF4444;
-  filter: drop-shadow(0 0 4px #EF4444);
+  filter: drop-shadow(0 0 6px #EF4444);
+  animation: brand-heartbeat 1.5s infinite ease-in-out;
 }
 
-.berserk-chapter-nav {
+.tome-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex: 1;
-  justify-content: center;
+  gap: 12px;
 }
 
-.berserk-nav-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.tome-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(220, 38, 38, 0.35);
   color: #E4E4E7;
-  font-size: 0.7rem;
-  padding: 5px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 7px 14px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
-  white-space: nowrap;
   font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.berserk-nav-btn:hover {
-  background: rgba(220, 38, 38, 0.2);
+.tome-btn:hover {
+  background: rgba(220, 38, 38, 0.25);
   border-color: #EF4444;
   color: #FFF;
+  box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
 }
 
-.berserk-chapter-pill {
-  font-size: 0.725rem;
-  font-weight: 600;
-  color: #FEE2E2;
-  background: rgba(220, 38, 38, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.4);
-  padding: 4px 12px;
-  border-radius: 9999px;
-  letter-spacing: 0.08em;
-  white-space: nowrap;
-  text-align: center;
-}
-
-.berserk-exit-btn {
+.tome-close-btn {
   background: #7F1D1D;
   border: 1px solid #EF4444;
   color: #FFF;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  padding: 6px 12px;
+  padding: 7px 16px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 5px;
-  white-space: nowrap;
-  font-family: inherit;
+  gap: 6px;
 }
 
-.berserk-exit-btn:hover {
+.tome-close-btn:hover {
   background: #DC2626;
-  box-shadow: 0 0 14px rgba(239, 68, 68, 0.6);
-  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.7);
+  transform: scale(1.04);
 }
 
-/* --- 4. FLOATING TALISMAN (THE BRAND OF SACRIFICE) --- */
-#berserk-talisman {
-  display: none;
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 52px;
-  height: 52px;
-  background: #09090D;
-  border: 1.5px solid #DC2626;
-  border-radius: 50%;
-  box-shadow: 0 0 25px rgba(220, 38, 38, 0.5), inset 0 0 10px rgba(185, 28, 28, 0.4);
-  z-index: 9992;
-  cursor: pointer;
+/* --- 4. 3D BOOK STAGE CONTAINER --- */
+.tome-stage {
+  position: relative;
+  z-index: 5;
+  width: min(94vw, 1020px);
+  height: min(80vh, 700px);
+  display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  perspective: 2500px;
 }
 
-body.berserk-mode #berserk-talisman {
-  display: flex;
-  animation: talisman-arrive 0.5s ease-out;
+#manga-book {
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 40px rgba(185, 28, 28, 0.3);
+  border-radius: 6px;
+  transition: transform 0.3s ease;
 }
 
-@keyframes talisman-arrive {
-  from { opacity: 0; transform: scale(0.6) rotate(-20deg); }
-  to { opacity: 1; transform: scale(1) rotate(0); }
-}
-
-#berserk-talisman:hover {
-  transform: scale(1.15) rotate(5deg);
-  box-shadow: 0 0 35px rgba(239, 68, 68, 0.8), inset 0 0 15px rgba(239, 68, 68, 0.6);
-}
-
-#berserk-talisman svg {
-  width: 24px;
-  height: 34px;
-  color: #EF4444;
-  filter: drop-shadow(0 0 6px #EF4444);
-  animation: brand-heartbeat 1.4s infinite ease-in-out;
-}
-
-/* Talisman Quote Tooltip */
-.berserk-quote-popup {
-  position: absolute;
-  bottom: 64px;
-  right: 0;
-  width: 290px;
-  background: #0B0B0F;
-  border: 1px solid #DC2626;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 20px rgba(220, 38, 38, 0.3);
-  border-radius: 8px;
-  padding: 12px 14px;
+/* --- 5. REAL MANGA PAGE STYLING --- */
+.manga-page {
+  background-color: #0D0E12;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  position: relative;
   color: #E4E4E7;
-  font-size: 0.75rem;
-  line-height: 1.5;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: all 0.25s ease;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.berserk-quote-popup::after {
+/* Page Texture Overlay */
+.manga-page::before {
   content: "";
   position: absolute;
-  bottom: -6px;
-  right: 22px;
-  width: 10px;
-  height: 10px;
-  background: #0B0B0F;
-  border-right: 1px solid #DC2626;
-  border-bottom: 1px solid #DC2626;
-  transform: rotate(45deg);
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 5px 5px;
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 2;
 }
 
-#berserk-talisman:hover .berserk-quote-popup {
-  opacity: 1;
-  transform: translateY(0);
+/* Page Spine Gradient Shadow */
+.manga-page.--left {
+  box-shadow: inset -25px 0 30px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(0, 0, 0, 0.5);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.berserk-quote-author {
-  display: block;
-  font-size: 0.65rem;
+.manga-page.--right {
+  box-shadow: inset 25px 0 30px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(0, 0, 0, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Page Interior Padding */
+.page-inner {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  padding: 30px 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* --- 6. COVER STYLES (FRONT & BACK HARD COVERS) --- */
+.page-cover {
+  background: #08080C !important;
+  border: 2px solid rgba(220, 38, 38, 0.45);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.95), 0 0 25px rgba(220, 38, 38, 0.25) !important;
+}
+
+.cover-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 36px 28px;
+  height: 100%;
+  box-sizing: border-box;
+  background-image: 
+    radial-gradient(circle at center, rgba(185, 28, 28, 0.25) 0%, transparent 65%),
+    linear-gradient(180deg, rgba(8, 8, 12, 0.95), #08080C);
+}
+
+.cover-border-frame {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.cover-border-frame::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px dashed rgba(220, 38, 38, 0.2);
+  pointer-events: none;
+}
+
+.cover-kanji {
+  font-size: 1.1rem;
+  letter-spacing: 0.4em;
+  color: #DC2626;
+  font-weight: 900;
+  text-shadow: 0 0 10px rgba(220, 38, 38, 0.7);
+}
+
+.cover-brand-rune {
+  width: 85px;
+  height: 120px;
+  color: #DC2626;
+  filter: drop-shadow(0 0 25px #DC2626) drop-shadow(0 0 50px rgba(220, 38, 38, 0.5));
+  margin: 12px 0;
+  animation: brand-heartbeat 1.8s infinite ease-in-out;
+}
+
+.cover-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #FFF;
+  letter-spacing: 0.15em;
+  margin: 0;
   text-transform: uppercase;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.cover-subtitle {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
   color: #F87171;
   margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.cover-author {
+  font-size: 0.85rem;
+  color: #E4E4E7;
   font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 12px;
+  border-top: 1px solid rgba(220, 38, 38, 0.4);
+  padding-top: 8px;
+  width: 80%;
+  text-align: center;
+}
+
+.cover-hint {
+  font-size: 0.7rem;
+  color: #A1A1AA;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  animation: bounce-hint 2s infinite ease-in-out;
+}
+
+@keyframes bounce-hint {
+  0%, 100% { transform: translateX(0); color: #A1A1AA; }
+  50% { transform: translateX(5px); color: #EF4444; }
+}
+
+/* --- 7. MANGA PANELS & ARTWORK CONTAINERS --- */
+.manga-panel {
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  background: #000;
+  box-shadow: 4px 4px 0px rgba(220, 38, 38, 0.6);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.manga-art-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.15) brightness(0.95);
+  transition: transform 0.5s ease;
+}
+
+.manga-panel:hover .manga-art-img {
+  transform: scale(1.04);
+}
+
+.manga-sfx {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #FFF;
+  text-shadow: 3px 3px 0 #DC2626, -2px -2px 0 #000;
+  letter-spacing: 0.15em;
+  pointer-events: none;
+  z-index: 5;
+  font-family: sans-serif;
+}
+
+/* --- 8. MANGA CHAPTER HEADERS & CONTENT --- */
+.chapter-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #FFF;
+  background: #DC2626;
+  padding: 3px 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.chapter-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #FFF;
+  letter-spacing: 0.05em;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+}
+
+.manga-quote-box {
+  background: rgba(220, 38, 38, 0.08);
+  border-left: 3px solid #DC2626;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #E4E4E7;
+  font-style: italic;
+  margin: 8px 0;
+}
+
+.manga-quote-author {
+  display: block;
+  font-style: normal;
+  font-size: 0.65rem;
+  color: #F87171;
+  font-weight: 700;
+  margin-top: 4px;
   letter-spacing: 0.1em;
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* --- 5. MANGA PANEL ACCENTS ON SECTIONS & CARDS --- */
-body.berserk-mode .spec-card,
-body.berserk-mode .bento-card,
-body.berserk-mode .article-preview-card,
-body.berserk-mode .hero-panel,
-body.berserk-mode .metric-card {
-  border-color: rgba(220, 38, 38, 0.28) !important;
-  background: #0A0A0F !important;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
+.manga-body-text {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: #D4D4D8;
+  margin: 6px 0;
 }
 
-body.berserk-mode .spec-card:hover,
-body.berserk-mode .bento-card:hover,
-body.berserk-mode .article-preview-card:hover {
-  border-color: #EF4444 !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(220, 38, 38, 0.25) !important;
+.manga-body-text strong {
+  color: #FFF;
+  font-weight: 700;
 }
 
-/* Manga Sound Effect (SFX) Watermarks in Section Corners */
-body.berserk-mode .section-header::after {
-  content: "ゴゴゴ...";
+/* Project Feature Card in Manga */
+.manga-project-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 8px 10px;
+  border-radius: 4px;
+  margin-top: 6px;
+}
+
+.manga-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.manga-card-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #FFF;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.manga-card-tag {
+  font-size: 0.62rem;
+  color: #FCA5A5;
+  background: rgba(220, 38, 38, 0.2);
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.manga-card-desc {
+  font-size: 0.72rem;
+  color: #A1A1AA;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.manga-link {
+  color: #EF4444;
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.manga-link:hover {
+  text-decoration: underline;
+  color: #F87171;
+}
+
+.page-footer-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: #71717A;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 6px;
+  margin-top: auto;
+}
+
+/* --- 9. BOTTOM FLIP CONTROLS HUD --- */
+.tome-bottombar {
   position: absolute;
-  top: -12px;
-  right: 10px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 900;
-  font-size: 1.5rem;
-  color: rgba(239, 68, 68, 0.35);
-  letter-spacing: 0.2em;
-  text-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
-  pointer-events: none;
-  animation: sfx-float 2.5s infinite ease-in-out;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(14, 14, 18, 0.92);
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  padding: 8px 18px;
+  border-radius: 9999px;
+  z-index: 10;
+  font-family: 'JetBrains Mono', monospace;
 }
 
-@keyframes sfx-float {
-  0%, 100% { transform: translateY(0); opacity: 0.35; }
-  50% { transform: translateY(-4px); opacity: 0.6; }
-}
-
-/* Custom Dragonslayer Ink Rule Divider */
-body.berserk-mode hr,
-body.berserk-mode .section-divider {
-  border: none !important;
-  height: 2px !important;
-  background: linear-gradient(90deg, transparent, #DC2626, #EF4444, #DC2626, transparent) !important;
-  box-shadow: 0 0 10px rgba(220, 38, 38, 0.5) !important;
-}
-
-/* Brand Glyph Highlights on Monograms */
-body.berserk-mode .brand-monogram {
-  border-color: #DC2626 !important;
-  color: #EF4444 !important;
-  box-shadow: 0 0 12px rgba(220, 38, 38, 0.5) !important;
-}
-
-/* Link Button Accent Shifts */
-body.berserk-mode .link-btn.accent,
-body.berserk-mode .pill.accent {
-  background: #7F1D1D !important;
-  border-color: #DC2626 !important;
-  color: #FFF !important;
-  box-shadow: 0 0 15px rgba(220, 38, 38, 0.4) !important;
-}
-
-/* --- 6. DRAMATIC ECLIPSE ACTIVATION SHOCKWAVE --- */
-#berserk-shockwave {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(239, 68, 68, 0.85) 0%, rgba(127, 29, 29, 0.95) 40%, #050507 90%);
-  z-index: 99999;
-  pointer-events: none;
+.tome-nav-arrow {
+  background: transparent;
+  border: none;
+  color: #F4F4F5;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 
-#berserk-shockwave.active {
+.tome-nav-arrow:hover {
+  color: #EF4444;
+  transform: scale(1.2);
+}
+
+.tome-page-counter {
+  font-size: 0.75rem;
+  color: #D4D4D8;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+/* Back cover tribute text */
+.back-cover-content {
   display: flex;
-  animation: shockwave-flash 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-@keyframes shockwave-flash {
-  0% { opacity: 0; transform: scale(0.9); }
-  25% { opacity: 1; transform: scale(1); }
-  85% { opacity: 1; }
-  100% { opacity: 0; transform: scale(1.05); }
+.tribute-box {
+  background: rgba(220, 38, 38, 0.05);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  padding: 16px;
+  border-radius: 6px;
+  margin: 15px 0;
 }
 
-.shockwave-symbol {
-  width: 90px;
-  height: 125px;
-  color: #FFF;
-  filter: drop-shadow(0 0 30px #EF4444) drop-shadow(0 0 60px #DC2626);
-  animation: symbol-pulse 0.9s ease-out;
-}
-
-@keyframes symbol-pulse {
-  0% { transform: scale(0.6); opacity: 0; }
-  50% { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.shockwave-text {
-  margin-top: 18px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1rem;
-  letter-spacing: 0.25em;
-  color: #FFF;
-  text-transform: uppercase;
-  font-weight: 800;
-  text-shadow: 0 0 15px rgba(239, 68, 68, 0.9);
-}
-
-/* Mobile Responsiveness for HUD */
-@media (max-width: 640px) {
-  #berserk-hud {
-    top: 65px;
-    padding: 6px 10px;
-    flex-wrap: wrap;
-    gap: 6px;
+/* Mobile Responsiveness for 3D Book */
+@media (max-width: 768px) {
+  .tome-stage {
+    width: 95vw;
+    height: 75vh;
   }
-  .berserk-hud-title {
-    font-size: 0.65rem;
+  .page-inner {
+    padding: 18px 20px;
   }
-  .berserk-chapter-pill {
-    font-size: 0.65rem;
-    padding: 3px 8px;
+  .cover-title {
+    font-size: 1.2rem;
   }
-  .berserk-nav-btn {
-    font-size: 0.65rem;
-    padding: 4px 6px;
+  .cover-brand-rune {
+    width: 60px;
+    height: 90px;
   }
-  #berserk-talisman {
-    bottom: 16px;
-    right: 16px;
-    width: 44px;
-    height: 44px;
+  .chapter-title {
+    font-size: 1.05rem;
+  }
+  .manga-body-text {
+    font-size: 0.7rem;
+    line-height: 1.4;
+  }
+  .tome-bottombar {
+    padding: 6px 14px;
+    gap: 10px;
   }
 }
