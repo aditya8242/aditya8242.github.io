@@ -40,7 +40,8 @@ SYSTEM CALLS & RECRUITER CLI UTILITIES:
   clear              Purge current terminal buffer
   gui                Toggle back to Apple hardware editorial view
   exit               Close terminal environment
-  berserk            Awaken the Brand of Sacrifice (Manga Tome mode)
+  berserk            Display the Brand of Sacrifice & Struggler's lore
+  manga              Launch the 3D Interactive Berserk Manga Tome
 `
     },
 
@@ -149,8 +150,14 @@ Type 'open blog' to launch the essays portal in your browser.
     open: {
       desc: 'Open a document or link',
       exec: (args) => {
-        if (!args[0]) return 'open: missing filename. Usage: open resume.pdf, open blog';
+        if (!args[0]) return 'open: missing filename. Usage: open resume.pdf, open blog, open manga';
         const target = args[0].toLowerCase();
+        if (target.includes('manga') || target.includes('tome') || target.includes('berserk')) {
+          if (typeof window.openBerserkTome === 'function') {
+            window.openBerserkTome();
+            return 'Launching 3D Berserk Manga Tome... (Press Esc inside tome to return to shell)';
+          }
+        }
         if (target.includes('blog')) {
           window.location.href = 'blog/';
           return 'Navigating to /blog...';
@@ -516,15 +523,23 @@ DIRECT DISPATCH ENDPOINTS:
       exec: () => `01000001 01000100 01010100 01011001 01000001\nFollow the white rabbit into the kernel.`
     },
 
-    berserk: {
-      desc: 'Awaken the Brand of Sacrifice (Manga Tome mode)',
+    manga: {
+      desc: 'Open the 3D Interactive Berserk Manga Tome',
       exec: () => {
-        if (typeof window.toggleBerserkMode === 'function') {
-          window.toggleBerserkMode(true);
+        if (typeof window.openBerserkTome === 'function') {
+          window.openBerserkTome();
+          return 'Launching 3D Berserk Manga Tome... (Press Esc inside tome to return to shell)';
         }
+        return 'Manga tome engine not loaded.';
+      }
+    },
+
+    berserk: {
+      desc: 'The Brand of Sacrifice (Berserk Mode)',
+      exec: () => {
         return `
 ================================================================================
-          生贄の烙印 // THE BRAND OF SACRIFICE -- BERSERK MODE AWAKENED
+     𒉭 生贄の烙印 // THE BRAND OF SACRIFICE -- BERSERK TOME READY 𒉭
 ================================================================================
 
               |\\                  /|
@@ -545,40 +560,27 @@ DIRECT DISPATCH ENDPOINTS:
 "Struggle, endure, contend. For that alone is the sword of one who defies death."
                               -- Skull Knight to Guts
 
-[ECLIPSE ACTIVE] The portfolio has transformed into the Tome of the Branded.
-Use the top chapter controls or press 'Esc' to return to normal view.
+[STRUGGLER'S TOME UNLOCKED]
+The 3D interactive Berserk manga book is loaded and ready.
+To open the tome now, enter command: 'manga' or 'open manga'
+Or click the 'Read as Manga 𒉭' button in the navigation bar.
 `;
       }
     },
 
     guts: {
       desc: 'The Black Swordsman',
-      exec: () => {
-        if (typeof window.toggleBerserkMode === 'function') {
-          window.toggleBerserkMode(true);
-        }
-        return COMMANDS.berserk.exec();
-      }
+      exec: () => COMMANDS.berserk.exec()
     },
 
     eclipse: {
       desc: 'Awaken the Eclipse',
-      exec: () => {
-        if (typeof window.toggleBerserkMode === 'function') {
-          window.toggleBerserkMode(true);
-        }
-        return COMMANDS.berserk.exec();
-      }
+      exec: () => COMMANDS.berserk.exec()
     },
 
     brand: {
       desc: 'The Brand of Sacrifice',
-      exec: () => {
-        if (typeof window.toggleBerserkMode === 'function') {
-          window.toggleBerserkMode(true);
-        }
-        return COMMANDS.berserk.exec();
-      }
+      exec: () => COMMANDS.berserk.exec()
     }
   };
 

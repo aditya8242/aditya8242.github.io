@@ -4,58 +4,128 @@
    Powered by StPageFlip 3D Engine & Vanilla JavaScript
    ========================================================================== */
 
-/* --- 1. RUNE TRIGGER BUTTON IN SITE HEADER --- */
-.brand-rune-btn {
+/* --- 1. PROMINENT "READ AS MANGA" BUTTON & TRIGGERS --- */
+.read-manga-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 7px;
+  height: 36px;
+  padding: 0 12px 0 10px;
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.4);
   border-radius: 9999px;
-  color: #71717A;
+  color: #FCA5A5;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: visible;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 0 12px rgba(220, 38, 38, 0.15);
 }
 
-.brand-rune-btn:hover {
-  background: rgba(220, 38, 38, 0.15);
-  border-color: rgba(239, 68, 68, 0.6);
+.read-manga-btn:hover {
+  background: rgba(220, 38, 38, 0.22);
+  border-color: #EF4444;
+  color: #FFF;
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.45);
+}
+
+.manga-btn-rune {
+  font-size: 1.15rem;
+  line-height: 1;
   color: #EF4444;
-  transform: scale(1.08);
-  box-shadow: 0 0 18px rgba(220, 38, 38, 0.5);
+  filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.8));
+  animation: brand-heartbeat 1.8s infinite ease-in-out;
 }
 
-.brand-rune-btn .rune-icon {
-  width: 18px;
-  height: 25px;
-  transition: all 0.3s ease;
+.manga-btn-text {
+  letter-spacing: 0.04em;
+  color: #FCA5A5;
 }
 
-.brand-rune-btn:hover .rune-icon {
-  filter: drop-shadow(0 0 6px #EF4444);
+.read-manga-btn:hover .manga-btn-text {
+  color: #FFF;
 }
 
-.brand-glow-dot {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #DC2626;
-  opacity: 0.6;
-  transition: all 0.3s ease;
+.manga-btn-badge {
+  font-size: 0.58rem;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(239, 68, 68, 0.25);
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  color: #FECACA;
+  font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
-.brand-rune-btn:hover .brand-glow-dot {
-  opacity: 1;
-  box-shadow: 0 0 8px #EF4444;
-  animation: brand-heartbeat 1s infinite ease-in-out;
+/* Hero Section Noticeable Manga Callout */
+.hero-manga-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.14) 0%, rgba(20, 10, 12, 0.85) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 6px;
+  color: #FCA5A5;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 12px rgba(220, 38, 38, 0.15);
+}
+
+.hero-manga-pill:hover {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.28) 0%, rgba(35, 12, 15, 0.95) 100%);
+  border-color: #EF4444;
+  color: #FFF;
+  box-shadow: 0 6px 24px rgba(220, 38, 38, 0.35);
+  transform: translateY(-1px);
+}
+
+.hero-manga-rune {
+  font-size: 1.35rem;
+  line-height: 1;
+  color: #EF4444;
+  filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.85));
+  animation: brand-heartbeat 1.6s infinite ease-in-out;
+}
+
+.hero-manga-sub {
+  color: #A1A1AA;
+  font-size: 0.72rem;
+  font-weight: 400;
+}
+
+.hero-manga-pill:hover .hero-manga-sub {
+  color: #D4D4D8;
+}
+
+/* Mobile Drawer Manga Trigger */
+.mobile-manga-drawer-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 6px;
+  color: #FCA5A5;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-manga-drawer-btn:hover {
+  background: rgba(220, 38, 38, 0.25);
+  border-color: #EF4444;
+  color: #FFF;
 }
 
 @keyframes brand-heartbeat {
@@ -122,11 +192,11 @@
   text-shadow: 0 0 12px rgba(220, 38, 38, 0.6);
 }
 
-.tome-brand-title svg {
-  width: 18px;
-  height: 24px;
+.tome-rune-icon {
+  font-size: 1.35rem;
+  line-height: 1;
   color: #EF4444;
-  filter: drop-shadow(0 0 6px #EF4444);
+  filter: drop-shadow(0 0 8px #EF4444);
   animation: brand-heartbeat 1.5s infinite ease-in-out;
 }
 
@@ -293,6 +363,16 @@
   color: #DC2626;
   font-weight: 900;
   text-shadow: 0 0 10px rgba(220, 38, 38, 0.7);
+}
+
+.cover-brand-rune-char {
+  font-size: 5.5rem;
+  line-height: 1;
+  color: #DC2626;
+  filter: drop-shadow(0 0 25px rgba(220, 38, 38, 0.8)) drop-shadow(0 0 50px rgba(220, 38, 38, 0.45));
+  margin: 14px 0;
+  animation: brand-heartbeat 1.8s infinite ease-in-out;
+  user-select: none;
 }
 
 .cover-brand-rune {
@@ -574,16 +654,88 @@
   box-sizing: border-box;
 }
 
-.tribute-box {
+/* Kentaro Miura Memorial Card on Back Cover */
+.miura-memorial-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 22px 20px;
   background: rgba(220, 38, 38, 0.05);
-  border: 1px solid rgba(220, 38, 38, 0.3);
-  padding: 16px;
+  border: 1px solid rgba(220, 38, 38, 0.35);
   border-radius: 6px;
-  margin: 15px 0;
+  margin: 20px 0;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 }
 
-/* Mobile Responsiveness for 3D Book */
+.back-brand-rune-char {
+  font-size: 3.8rem;
+  line-height: 1;
+  color: #DC2626;
+  filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.75));
+  margin-bottom: 12px;
+  user-select: none;
+  animation: brand-heartbeat 2s infinite ease-in-out;
+}
+
+.miura-title {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  color: #FFF;
+  margin: 0 0 6px 0;
+  text-transform: uppercase;
+}
+
+.miura-dates {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: #FCA5A5;
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+}
+
+.miura-quote {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #D4D4D8;
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+
+.miura-seal {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  color: #EF4444;
+  border-top: 1px dashed rgba(220, 38, 38, 0.4);
+  padding-top: 10px;
+  width: 80%;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Mobile Responsiveness for 3D Book & Controls */
 @media (max-width: 768px) {
+  .read-manga-btn {
+    padding: 0 9px;
+    gap: 5px;
+    height: 32px;
+    font-size: 0.7rem;
+  }
+  .read-manga-btn .manga-btn-badge {
+    display: none;
+  }
+  .hero-manga-pill {
+    padding: 7px 12px;
+    font-size: 0.74rem;
+  }
+  .hero-manga-pill .hero-manga-sub {
+    display: none;
+  }
   .tome-stage {
     width: 95vw;
     height: 75vh;
@@ -594,9 +746,12 @@
   .cover-title {
     font-size: 1.2rem;
   }
-  .cover-brand-rune {
-    width: 60px;
-    height: 90px;
+  .cover-brand-rune-char {
+    font-size: 4rem;
+    margin: 8px 0;
+  }
+  .back-brand-rune-char {
+    font-size: 3rem;
   }
   .chapter-title {
     font-size: 1.05rem;
@@ -608,5 +763,14 @@
   .tome-bottombar {
     padding: 6px 14px;
     gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .read-manga-btn .manga-btn-text {
+    display: none;
+  }
+  .read-manga-btn {
+    padding: 0 8px;
   }
 }

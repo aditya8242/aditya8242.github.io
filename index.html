@@ -131,22 +131,11 @@
             <span class="kbd-shortcut">/</span>
           </button>
 
-          <!-- Berserk Easter Egg: The Brand of Sacrifice Rune -->
-          <button id="berserk-rune-btn" class="brand-rune-btn" aria-label="Awaken the Brand of Sacrifice" title="贄 // The Brand of Sacrifice (Press 'B' or click to awaken)">
-            <svg viewBox="0 0 100 140" class="rune-icon" aria-hidden="true">
-              <g stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="50" y1="8" x2="50" y2="132" stroke-width="6" />
-                <path d="M 28 26 C 24 10, 44 8, 50 24 C 56 8, 76 10, 72 26" stroke-width="5.5" />
-                <path d="M 50 36 L 24 54 L 50 78" stroke-width="5.5" />
-                <path d="M 50 36 L 76 54 L 50 78" stroke-width="5.5" />
-                <line x1="28" y1="54" x2="72" y2="54" stroke-width="5" />
-                <line x1="36" y1="44" x2="64" y2="64" stroke-width="4" />
-                <line x1="64" y1="44" x2="36" y2="64" stroke-width="4" />
-                <path d="M 50 78 L 22 108" stroke-width="5.5" />
-                <path d="M 50 78 L 78 108" stroke-width="5.5" />
-              </g>
-            </svg>
-            <span class="brand-glow-dot"></span>
+          <!-- Noticeable Read as Manga Button -->
+          <button id="berserk-rune-btn" class="read-manga-btn" aria-label="Read Portfolio as Manga" title="Read Portfolio as 3D Interactive Berserk Manga (Press 'B' or click to open)">
+            <span class="manga-btn-rune">𒉭</span>
+            <span class="manga-btn-text">Read as Manga</span>
+            <span class="manga-btn-badge">3D</span>
           </button>
 
           <!-- Mobile Navigation Toggle -->
@@ -167,6 +156,13 @@
         <li><a href="#writing" class="mobile-nav-link"><span>05 // Engineering Dispatches</span><span>&darr;</span></a></li>
         <li><a href="#dispatch" class="mobile-nav-link"><span>06 // Direct Dispatch / Contact</span><span>&darr;</span></a></li>
         <li><a href="blog/" class="mobile-nav-link accent"><span>&rarr; Engineering Blog Archive</span><span>&#8599;</span></a></li>
+        <li style="margin-top:0.75rem; padding-top:0.75rem; border-top:1px solid rgba(255,255,255,0.08);">
+          <button id="mobile-manga-trigger-btn" class="mobile-manga-drawer-btn" type="button">
+            <span class="manga-btn-rune">𒉭</span>
+            <span>Read Portfolio as Manga</span>
+            <span class="manga-btn-badge">3D TOME</span>
+          </button>
+        </li>
       </ul>
     </div>
   </header>
@@ -199,6 +195,15 @@
         <div class="philosophy-callout fade-in-entry delay-4">
           <span class="philosophy-prefix">CORE TENET //</span>
           <span class="philosophy-quote">"Brute force the logic first. Optimize it later."</span>
+        </div>
+
+        <!-- Manga Tome Noticeable Callout Pill -->
+        <div class="fade-in-entry delay-4" style="margin-bottom: 1.25rem;">
+          <button id="hero-manga-trigger-btn" class="hero-manga-pill" type="button" title="Read this portfolio as an interactive 3D Berserk manga tome">
+            <span class="hero-manga-rune">𒉭</span>
+            <span class="hero-manga-text">READ AS MANGA</span>
+            <span class="hero-manga-sub">3D Interactive Tome &bull; Kentaro Miura Tribute &rarr;</span>
+          </button>
         </div>
 
         <!-- Latest Dispatch Callout Pill -->
@@ -1023,7 +1028,7 @@
         <!-- Bottom bar -->
         <div class="footer-bottom-bar">
           <div>
-            <span>&copy; 2026 Aditya Chavan. Engineered with Dieter Rams precision.</span>
+            <span>&copy; 2026 Aditya Chavan. Engineered with Dieter Rams precision. (Dieter Rams loved this.)</span>
           </div>
           <div style="display:flex;gap:1rem;">
             <span>Zero-Config Static Engine</span>

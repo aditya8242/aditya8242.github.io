@@ -86,17 +86,7 @@
       <!-- Top Tome Controls -->
       <header class="tome-topbar">
         <div class="tome-brand-title">
-          <svg viewBox="0 0 100 140">
-            <g stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="50" y1="8" x2="50" y2="132" stroke-width="6" />
-              <path d="M 28 26 C 24 10, 44 8, 50 24 C 56 8, 76 10, 72 26" stroke-width="5.5" />
-              <path d="M 50 36 L 24 54 L 50 78" stroke-width="5.5" />
-              <path d="M 50 36 L 76 54 L 50 78" stroke-width="5.5" />
-              <line x1="28" y1="54" x2="72" y2="54" stroke-width="5" />
-              <path d="M 50 78 L 22 108" stroke-width="5.5" />
-              <path d="M 50 78 L 78 108" stroke-width="5.5" />
-            </g>
-          </svg>
+          <span class="tome-rune-icon">𒉭</span>
           <span>THE STRUGGLER'S TOME // BERSERK EDITION</span>
         </div>
         <div class="tome-actions">
@@ -120,17 +110,7 @@
               <div class="cover-border-frame">
                 <div class="cover-kanji">生 贄 の 書</div>
                 <div>
-                  <svg viewBox="0 0 100 140" class="cover-brand-rune">
-                    <g stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="50" y1="8" x2="50" y2="132" stroke-width="6" />
-                      <path d="M 28 26 C 24 10, 44 8, 50 24 C 56 8, 76 10, 72 26" stroke-width="5.5" />
-                      <path d="M 50 36 L 24 54 L 50 78" stroke-width="5.5" />
-                      <path d="M 50 36 L 76 54 L 50 78" stroke-width="5.5" />
-                      <line x1="28" y1="54" x2="72" y2="54" stroke-width="5" />
-                      <path d="M 50 78 L 22 108" stroke-width="5.5" />
-                      <path d="M 50 78 L 78 108" stroke-width="5.5" />
-                    </g>
-                  </svg>
+                  <div class="cover-brand-rune-char">𒉭</div>
                   <h1 class="cover-title">ADITYA CHAVAN</h1>
                   <div class="cover-subtitle">THE STRUGGLER'S CODEBOOK</div>
                 </div>
@@ -421,39 +401,20 @@
             </div>
           </div>
 
-          <!-- PAGE 8: HARD BACK COVER (THE TRIBUTE & DIETER RAMS SEAL) -->
+          <!-- PAGE 8: HARD BACK COVER (MEMORIAL TO KENTARO MIURA) -->
           <div class="manga-page page-cover" data-density="hard">
             <div class="cover-front">
               <div class="cover-border-frame">
                 <div class="cover-kanji">完 &bull; THE END</div>
                 
-                <div class="tribute-box">
-                  <div style="font-family:'JetBrains Mono', monospace; font-size:0.85rem; font-weight:700; color:#FFF; margin-bottom:6px;">
-                    &ldquo;Weniger, aber besser.&rdquo;
-                  </div>
-                  <div style="font-size:0.75rem; color:#A1A1AA; font-style:italic;">
-                    Less, but better.
-                  </div>
-                  <div style="margin-top:10px; font-family:'JetBrains Mono', monospace; font-size:0.75rem; color:#F87171; font-weight:800;">
-                    (Dieter Rams loved this.)
-                  </div>
-                </div>
-
-                <div>
-                  <svg viewBox="0 0 100 140" style="width:50px; height:70px; color:#DC2626; opacity:0.8;">
-                    <g stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="50" y1="8" x2="50" y2="132" stroke-width="6" />
-                      <path d="M 28 26 C 24 10, 44 8, 50 24 C 56 8, 76 10, 72 26" stroke-width="5.5" />
-                      <path d="M 50 36 L 24 54 L 50 78" stroke-width="5.5" />
-                      <path d="M 50 36 L 76 54 L 50 78" stroke-width="5.5" />
-                      <line x1="28" y1="54" x2="72" y2="54" stroke-width="5" />
-                      <path d="M 50 78 L 22 108" stroke-width="5.5" />
-                      <path d="M 50 78 L 78 108" stroke-width="5.5" />
-                    </g>
-                  </svg>
-                  <p style="font-size:0.72rem; color:#71717A; font-family:'JetBrains Mono', monospace; margin-top:8px;">
-                    Dedicated to Kentaro Miura (1966&ndash;2021)
+                <div class="miura-memorial-card">
+                  <div class="back-brand-rune-char">𒉭</div>
+                  <h3 class="miura-title">KENTARO MIURA</h3>
+                  <div class="miura-dates">三浦 建太郎 &bull; 1966 &ndash; 2021</div>
+                  <p class="miura-quote">
+                    &ldquo;He lived. He fought. He created.&rdquo;
                   </p>
+                  <div class="miura-seal">STRUGGLER'S COMMEMORATION</div>
                 </div>
 
                 <div class="cover-hint" style="cursor:pointer;" id="tome-flip-back-first">
@@ -547,7 +508,7 @@
         if (pageIdx === 0) {
           counterEl.textContent = 'FRONT COVER';
         } else if (pageIdx >= pages.length - 1) {
-          counterEl.textContent = 'BACK COVER • DIETER RAMS INSCRIBED';
+          counterEl.textContent = 'BACK COVER • KENTARO MIURA MEMORIAL';
         } else {
           counterEl.textContent = `PAGES ${pageIdx} - ${Math.min(pageIdx + 1, pages.length - 1)} OF ${pages.length - 1}`;
         }
@@ -595,6 +556,14 @@
       return;
     }
 
+    // Do NOT intercept keys if the terminal modal is open or raw CLI mode is active
+    const termModal = document.getElementById('terminal-modal');
+    const isTermModalOpen = termModal && termModal.classList.contains('open');
+    const isFullTermOpen = document.body.classList.contains('mode-terminal');
+    if (isTermModalOpen || isFullTermOpen) {
+      return;
+    }
+
     if (e.key === 'b' || e.key === 'B') {
       if (!e.ctrlKey && !e.metaKey && !e.altKey) {
         e.preventDefault();
@@ -612,15 +581,15 @@
     }
   });
 
-  // Attach to trigger button
+  // Attach to trigger buttons
   function initTrigger() {
-    const btn = document.getElementById('berserk-rune-btn');
-    if (btn) {
+    const triggers = document.querySelectorAll('#berserk-rune-btn, #hero-manga-trigger-btn, #mobile-manga-trigger-btn, .js-open-berserk');
+    triggers.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         openTome();
       });
-    }
+    });
   }
 
   // Expose to window for TerminalEngine & global triggers
