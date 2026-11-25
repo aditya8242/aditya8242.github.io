@@ -40,6 +40,7 @@ SYSTEM CALLS & RECRUITER CLI UTILITIES:
   clear              Purge current terminal buffer
   gui                Toggle back to Apple hardware editorial view
   exit               Close terminal environment
+  berserk            Awaken the Brand of Sacrifice (Manga Tome mode)
 `
     },
 
@@ -513,6 +514,71 @@ DIRECT DISPATCH ENDPOINTS:
     matrix: {
       desc: 'Wake up, Neo...',
       exec: () => `01000001 01000100 01010100 01011001 01000001\nFollow the white rabbit into the kernel.`
+    },
+
+    berserk: {
+      desc: 'Awaken the Brand of Sacrifice (Manga Tome mode)',
+      exec: () => {
+        if (typeof window.toggleBerserkMode === 'function') {
+          window.toggleBerserkMode(true);
+        }
+        return `
+================================================================================
+          生贄の烙印 // THE BRAND OF SACRIFICE -- BERSERK MODE AWAKENED
+================================================================================
+
+              |\\                  /|
+             /  \\       /\\       /  \\
+            / /\\ \\     /  \\     / /\\ \\
+           / /  \\ \\   / /\\ \\   / /  \\ \\
+          /_/    \\ \\_/ /  \\ \\_/ /    \\_\\
+                  \\___/ /\\ \\___/
+                       / /\\ \\
+                      / /  \\ \\
+                     /_/    \\_\\
+                       |    |
+                       |    |
+                       |    |
+                      /      \\
+                     /________\\
+
+"Struggle, endure, contend. For that alone is the sword of one who defies death."
+                              -- Skull Knight to Guts
+
+[ECLIPSE ACTIVE] The portfolio has transformed into the Tome of the Branded.
+Use the top chapter controls or press 'Esc' to return to normal view.
+`;
+      }
+    },
+
+    guts: {
+      desc: 'The Black Swordsman',
+      exec: () => {
+        if (typeof window.toggleBerserkMode === 'function') {
+          window.toggleBerserkMode(true);
+        }
+        return COMMANDS.berserk.exec();
+      }
+    },
+
+    eclipse: {
+      desc: 'Awaken the Eclipse',
+      exec: () => {
+        if (typeof window.toggleBerserkMode === 'function') {
+          window.toggleBerserkMode(true);
+        }
+        return COMMANDS.berserk.exec();
+      }
+    },
+
+    brand: {
+      desc: 'The Brand of Sacrifice',
+      exec: () => {
+        if (typeof window.toggleBerserkMode === 'function') {
+          window.toggleBerserkMode(true);
+        }
+        return COMMANDS.berserk.exec();
+      }
     }
   };
 

@@ -46,6 +46,7 @@
   </noscript>
 
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="berserk.css">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -128,6 +129,24 @@
           <button id="open-terminal-btn" class="terminal-trigger-btn" title="Open Interactive Terminal (Press /)">
             <span>[~]$</span>
             <span class="kbd-shortcut">/</span>
+          </button>
+
+          <!-- Berserk Easter Egg: The Brand of Sacrifice Rune -->
+          <button id="berserk-rune-btn" class="brand-rune-btn" aria-label="Awaken the Brand of Sacrifice" title="贄 // The Brand of Sacrifice (Press 'B' or click to awaken)">
+            <svg viewBox="0 0 100 140" class="rune-icon" aria-hidden="true">
+              <g stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="50" y1="8" x2="50" y2="132" stroke-width="6" />
+                <path d="M 28 26 C 24 10, 44 8, 50 24 C 56 8, 76 10, 72 26" stroke-width="5.5" />
+                <path d="M 50 36 L 24 54 L 50 78" stroke-width="5.5" />
+                <path d="M 50 36 L 76 54 L 50 78" stroke-width="5.5" />
+                <line x1="28" y1="54" x2="72" y2="54" stroke-width="5" />
+                <line x1="36" y1="44" x2="64" y2="64" stroke-width="4" />
+                <line x1="64" y1="44" x2="36" y2="64" stroke-width="4" />
+                <path d="M 50 78 L 22 108" stroke-width="5.5" />
+                <path d="M 50 78 L 78 108" stroke-width="5.5" />
+              </g>
+            </svg>
+            <span class="brand-glow-dot"></span>
           </button>
 
           <!-- Mobile Navigation Toggle -->
@@ -1248,5 +1267,6 @@
 
     })();
   </script>
+  <script src="berserk.js" defer></script>
 </body>
 </html>
