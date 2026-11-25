@@ -10,6 +10,28 @@
   let pageFlipInstance = null;
   let isTomeOpen = false;
 
+  // Preload pool of real physical paper-flip audio
+  const realPageFlipPool = [
+    new Audio('berserk_assets/page-flip.mp3'),
+    new Audio('berserk_assets/page-flip.mp3'),
+    new Audio('berserk_assets/page-flip.mp3')
+  ];
+  let flipAudioPoolIndex = 0;
+
+  function playRealPageFlipSound() {
+    try {
+      const audio = realPageFlipPool[flipAudioPoolIndex];
+      audio.currentTime = 0;
+      audio.volume = 0.9;
+      audio.play().catch(() => {
+        playAudioCue('page-flip');
+      });
+      flipAudioPoolIndex = (flipAudioPoolIndex + 1) % realPageFlipPool.length;
+    } catch (e) {
+      playAudioCue('page-flip');
+    }
+  }
+
   // Synthesize realistic audio (Berserk Dragonslayer Iron CLANG & Real Page Flip)
   function playAudioCue(type) {
     try {
@@ -578,6 +600,7 @@
       maxHeight: 780,
       maxShadowOpacity: 0.85,
       showCover: true,
+      flippingTime: 1600,
       mobileScrollSupport: false,
       usePortrait: true,
       startPage: 0
@@ -586,9 +609,9 @@
     const pages = bookEl.querySelectorAll('.manga-page');
     pageFlipInstance.loadFromHTML(pages);
 
-    // Sound effect & page counter update on every flip
+    // Sound effect & page counter update on every flip (Real acoustic paper flip)
     pageFlipInstance.on('flip', (e) => {
-      playAudioCue('page-flip');
+      playRealPageFlipSound();
       const counterEl = document.getElementById('tome-page-info');
       if (counterEl) {
         const pageIdx = e.data;

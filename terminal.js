@@ -539,31 +539,44 @@ DIRECT DISPATCH ENDPOINTS:
       exec: () => {
         return `
 ================================================================================
-     𒉭 生贄の烙印 // THE BRAND OF SACRIFICE -- BERSERK TOME READY 𒉭
+            𒉭  THE BRAND OF SACRIFICE // 烙印の者  𒉭
 ================================================================================
 
-              |\\                  /|
-             /  \\       /\\       /  \\
-            / /\\ \\     /  \\     / /\\ \\
-           / /  \\ \\   / /\\ \\   / /  \\ \\
-          /_/    \\ \\_/ /  \\ \\_/ /    \\_\\
-                  \\___/ /\\ \\___/
-                       / /\\ \\
-                      / /  \\ \\
-                     /_/    \\_\\
-                       |    |
-                       |    |
-                       |    |
-                      /      \\
-                     /________\\
+               .---.         .---.
+              / / \\ \\       / / \\ \\
+             | |   \\ \\     / /   | |
+              \\ \\   \\ \\   / /   / /
+               \\ \\   \\ \\ / /   / /
+           =====\\ \\===\\ V /===/ /=====
+                 \\ \\   | |   / /
+                  \\ \\  | |  / /
+                   \\ \\ | | / /
+                    \\ \\| |/ /
+                     \\ | | /
+                      \\| |/
+                      /| |\\
+                     / | | \\
+                    / /| |\\ \\
+                   /_/ | | \\_\\
+                       | |
+                       | |
+                       '-'
+
+             /| ___________________________________________________________
+       O[===|* >===========================================================>
+             \\| -----------------------------------------------------------
+                         THE DRAGONSLAYER // ドラゴンころし
+
+"It was too big to be called a sword. Massive, thick, heavy, and far too rough.
+Indeed, it was like a heap of raw iron."
 
 "Struggle, endure, contend. For that alone is the sword of one who defies death."
                               -- Skull Knight to Guts
 
 [STRUGGLER'S TOME UNLOCKED]
 The 3D interactive Berserk manga book is loaded and ready.
-To open the tome now, enter command: 'manga' or 'open manga'
-Or click the 'Read as Manga 𒉭' button in the navigation bar.
+- To open the volume from terminal: type 'manga' or 'open manga'
+- Or click the 'Read as Manga 𒉭' button in the navigation bar.
 `;
       }
     },

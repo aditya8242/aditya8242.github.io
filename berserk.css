@@ -128,7 +128,7 @@
 
 /* --- 2. FULLSCREEN BERSERK TOME MODAL OVERLAY --- */
 #berserk-modal {
-  display: none;
+  display: flex;
   position: fixed;
   inset: 0;
   background: radial-gradient(circle at center, rgba(30, 10, 10, 0.98) 0%, rgba(10, 8, 12, 0.99) 50%, #040305 100%);
@@ -138,12 +138,15 @@
   justify-content: center;
   flex-direction: column;
   opacity: 0;
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #berserk-modal.active {
-  display: flex;
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* Atmospheric Ambient Ink Vignette */
@@ -171,6 +174,14 @@
   justify-content: space-between;
   z-index: 10;
   font-family: 'JetBrains Mono', monospace;
+  opacity: 0;
+  transform: translateY(-16px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.15s, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+}
+
+#berserk-modal.active .tome-topbar {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .tome-brand-title {
@@ -252,12 +263,20 @@
   align-items: center;
   justify-content: center;
   perspective: 2500px;
+  opacity: 0;
+  transform: scale(0.9) translateY(28px) rotateX(3deg);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#berserk-modal.active .tome-stage {
+  opacity: 1;
+  transform: scale(1) translateY(0) rotateX(0deg);
 }
 
 #manga-book {
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 40px rgba(185, 28, 28, 0.3);
   border-radius: 6px;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
 /* --- 5. REAL MANGA PAGE STYLING --- */
@@ -593,7 +612,8 @@
   position: absolute;
   bottom: 16px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -604,6 +624,12 @@
   border-radius: 9999px;
   z-index: 10;
   font-family: 'JetBrains Mono', monospace;
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.2s, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+
+#berserk-modal.active .tome-bottombar {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .tome-nav-arrow {
